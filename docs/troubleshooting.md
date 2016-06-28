@@ -8,7 +8,8 @@
    * [应用程序相关的故障排查](/docs/user-guide/application-troubleshooting) - 当遇到将代码部署到Kubernetes时发生的各类错误时，请参考这部分内容。
    * [集群相关的故障排查](/docs/admin/cluster-troubleshooting) - 当集群系统的管理者发现Kubernetes的集群工作不正常时，请参考这部分内容。
 
-你还可以通过查看Kubernetes的[已知问题](/docs/user-guide/known-issues)页面查看所用版本存在的已知问题。
+你还可以通过查看Kubernetes的[已知问题](/docs/user-guide/known-issues)
+页面查看所用版本存在的已知问题。
 
 ### 寻求帮助
 
@@ -33,11 +34,22 @@
 
 ### Stack Overflow
 
-社区中的其他人也许遇到过和你相同的问题，Kubernetes的开发者小组会订阅并定期的解答Stack Overflow上[包含有kubernetes标签的提问](http://stackoverflow.com/questions/tagged/kubernetes)。如果所有的这些提问都没有包含你所遇到的问题，你也可以[创建一个新的提问](http://stackoverflow.com/questions/ask?tags=kubernetes)！
+社区中的其他人也许遇到过和你相同的问题，
+Kubernetes 的开发者小组会订阅并定期的解答Stack Overflow上[包含有kubernetes标签的提问](http://stackoverflow.com/questions/tagged/kubernetes)。
+如果所有的这些提问都没有包含你所遇到的问题，
+你也可以[创建一个新的提问](http://stackoverflow.com/questions/ask?tags=kubernetes)！
 
 ### Slack
 
-Kubernetes开发小组的成员常常会出没在Slack的`#kubernetes-users`频道中，用户可以在这里直接将问题抛给第一线的开发者，并进行交流。Kubernetes的Slack开发者频道入口地址是[这里](https://kubernetes.slack.com)。第一次进入频道前，用户需要先到[这里](http://slack.kubernetes.io)进行注册。我们欢迎倾听到各种不同的声音和问题。
+Kubernetes开发小组的成员常常会出没在Slack的`#kubernetes-users`频道中，
+用户可以在这里直接将问题抛给第一线的开发者，并进行交流。
+Kubernetes的Slack开发者频道入口地址是[这里](https://kubernetes.slack.com)。
+第一次进入频道前，用户需要先到[这里](http://slack.kubernetes.io)进行注册。
+我们欢迎倾听到各种不同的声音和问题。
+
+一旦注册，你将会看到越来越多的话题。
+比如：想要知道 Kubernetes 消息的人可以加入`#kubernetes-novice`
+再比如：开发者应该加入`#kubernetes-dev`
 
 ### 邮件组
 
