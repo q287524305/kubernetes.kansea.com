@@ -6,7 +6,8 @@
 
 ## Introduction
 
-The goal of this codelab is for you to turn a simple Hello World node.js app into a replicated application running on Kubernetes. We will show you how to take code that you have developed on your machine, turn it into a Docker container image, and then run that image on [Google Container Engine](https://cloud.google.com/container-engine/).
+这个代码实验室的目标是，让你吧一个 node.js 的简单的 Hello World 应用，在 Kubernetes 上部署成为一个复制应用。
+我们会告诉你，如何将你的代码变成一个 Docker 镜像，并且在[Google Container Engine](https://cloud.google.com/container-engine/)上运行它。
 
 Here’s a diagram of the various parts in play in this codelab to help you understand how pieces fit with one another. Use this as a reference as we progress through the codelab; it should all make sense by the time we get to the end.
 

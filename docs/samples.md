@@ -1,11 +1,10 @@
 ---
 ---
-We have a wide variety of samples to choose from.
+我们有很多不同类型的参考案例可供选择：
 
-## Recently updated samples
+## 最近更新的应用
 
-The Kubernetes team is highlighting these samples as being the most up-to-date. Active upkeep is being done or has recently been done
-on these samples to ensure they are high quality and work on Kubernetes {{page.version}}. 
+Kubetentes小组将这些应用示例标记为最近更新的。它们在不久前刚刚被检查过，因此可以确保其内容质量良好且能够在Kubernetes {{page.version}}版本中正常使用。
 
 <p>&nbsp;</p>
 

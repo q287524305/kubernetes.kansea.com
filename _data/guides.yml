@@ -1,27 +1,27 @@
-bigheader: "Guides"
-abstract: "How to get started, and achieve tasks, using Kubernetes"
+bigheader: "指南"
+abstract: "如何开始使用 Kubernetes，并创建任务"
 toc:
-- title: Guides
+- title: 指南
   path: /docs/
 
-- title: Getting Started
+- title: 入门
   section:
-  - title: What is Kubernetes?
+  - title: 什么是 Kubernetes?
     path: /docs/whatisk8s/
-  - title: Downloading or Building Kubernetes
+  - title: 下载或编译安装 Kubernetes
     path: /docs/getting-started-guides/binary_release/
-  - title: Hello World Walkthrough
+  - title: Hello World 指南
     path: /docs/hellonode/
-  - title: Online Training Course
+  - title: 在线培训
     path: https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615
 
-- title: Accessing the Cluster
+- title: 链接群集
   section:
-  - title: Installing and Setting up kubectl
+  - title: 安装和设置 kubectl
     path: /docs/user-guide/prereqs/
-  - title: Accessing Clusters
+  - title: 链接群集
     path: /docs/user-guide/accessing-the-cluster/
-  - title: Sharing Cluster Access with kubeconfig
+  - title: 通过`kubeconfig`接入群集
     path: /docs/user-guide/sharing-clusters/
   - title: Authenticating Across Clusters with kubeconfig
     path: /docs/user-guide/kubeconfig-file/
