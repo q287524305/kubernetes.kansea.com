@@ -26,44 +26,44 @@ toc:
   - title: Authenticating Across Clusters with kubeconfig
     path: /docs/user-guide/kubeconfig-file/
 
-- title: User Guide
+- title: 用户指南
   path: /docs/user-guide/
 
-- title: Web UI (Dashboard)
+- title: Web UI (仪表盘)
   path: /docs/user-guide/ui/
 
-- title: Workload Deployment and Management
+- title: Workload 部署和管理
   section:
-  - title: Launching, Exposing, and Killing Applications
+  - title: 启动, 公开, 和关闭应用
     path: /docs/user-guide/quick-start/
-  - title: Deploying Applications
+  - title: 部署应用程序
     path: /docs/user-guide/deploying-applications/
-  - title: Managing Resources
+  - title: 资源管理
     path: /docs/user-guide/managing-deployments/
-  - title: Replication Controller Operations
+  - title: 操作 Replication Controller
     path: /docs/user-guide/replication-controller/operations/
-  - title: Resizing a Replication Controller
+  - title: 调整 Replication Controller
     path: /docs/user-guide/resizing-a-replication-controller/
-  - title: Rolling Updates
+  - title: 滚动更新
     path: /docs/user-guide/rolling-updates/
-  - title: Rolling Update Demo
+  - title: 滚动更新演示
     path: /docs/user-guide/update-demo/
   - title: Secrets Walkthrough
     path: /docs/user-guide/secrets/walkthrough/
-  - title: Using ConfigMap
+  - title: 使用 ConfigMap
     path: /docs/user-guide/configmap/
-  - title: Horizontal Pod Autoscaling
+  - title: POD 横向扩展
     path: /docs/user-guide/horizontal-pod-autoscaling/walkthrough/
-  - title: Best Practices for Configuration
+  - title: 最佳实践配置
     path: /docs/user-guide/config-best-practices/
-  - title: Using kubectl to Manage Resources
+  - title: 使用 kubectl 管理资源
     path: /docs/user-guide/working-with-resources/
 
-- title: Batch Jobs
+- title: 批量作业
   section:
   - title: Jobs
     path: /docs/user-guide/jobs/
-  - title: Parallel Processing using Expansions
+  - title: 使用拓展并行处理
     path: /docs/user-guide/jobs/expansions/
   - title: Coarse Parallel Processing using a Work Queue
     path: /docs/user-guide/jobs/work-queue-1/
@@ -252,31 +252,31 @@ toc:
     path: /docs/admin/limitrange/
   - title: Understanding Resource Quotas
     path: /docs/admin/resourcequota/
-  - title: Applying Resource Quotas and Limits
+  - title: 资源配额及限制
     path: /docs/admin/resourcequota/walkthrough/
-  - title: Kubernetes Components
+  - title: Kubernetes 组件
     path: /docs/admin/cluster-components/
-  - title: Configuring Kubernetes Use of etcd
+  - title: 配置 etcd
     path: /docs/admin/etcd/
-  - title: Using Multiple Clusters
+  - title: 使用多个群集
     path: /docs/admin/multi-cluster/
-  - title: Changing Cluster Size
+  - title: 修改群集大小
     path: https://github.com/kubernetes/kubernetes/wiki/User-FAQ#how-do-i-change-the-size-of-my-cluster/
-  - title: Configuring Multiple Schedulers
+  - title: 配置多个 Schedulers
     path: /docs/admin/multiple-schedulers/
-  - title: Networking in Kubernetes
+  - title: Kubernetes的网络
     path: /docs/admin/networking/
-  - title: Using DNS Pods and Services
+  - title: Pods，Services 使用 DNS
     path: /docs/admin/dns/
-  - title: Setting Up and Configuring DNS
+  - title: 设定和配置 DNS
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/cluster-dns
-  - title: Master <-> Node Communication
+  - title: Master <-> Node 的通讯
     path: /docs/admin/master-node-communication/
-  - title: Network Plugins
+  - title: 网络插件
     path: /docs/admin/network-plugins/
-  - title: Static Pods
+  - title: 静态 Pods
     path: /docs/admin/static-pods/
-  - title: Configuring Garbage Collection
+  - title: 配置垃圾回收
     path: /docs/admin/garbage-collection/
-  - title: Configuring Kubernetes with Salt
+  - title: 利用 Salt 配置 Kubernetes
     path: /docs/admin/salt/
