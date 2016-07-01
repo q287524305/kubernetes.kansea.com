@@ -1,36 +1,35 @@
 ---
 ---
 
-**Stop. This guide has been superseded by [Minikube](../minikube/) which is the recommended method of running Kubernetes on your local machine.**
+**停住你的脚步。现在开始已经推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**
 
-The following instructions show you how to set up a simple, single node Kubernetes cluster using Docker.
+下面将介绍，如果使用 Docker 搭建一个单点 kubernetes 群集。
 
-Here's a diagram of what the final result will look like:
+下面是最终示意图:
 
-![Kubernetes Single Node on Docker](/images/docs/k8s-singlenode-docker.png)
+![基于 Docker 的单节点 Kubernetes](/images/docs/k8s-singlenode-docker.png)
 
 * TOC
 {:toc}
 
-## Prerequisites
+## 前提条件
 
-**Note: These steps have not been tested with the [Docker For Mac or Docker For Windows beta programs](https://blog.docker.com/2016/03/docker-for-mac-windows-beta/).**
+**注意: 下面这些步骤没有经过[Docker For Mac和Docker For Windows](https://blog.docker.com/2016/03/docker-for-mac-windows-beta/)的验证。**
 
-1. You need to have docker installed on one machine.
-2. Decide what Kubernetes version to use. Set the `${K8S_VERSION}` variable to
-   a released version of Kubernetes >= "v1.2.0". If you'd like to use the current stable version of Kubernetes, run the following:
+1. 你必须拥有一台安装有 Docker 的机器。
+2. 选择使用什么版本的 Kubernetes，设置 ` ${K8S_VERSION}`  为高于或等于 "V1.2.0" 的版本号，如果你想使用稳定版的话，那么你可以运行一下命令:
 
 ```sh
 export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 ```
 
-and for the latest available version (including unstable releases):
+或者获取最新版本(包括不稳定版本):
 
 ```sh
 export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/latest.txt)
 ```
 
-### Run it
+### 运行
 
 ```shell
 export ARCH=amd64
@@ -64,13 +63,13 @@ This actually runs the kubelet, which in turn runs a [pod](/docs/user-guide/pods
 
 ** **SECURITY WARNING** ** services exposed via Kubernetes using Hyperkube are available on the host node's public network interface / IP address.  Because of this, this guide is not suitable for any host node/server that is directly internet accessible.  Refer to [#21735](https://github.com/kubernetes/kubernetes/issues/21735) for addtional info.
 
-### Download `kubectl`
+### 下载 `kubectl`
 
 At this point you should have a running Kubernetes cluster. You can test it out
 by downloading the kubectl binary for `${K8S_VERSION}` (in this example: `{{page.version}}.0`).
 
 
-Downloads:
+下载:
 
  - `linux/amd64`: http://storage.googleapis.com/kubernetes-release/release/{{page.version}}.0/bin/linux/amd64/kubectl
  - `linux/386`: http://storage.googleapis.com/kubernetes-release/release/{{page.version}}.0/bin/linux/386/kubectl
@@ -82,12 +81,12 @@ Downloads:
  - `windows/amd64`: http://storage.googleapis.com/kubernetes-release/release/{{page.version}}.0/bin/windows/amd64/kubectl.exe
  - `windows/386`: http://storage.googleapis.com/kubernetes-release/release/{{page.version}}.0/bin/windows/386/kubectl.exe
 
-The generic download path is:
+通用下载路径:
 ```
 http://storage.googleapis.com/kubernetes-release/release/${K8S_VERSION}/bin/${GOOS}/${GOARCH}/${K8S_BINARY}
 ```
 
-An example install with `linux/amd64`:
+`linux/amd64`的一个安装例子:
 
 ```
 curl -sSL "http://storage.googleapis.com/kubernetes-release/release/{{page.version}}.0/bin/linux/amd64/kubectl" > /usr/bin/kubectl
@@ -125,7 +124,7 @@ NAME        STATUS    AGE
 127.0.0.1   Ready     1h
 ```
 
-### Run an application
+### 运行一个程序
 
 ```shell
 kubectl run nginx --image=nginx --port=80
@@ -133,87 +132,84 @@ kubectl run nginx --image=nginx --port=80
 
 Now run `docker ps` you should see nginx running. You may need to wait a few minutes for the image to get pulled.
 
-### Expose it as a service
+### 用 service 来开放端口
 
 ```shell
 kubectl expose deployment nginx --port=80
 ```
 
-Run the following command to obtain the cluster local IP of this service we just created:
+运行一下命令，来获取我们刚刚创建的群集的 service 的 IP 地址:
 
 ```shell{% raw %}
 ip=$(kubectl get svc nginx --template={{.spec.clusterIP}})
 echo $ip
 {% endraw %}```
 
-Hit the webserver with this IP:
+在浏览器中输入这个 IP:
 
 ```shell{% raw %}
 kubectl get svc nginx --template={{.spec.clusterIP}}
 {% endraw %}```
 
-On OS X, since docker is running inside a VM, run the following command instead:
+在 macOS 中，使用以下命令，访问虚拟机中的 Docker:
 
 ```shell
 docker-machine ssh `docker-machine active` curl $ip
 ```
 
-## Deploy a DNS
+## 部署 DNS
 
-See [here](/docs/getting-started-guides/docker-multinode/deployDNS/) for instructions.
+说明看 [这](/docs/getting-started-guides/docker-multinode/deployDNS/) 。
 
-### Turning down your cluster
+### 关闭群集
 
-1. Delete all the containers including the kubelet:
+1. 删除所有容器和 kubelet:
 
 Many of these containers run under the management of the `kubelet` binary, which attempts to keep containers running, even if they fail.
 So, in order to turn down the cluster, you need to first kill the kubelet container, and then any other containers.
 
 You may use `docker rm -f $(docker ps -aq)`, note this removes _all_ containers running under Docker, so use with caution.
 
-2. Cleanup the filesystem:
+2. 清理文件系统:
 
-On OS X, first ssh into the docker VM:
+在 macOS 中，需要先通过 ssh 连接到 docker 虚拟机:
 
 ```shell
 docker-machine ssh `docker-machine active`
 ```
 
 ```shell
-sudo umount `cat /proc/mounts | grep /var/lib/kubelet | awk '{print $2}'` 
+sudo umount `cat /proc/mounts | grep /var/lib/kubelet | awk '{print $2}'`
 sudo rm -rf /var/lib/kubelet
 ```
 
-### Troubleshooting
+### 排除故障
 
-#### Node is in `NotReady` state
+#### Node 是 `NotReady` 状态
 
-If you see your node as `NotReady` it's possible that your OS does not have memcg enabled.
+如果你发现你的 node (节点)的状态是 `NotReady` ，那么他可能是因为你的系统不具备 memcg 而导致的。
 
-1. Your kernel should support memory accounting. Ensure that the
-following configs are turned on in your linux kernel:
+1. 你的系统内核应该支持`memory accounting`，输入一下命令来开启它:
 
 ```shell
 CONFIG_RESOURCE_COUNTERS=y
 CONFIG_MEMCG=y
 ```
 
-2. Enable the memory accounting in the kernel, at boot, as command line
-parameters as follows:
+2. 在内核启动时启用`memory accounting`的命令:
 
 ```shell
 GRUB_CMDLINE_LINUX="cgroup_enable=memory=1"
 ```
 
-NOTE: The above is specifically for GRUB2.
-You can check the command line parameters passed to your kernel by looking at the
-output of /proc/cmdline:
+注意：以上只适用于GRUB2。
+通过查看 `/proc/cmdline` 可以确认命令行参数是否已经成功传给内核：
 
 ```shell
 $ cat /proc/cmdline
 BOOT_IMAGE=/boot/vmlinuz-3.18.4-aufs root=/dev/sda5 ro cgroup_enable=memory=1
 ```
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level
@@ -221,11 +217,9 @@ IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs               
 Docker Single Node   | custom       | N/A    | local       | [docs](/docs/getting-started-guides/docker)                                 |          | Project ([@brendandburns](https://github.com/brendandburns))
 
 
-For support level information on all solutions, see the [Table of solutions](/docs/getting-started-guides/#table-of-solutions) chart.
+所有解决方案及支持级别的信息，请参阅[解决方案表格](/docs/getting-started-guides/#table-of-solutions) .
 
 
-## Further reading
+## 深入阅读
 
-Please see the [Kubernetes docs](/docs/) for more details on administering
-and using a Kubernetes cluster.
-
+更多详细的使用和管理 Kubernetes 群集相关的信息，请看 [Kubernetes 文档](/docs/)

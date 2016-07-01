@@ -19,7 +19,7 @@ Kubernetes [是一个用于容器集群的自动化部署、扩容以及运维�
 * **可扩展的**：模块化, 插件化, 可挂载, 可组合
 * **可自愈的**：自动布置, 自动重启, 自动复制, 自动扩容
 
-Kubernetes项目是Google在2014年启动的。Kubernetes构建在[Google公司十几年的大规模高负载生产系统运维经验](https://research.google.com/pubs/pub43438.html)之上，同时结合了社区中各项最佳设计和实践。
+Kubernetes项目是Google在2014年启动的。Kubernetes构建在[Google公司十几年的大规模高负载运维经验](https://research.google.com/pubs/pub43438.html)之上，同时结合了社区中各项最佳设计和实践。
 
 ##### 准备好[开始](/docs/getting-started-guides/)了吗？
 
@@ -61,33 +61,34 @@ Kubernetes项目是Google在2014年启动的。Kubernetes构建在[Google公司�
 * **资源利用**:
     高性能，大容量。
 
-#### Why do I need Kubernetes and what can it do?
+#### 为什么需要 Kubernetes，它能做什么?
 
-At a minimum, Kubernetes can schedule and run application containers on clusters of physical or virtual machines. However, Kubernetes also allows developers to 'cut the cord' to physical and virtual machines, moving from a **host-centric** infrastructure to a **container-centric** infrastructure, which provides the full advantages and benefits inherent to containers. Kubernetes provides the infrastructure to build a truly **container-centric** development environment.
+Kubernetes不仅仅只能调度编排物理机或者虚拟机上的容器， However, Kubernetes also allows developers to 'cut the cord' to physical and virtual machines, moving from a **host-centric** infrastructure to a **container-centric** infrastructure, which provides the full advantages and benefits inherent to containers. Kubernetes provides the infrastructure to build a truly **container-centric** development environment.
 
-Kubernetes satisfies a number of common needs of applications running in production, such as:
+Kubernetes 可以满足一般生产环境的需求, 例如:
 
-* [co-locating helper processes](/docs/user-guide/pods/), facilitating composite applications and preserving the one-application-per-container model,
-* [mounting storage systems](/docs/user-guide/volumes/),
-* [distributing secrets](/docs/user-guide/secrets/),
-* [application health checking](/docs/user-guide/production-pods/#liveness-and-readiness-probes-aka-health-checks),
-* [replicating application instances](/docs/user-guide/replication-controller/),
-* [horizontal auto-scaling](/docs/user-guide/horizontal-pod-autoscaling/),
-* [naming and discovery](/docs/user-guide/connecting-applications/),
-* [load balancing](/docs/user-guide/services/),
-* [rolling updates](/docs/user-guide/update-demo/),
-* [resource monitoring](/docs/user-guide/monitoring/),
-* [log access and ingestion](/docs/user-guide/logging/),
-* [support for introspection and debugging](/docs/user-guide/introspection-and-debugging/), and
-* [identity and authorization](/docs/admin/authorization/).
+* [协同定位辅助](/docs/user-guide/pods/), 复合应用，和单独应用容器模型,
+* [装在储存视同](/docs/user-guide/volumes/),
+* [安全分发](/docs/user-guide/secrets/),
+* [健康检查](/docs/user-guide/production-pods/#liveness-and-readiness-probes-aka-health-checks),
+* [replicating application](/docs/user-guide/replication-controller/),
+* [横向扩容](/docs/user-guide/horizontal-pod-autoscaling/),
+* [命名和查找](/docs/user-guide/connecting-applications/),
+* [负载均衡](/docs/user-guide/services/),
+* [滚动更新](/docs/user-guide/update-demo/),
+* [资源监控](/docs/user-guide/monitoring/),
+* [进出站日志](/docs/user-guide/logging/),
+* [自检和调试](/docs/user-guide/introspection-and-debugging/), and
+* [权限](/docs/admin/authorization/).
 
-This provides the simplicity of Platform as a Service (PaaS) with the flexibility of Infrastructure as a Service (IaaS), and facilitates portability across infrastructure providers.
+提供了具有灵活的 IaaS 服务的 PaaS 平台，让你的应用提高了可移植性，不再依赖基础设施。
 
-For more details, see the [user guide](/docs/user-guide/).
+更多详细内容，请看[用户指南](/docs/user-guide/).
 
-#### Why and how is Kubernetes a platform?
+#### Kubernetes 是一个什么样的平台，为什么这么设计呢?
 
-Even though Kubernetes provides a lot of functionality, there are always new scenarios that would benefit from new features. Application-specific workflows can be streamlined to accelerate developer velocity. Ad hoc orchestration that is acceptable initially often requires robust automation at scale. This is why Kubernetes was also designed to serve as a platform for building an ecosystem of components and tools to make it easier to deploy, scale, and manage applications.
+尽管 Kubernetes 提供了很多种解决方案，但总会有一些意想不到的应用场景。
+Application-specific workflows can be streamlined to accelerate developer velocity. Ad hoc orchestration that is acceptable initially often requires robust automation at scale. This is why Kubernetes was also designed to serve as a platform for building an ecosystem of components and tools to make it easier to deploy, scale, and manage applications.
 
 [Labels](/docs/user-guide/labels/) empower users to organize their resources however they please. [Annotations](/docs/user-guide/annotations/) enable users to decorate resources with custom information to facilitate their workflows and provide an easy way for management tools to checkpoint state.
 
