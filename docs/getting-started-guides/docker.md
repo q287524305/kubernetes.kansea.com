@@ -1,7 +1,7 @@
 ---
 ---
 
-**停住你的脚步。现在开始已经推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**
+**停住你的脚步。现在开始，在本地环境下推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**
 
 下面将介绍，如果使用 Docker 搭建一个单点 kubernetes 群集。
 
@@ -14,7 +14,7 @@
 
 ## 前提条件
 
-**注意: 下面这些步骤没有经过[Docker For Mac和Docker For Windows](https://blog.docker.com/2016/03/docker-for-mac-windows-beta/)的验证。**
+**注意: 下面这些步骤没有经过[Docker For Mac 和 Docker For Windows](https://blog.docker.com/2016/03/docker-for-mac-windows-beta/)的验证。**
 
 1. 你必须拥有一台安装有 Docker 的机器。
 2. 选择使用什么版本的 Kubernetes，设置 ` ${K8S_VERSION}`  为高于或等于 "V1.2.0" 的版本号，如果你想使用稳定版的话，那么你可以运行一下命令:
@@ -53,20 +53,19 @@ docker run -d \
         --allow-privileged --v=2
 ```
 
-> Note that `--cluster-dns` and `--cluster-domain` is used to deploy dns, feel free to discard them if dns is not needed.
+> 注意 `--cluster-dns` 和 `--cluster-domain` 是用来部署 dns 的, 如果不需要 dns 的话可以不设置。
 
-> If you would like to mount an external device as a volume, add `--volume=/dev:/dev` to the command above. It may however, cause some problems described in [#18230](https://github.com/kubernetes/kubernetes/issues/18230)
+> 如果你想要装在一个外部设备作为volume（卷）来使用的话，需要添加 `--volume=/dev:/dev` 到上面。 然而它可能会导致出现一些问题[#18230](https://github.com/kubernetes/kubernetes/issues/18230)
 
-> Architectures other than `amd64` are experimental and sometimes unstable, but feel free to try them out! Valid values: `arm`, `arm64` and `ppc64le`. ARM is available with Kubernetes version `v1.3.0-alpha.2` and higher. ARM 64-bit and PowerPC 64 little-endian are available with `v1.3.0-alpha.3` and higher. Track progress on multi-arch support [here](https://github.com/kubernetes/kubernetes/issues/17981)
+> `amd64` 以外的架构，有可能不稳定, 但如果你想尝试一下的话，可以设置为 `arm`, `arm64` 或者 `ppc64le`。 Kubernetes `v1.3.0-alpha.2` 以上的版本才开始支持 ARM. ARM 64-bit 和 PowerPC 64 需要 `v1.3.0-alpha.3` 或更高版本。 [在这](https://github.com/kubernetes/kubernetes/issues/17981)查看·multi-arch·支持进度
 
 This actually runs the kubelet, which in turn runs a [pod](/docs/user-guide/pods/) that contains the other master components.
 
-** **SECURITY WARNING** ** services exposed via Kubernetes using Hyperkube are available on the host node's public network interface / IP address.  Because of this, this guide is not suitable for any host node/server that is directly internet accessible.  Refer to [#21735](https://github.com/kubernetes/kubernetes/issues/21735) for addtional info.
+** **安全警告** ** services exposed via Kubernetes using Hyperkube are available on the host node's public network interface / IP address.  Because of this, this guide is not suitable for any host node/server that is directly internet accessible.  Refer to [#21735](https://github.com/kubernetes/kubernetes/issues/21735) for addtional info.
 
 ### 下载 `kubectl`
 
-At this point you should have a running Kubernetes cluster. You can test it out
-by downloading the kubectl binary for `${K8S_VERSION}` (in this example: `{{page.version}}.0`).
+这时候你应该运行了一个 Kubernetes 群集。你可以下载`${K8S_VERSION}`版本的kubectl来进行测试。(本示例使用: `{{page.version}}.0`).
 
 
 下载:
@@ -109,15 +108,15 @@ kubectl config set-context test-doc --cluster=test-doc
 kubectl config use-context test-doc
 ```
 
-### Test it out
+### 测试
 
-List the nodes in your cluster by running:
+列出群集中的 node(节点)
 
 ```shell
 kubectl get nodes
 ```
 
-This should print:
+应该会打印出:
 
 ```shell
 NAME        STATUS    AGE
@@ -130,7 +129,7 @@ NAME        STATUS    AGE
 kubectl run nginx --image=nginx --port=80
 ```
 
-Now run `docker ps` you should see nginx running. You may need to wait a few minutes for the image to get pulled.
+由于下载镜像需要花上几分钟，过一会运行 `docker ps` 你会看到 nginx 正在运行。
 
 ### 用 service 来开放端口
 

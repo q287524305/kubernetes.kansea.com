@@ -1,33 +1,35 @@
 ---
 ---
 
-**Stop. This guide has been superseded by [Minikube](../minikube/) which is the recommended method of running Kubernetes on your local machine.**
+**停住你的脚步。现在开始，在本地环境下推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**
 
-Running Kubernetes with Vagrant (and VirtualBox) is an easy way to run/test/develop on your local machine (Linux, Mac OS X).
+使用 Vagrant（和 VirtualBox）运行 Kubernetes 是在本地机器（Linux，Mac OS X）进行运行/测试/开发的简单方法。
+
+
 
 * TOC
 {:toc}
 
-### Prerequisites
+### 前提条件
 
-1. Install latest version >= 1.7.4 of [Vagrant](http://www.vagrantup.com/downloads.html)
-2. Install one of:
-   1. The latest version of [Virtual Box](https://www.virtualbox.org/wiki/Downloads)
-   2. [VMWare Fusion](https://www.vmware.com/products/fusion/) version 5 or greater as well as the appropriate [Vagrant VMWare Fusion provider](https://www.vagrantup.com/vmware)
-   3. [VMWare Workstation](https://www.vmware.com/products/workstation/) version 9 or greater as well as the [Vagrant VMWare Workstation provider](https://www.vagrantup.com/vmware)
-   4. [Parallels Desktop](https://www.parallels.com/products/desktop/) version 9 or greater as well as the [Vagrant Parallels provider](https://parallels.github.io/vagrant-parallels/)
-   5. libvirt with KVM and enable support of hardware virtualisation. [Vagrant-libvirt](https://github.com/pradels/vagrant-libvirt). For fedora provided official rpm, and possible to use `yum install vagrant-libvirt`
+1. 安装版本高于 1.7.4 的 [Vagrant](http://www.vagrantup.com/downloads.html)
+2. 下载一下中的一项:
+   1. 最新版的 [Virtual Box](https://www.virtualbox.org/wiki/Downloads)
+   2. 版本号>=5的 [VMWare Fusion](https://www.vmware.com/products/fusion/) 和合适的 [Vagrant VMWare Fusion provider](https://www.vagrantup.com/vmware)
+   3. 版本号>=9的[VMWare Workstation](https://www.vmware.com/products/workstation/) 以及 [Vagrant VMWare Workstation provider](https://www.vagrantup.com/vmware)
+   4. 版本号>=9的[Parallels Desktop](https://www.parallels.com/products/desktop/) 以及 [Vagrant Parallels provider](https://parallels.github.io/vagrant-parallels/)
+   5. 支持硬件虚拟化并且带有libvirt的KVM. [Vagrant-libvirt](https://github.com/pradels/vagrant-libvirt). 为fedora提供官方的rpm，可以使用 `yum install vagrant-libvirt`命令来安装。
 
-### Setup
+### 设置
 
-Setting up a cluster is as simple as running:
+简单运行下列代码就能够设置一个集群:
 
 ```sh
 export KUBERNETES_PROVIDER=vagrant
 curl -sS https://get.k8s.io | bash
 ```
 
-Alternatively, you can download [Kubernetes release](https://github.com/kubernetes/kubernetes/releases) and extract the archive. To start your local cluster, open a shell and run:
+你也可以下载 [Kubernetes 发行版](https://github.com/kubernetes/kubernetes/releases) 或者解压归档文件. 来打开终端运行以下命令启动本地集群:
 
 ```sh
 cd kubernetes
@@ -36,13 +38,12 @@ export KUBERNETES_PROVIDER=vagrant
 ./cluster/kube-up.sh
 ```
 
-The `KUBERNETES_PROVIDER` environment variable tells all of the various cluster management scripts which variant to use.  If you forget to set this, the assumption is you are running on Google Compute Engine.
+环境变量 `KUBERNETES_PROVIDER` 用来告诉所有不同的集群管理脚本该使用哪一个脚本管理器（比如Vagrant）。如果你忘记设置这个变量，默认假设你运行Google Compute Engine上运行k8s。
+默认情况下，Vagrant会创建一个单独的master VM（被称为kubernetes-master），以及一个节点VM（被称为kubernetes-node-1）。每个VM会占用1G内存，所以确保你有至少2G-4G的空余内存（以及合适的空闲硬盘空间）。
 
-By default, the Vagrant setup will create a single master VM (called kubernetes-master) and one node (called kubernetes-node-1). Each VM will take 1 GB, so make sure you have at least 2GB to 4GB of free memory (plus appropriate free disk space).
+Vagrant 会提供集群中每台机器运行 Kuberbetes 所有必须的组件。每台机器会花费几分钟完成初始化设置。
 
-Vagrant will provision each machine in the cluster with all the necessary components to run Kubernetes.  The initial setup can take a few minutes to complete on each machine.
-
-If you installed more than one Vagrant provider, Kubernetes will usually pick the appropriate one. However, you can override which one Kubernetes will use by setting the [`VAGRANT_DEFAULT_PROVIDER`](https://docs.vagrantup.com/v2/providers/default.html) environment variable:
+如果你下载了多个Vagrant provider，Kubernetes通常会选择最恰当的那个。但是，你可以通过设置环境变量[`VAGRANT_DEFAULT_PROVIDER`](https://docs.vagrantup.com/v2/providers/default.html) 的值来让Kubernetes使用哪个Vagrant provider:
 
 ```sh
 export VAGRANT_DEFAULT_PROVIDER=parallels
@@ -50,27 +51,27 @@ export KUBERNETES_PROVIDER=vagrant
 ./cluster/kube-up.sh
 ```
 
-By default, each VM in the cluster is running Fedora.
+默认情况下每个集群中的VM运行 Fedora 系统。
 
-To access the master or any node:
+通过下面的命令连接 master 或任意节点:
 
 ```sh
 vagrant ssh master
 vagrant ssh node-1
 ```
 
-If you are running more than one node, you can access the others by:
+如果你运行超过一个节点，可以通过下面命令连接其它节点：
 
 ```sh
 vagrant ssh node-2
 vagrant ssh node-3
 ```
 
-Each node in the cluster installs the docker daemon and the kubelet.
+每一个安装了 Docker 和 kubelet 的 node (节点).
 
-The master node instantiates the Kubernetes master components as pods on the machine.
+master节点会实例化Kubernetes master 组件作为pods运行在机器上。
 
-To view the service status and/or logs on the kubernetes-master:
+查看kubernetes-master上的服务状态或者日志：
 
 ```console
 [vagrant@kubernetes-master ~] $ vagrant ssh master
@@ -87,7 +88,7 @@ To view the service status and/or logs on the kubernetes-master:
 [root@kubernetes-master ~] $ tail -f /var/log/kube-scheduler.log
 ```
 
-To view the services on any of the nodes:
+查看任意节点的服务状态：
 
 ```console
 [vagrant@kubernetes-master ~] $ vagrant ssh node-1
@@ -100,32 +101,32 @@ To view the services on any of the nodes:
 [root@kubernetes-master ~] $ journalctl -ru docker
 ```
 
-### Interacting with your Kubernetes cluster with Vagrant.
+### 使用 Vagrant 与 Kubernetes 集群交互
 
-With your Kubernetes cluster up, you can manage the nodes in your cluster with the regular Vagrant commands.
+启动好你的 Kubernetes 集群后，你可以使用常用的 Vagrant 命令管理集群中的节点。
 
-To push updates to new Kubernetes code after making source changes:
+源代码改变后推送更新到 Kubernetes 代码：
 
 ```sh
 ./cluster/kube-push.sh
 ```
 
-To stop and then restart the cluster:
+暂停与重启集群：
 
 ```sh
 vagrant halt
 ./cluster/kube-up.sh
 ```
 
-To destroy the cluster:
+删除集群：
 
 ```sh
 vagrant destroy
 ```
 
-Once your Vagrant machines are up and provisioned, the first thing to do is to check that you can use the `kubectl.sh` script.
+一旦你的Vgrant机器运行并且提供相应资源，第一件要做的事情就是检查能否使用`kubectl.sh`脚本。
 
-You may need to build the binaries first, you can do this with `make`
+你可能需要先编译二进制文件，可以使用`make`命令：
 
 ```console
 $ ./cluster/kubectl.sh get nodes
@@ -136,9 +137,9 @@ NAME                LABELS
 10.245.1.3          <none>
 ```
 
-### Authenticating with your master
+### 验证你的 master
 
-When using the vagrant provider in Kubernetes, the `cluster/kubectl.sh` script will cache your credentials in a `~/.kubernetes_vagrant_auth` file so you will not be prompted for them in the future.
+当我们使用vagrant provider管理Kubernetes时，`cluster/kubectl.sh`脚本会创建证书保存在home或～（ps：Linux中使用～表示当前用户的家目录）目录下的`~/.kubernetes_vagrant_auth`文件中，这样以后就不会出现验证的提示了。
 
 ```sh
 cat ~/.kubernetes_vagrant_auth
@@ -153,15 +154,15 @@ cat ~/.kubernetes_vagrant_auth
 }
 ```
 
-You should now be set to use the `cluster/kubectl.sh` script. For example try to list the nodes that you have started with:
+现在你可以使用`cluster/kubectl.sh`脚本了。例如使用下面的命令列出已经启动的节点：
 
 ```sh
 ./cluster/kubectl.sh get nodes
 ```
 
-### Running containers
+### 运行容器
 
-Your cluster is running, you can list the nodes in your cluster:
+你的集群已经运行起来了，你可以列出集群中的节点：
 
 ```sh
 $ ./cluster/kubectl.sh get nodes
@@ -172,10 +173,10 @@ NAME                 LABELS
 10.245.2.2           <none>
 ```
 
-Now start running some containers!
+现在开始运行一些容器吧！
 
-You can now use any of the `cluster/kube-*.sh` commands to interact with your VM machines.
-Before starting a container there will be no pods, services and replication controllers.
+现在你可以用`cluster/kube-*.sh`的任何命令来与你的VMs交互。
+启动容器之前并没有`pods`，`services`，`replication controllers`
 
 ```sh
 $ ./cluster/kubectl.sh get pods
@@ -188,13 +189,13 @@ $ ./cluster/kubectl.sh get replicationcontrollers
 CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR   REPLICAS
 ```
 
-Start a container running nginx with a replication controller and three replicas
+启动一个运行 nginx、使用`replication controllers`并且副本数为3的容器：
 
 ```sh
 $ ./cluster/kubectl.sh run my-nginx --image=nginx --replicas=3 --port=80
 ```
 
-When listing the pods, you will see that three containers have been started and are in Waiting state:
+（此时）列出pods，会看到3个容器已经被启动了，并且处于等待状态：
 
 ```sh
 $ ./cluster/kubectl.sh get pods
@@ -204,7 +205,7 @@ my-nginx-gr3hh   0/1       Pending   0          10s
 my-nginx-xql4j   0/1       Pending   0          10s
 ```
 
-You need to wait for the provisioning to complete, you can monitor the nodes by doing:
+你需要等待（Vagrant）分配好资源，这时可以通过命令来监测节点：
 
 ```sh
 $ vagrant ssh node-1 -c 'sudo docker images'
@@ -215,7 +216,7 @@ kubernetes-node-1:
     kubernetes/pause    latest              6c4579af347b        8 weeks ago         239.8 kB
 ```
 
-Once the docker image for nginx has been downloaded, the container will start and you can list it:
+下载好 docker nginx 镜像后容器就会启动，通过下面的命令查看：
 
 ```sh
 $ vagrant ssh node-1 -c 'sudo docker ps'
@@ -227,7 +228,7 @@ kubernetes-node-1:
     65a3a926f357        kubernetes/pause:latest   "/pause"               39 minutes ago      Up 39 minutes       0.0.0.0:4194->8080/tcp   k8s--net.c5ba7f0e--cadvisor_-_agent.file--342fd561
 ```
 
-Going back to listing the pods, services and replicationcontrollers, you now have:
+这时再次列举`pods`，`services`和`replication controllers`，会看到：
 
 ```sh
 $ ./cluster/kubectl.sh get pods
@@ -244,9 +245,7 @@ CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR       REPLICAS   AGE
 my-nginx     my-nginx       nginx      run=my-nginx   3          1m
 ```
 
-We did not start any services, hence there are none listed. But we see three replicas displayed properly.
-Learn about [running your first containers](../user-guide/simple-nginx/) application to learn how to create a service.
-You can already play with scaling the replicas with:
+我们没有启动任何服务，因此列举服务是什么也没有。但是我们看到3个副本正常显示。查看 [运行第一个容器](../user-guide/simple-nginx/) 了解如何创建服务。现在你已经可以尝试增加或减少副本了：
 
 ```sh
 $ ./cluster/kubectl.sh scale rc my-nginx --replicas=2
@@ -256,13 +255,13 @@ my-nginx-5kq0g   1/1       Running   0          2m
 my-nginx-gr3hh   1/1       Running   0          2m
 ```
 
-Congratulations!
+祝贺你!
 
-## Troubleshooting
+## 常见问题
 
 #### I keep downloading the same (large) box all the time!
 
-By default the Vagrantfile will download the box from S3. You can change this (and cache the box locally) by providing a name and an alternate URL when calling `kube-up.sh`
+Vagrantfile 默认从 S3 下载 box。当调用`kube-up.sh`脚本是你可以提供name和可选的连接作为参数来修改下载站点：
 
 ```sh
 export KUBERNETES_BOX_NAME=choose_your_own_name_for_your_kuber_box
