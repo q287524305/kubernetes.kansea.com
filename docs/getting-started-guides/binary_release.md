@@ -1,27 +1,27 @@
 ---
 ---
 
-You can either build a release from sources or download a pre-built release.  If you do not plan on developing Kubernetes itself, we suggest a pre-built release. 
+你可以从代码编译或者下载一个预发布版。如果你不打算自己开发 Kubernetes，那么我建议你下载一个预发布版。
 
-If you just want to run Kubernetes locally for development, we recommend using Minikube. You can download Minikube [here](https://github.com/kubernetes/minikube/releases/latest).
-Minikube sets up a local VM that runs a Kubernetes cluster securely, and makes it easy to work with that cluster.
+如果你仅仅想要在本地运行 Kubernetes，那么我们推荐你使用 Minikube。你可以在[这](https://github.com/kubernetes/minikube/releases/latest)下载 Minikube。
+Minikube 可以确保你很容易地在本地搭建起 Kubernetes 群集。
 
 * TOC
 {:toc}
 
-### Prebuilt Binary Release
+### 预发布版
 
-The list of binary releases is available for download from the [GitHub Kubernetes repo release page](https://github.com/kubernetes/kubernetes/releases).
+你可以从 [GitHub Kubernetes 版本库](https://github.com/kubernetes/kubernetes/releases)下载二进制版。
 
-Download the latest release and unpack this tar file on Linux or OS X, cd to the created `kubernetes/` directory, and then follow the getting started guide for your cloud.
+在 Linux 或 macOS 下载最新的版本并解压缩，切换到 `kubernetes/` 目录下然后你就可以按照用户指南来搭建你的私有云了。
 
-On OS X you can also use the [homebrew](http://brew.sh/) package manager: `brew install kubernetes-cli`
+macOS 上你也可以用 [homebrew](http://brew.sh/) : `brew install kubernetes-cli`
 
-### Building from source
+### 编译
 
-Get the Kubernetes source.  If you are simply building a release from source there is no need to set up a full golang environment as all building happens in a Docker container.
+获取 Kubernetes 源代码。如果你仅仅要用源代码编译一次，那么你没必要搭建一个完整的 Golang 环境，使用 Docker 容器就可以了。
 
-Building a release is simple.
+编译非常简单。
 
 ```shell
 git clone https://github.com/kubernetes/kubernetes.git
@@ -29,12 +29,11 @@ cd kubernetes
 make release
 ```
 
-For more details on the release process see the [`build/` directory](http://releases.k8s.io/{{page.githubbranch}}/build/)
+更多详细内容请参阅[`build/` 文件夹](http://releases.k8s.io/{{page.githubbranch}}/build/)
 
-### Download Kubernetes and automatically set up a default cluster
+### 下载 Kubernetes 并且自动设置一个群集
 
-The bash script at `https://get.k8s.io`, which can be run with `wget` or `curl`, automatically downloads Kubernetes, and provisions a cluster based on your desired cloud provider.
-
+`https://get.k8s.io` 这个脚本可以使用 `wget` 或者 `curl` 来自动下载 Kubernetes，并在你的私有云中创建群集。
 ```shell
 # wget version
 export KUBERNETES_PROVIDER=YOUR_PROVIDER; wget -q -O - https://get.k8s.io | bash
@@ -43,7 +42,7 @@ export KUBERNETES_PROVIDER=YOUR_PROVIDER; wget -q -O - https://get.k8s.io | bash
 export KUBERNETES_PROVIDER=YOUR_PROVIDER; curl -sS https://get.k8s.io | bash
 ```
 
-Possible values for `YOUR_PROVIDER` include:
+`YOUR_PROVIDER`支持一下服务:
 
 * `gce` - Google Compute Engine [default]
 * `gke` - Google Container Engine
@@ -53,4 +52,5 @@ Possible values for `YOUR_PROVIDER` include:
 * `vsphere` - VMWare VSphere
 * `rackspace` - Rackspace
 
-For the complete, up-to-date list of providers supported by this script, see [the `/cluster` folder in the main Kubernetes repo](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/cluster), where each folder represents a possible value for `YOUR_PROVIDER`. If you don't see your desired provider, try looking at our [getting started guides](/docs/getting-started-guides); there's a good chance we have docs for them.
+通过这个脚本来完善更多服务商，, 看 [Kubernetes 代码库的 `/cluster` 文件夹](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/cluster)， 其中每一个文件夹代表一个`YOUR_PROVIDER`支持的服务商。
+如果没找到你的服务商，你可以查看[入门指南](/docs/getting-started-guides); 那会有我们为他们准备的文档。

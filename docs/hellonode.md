@@ -9,41 +9,41 @@
 这个代码实验室的目标是，让你吧一个 node.js 的简单的 Hello World 应用，在 Kubernetes 上部署成为一个复制应用。
 我们会告诉你，如何将你的代码变成一个 Docker 镜像，并且在[Google Container Engine](https://cloud.google.com/container-engine/)上运行它。
 
-Here’s a diagram of the various parts in play in this codelab to help you understand how pieces fit with one another. Use this as a reference as we progress through the codelab; it should all make sense by the time we get to the end.
+这个是本实验帮助你了解，这个演示的每一个细节的图解。 整个实验，我们都会参考这个图解。
 
 ![image](/images/hellonode/image_1.png)
 
-Kubernetes is an open source project which can run on many different environments, from laptops to high-availability multi-node clusters, from public clouds to on-premise deployments, from virtual machines to bare metal. Using a managed environment such as Google Container Engine (a Google-hosted version of Kubernetes) will allow you to focus more on experiencing Kubernetes rather than setting up the underlying infrastructure.
+Kubernetes 是可以运行在许多不同环境的开源项目，无论是笔记本还是高可用多点集群，公有云还是本地环境，无论是虚拟机还是裸机。使用例如 Google Container Engine (一个 Google 托管的 Kubernetes 运行环境) 托管环境的话，会让你不用设置底层基础架构而更专注地体验 Kubernetes。
 
-## Setup and Requirements
+## 设置和要求
 
-If you don't already have a Google Account (Gmail or Google Apps), you must [create one](https://accounts.google.com/SignUp). Then, sign-in to Google Cloud Platform console ([console.cloud.google.com](http://console.cloud.google.com)) and create a new project:
+如果你还没有 Google 账号(Gmail 或者 Google Apps), 你必须[创建一个](https://accounts.google.com/SignUp)。然后登录 Google 云平台([console.cloud.google.com](http://console.cloud.google.com)) 并创建一个项目:
 
 ![image](/images/hellonode/image_2.png)
 
 ![image](/images/hellonode/image_3.png)
 
-Remember the project ID; it will be referred to later in this codelab as `PROJECT_ID`.
+记住这个项目 ID; 下面将称它为`PROJECT_ID`。
 
-Next, [enable billing](https://console.developers.google.com/billing) in the Developers Console in order to use Google Cloud resources and [enable the Container Engine API](https://console.developers.google.com/project/_/kubernetes/list).
+接下来, 在开发者控制台[启用结算](https://console.developers.google.com/billing) 以便使用 Google 云资源 and [开启容器引擎 API](https://console.developers.google.com/project/_/kubernetes/list).
 
-New users of Google Cloud Platform receive a [$300 free trial](https://console.developers.google.com/billing/freetrial?hl=en). Running through this codelab shouldn’t cost you more than a few dollars of that trial. Google Container Engine pricing is documented [here](https://cloud.google.com/container-engine/pricing).
+新用户会获得[300美元的试用额度](https://console.developers.google.com/billing/freetrial?hl=en). 运行本示例只会用掉几美元的额度。Google 容器引擎的定价在[这里](https://cloud.google.com/container-engine/pricing).
 
-Next, make sure you [download Node.js](https://nodejs.org/en/download/).
+下面, 你要[下载 Node.js](https://nodejs.org/en/download/).
 
-Then install [Docker](https://docs.docker.com/engine/installation/), and [Google Cloud SDK](https://cloud.google.com/sdk/).
+并且安装 [Docker](https://docs.docker.com/engine/installation/) 和 [Google Cloud SDK](https://cloud.google.com/sdk/).
 
-Finally, after Google Cloud SDK installs, run the following command to install [`kubectl`](http://kubernetes.io/docs/user-guide/kubectl-overview/):
+最后, 在安装完 Google Cloud SDK 以后，运行一下命令来安装[`kubectl`](http://kubernetes.io/docs/user-guide/kubectl-overview/):
 
 ```shell
 gcloud components install kubectl
 ```
 
-You're all set up with an environment that can build container images, run Node apps, run Kubernetes clusters locally, and deploy Kubernetes clusters to Google Container Engine. Let's begin!
+全部设置完毕以后，你就可以创建容器的镜像了，运行 Node 应用, 在本地运行 Kubernetes 集群, 并且部署 Kubernetes 集群到 Google Container Engine。让我们马上开始行动吧!
 
-## Create your Node.js application
+## 创建你的 Node.js 应用
 
-The first step is to write the application. Save this code in a folder called "`hellonode/`" with the filename `server.js`:
+首先要写这个程序。保存代码到 "`hellonode/`" 文件夹下的`server.js`:
 
 #### server.js
 
@@ -57,21 +57,21 @@ var www = http.createServer(handleRequest);
 www.listen(8080);
 ```
 
-Now run this simple command :
+现在运行这个简单的命令 :
 
 ```shell
 node server.js
 ```
 
-You should be able to see your "Hello World!" message at http://localhost:8080/
+在浏览器打开 http://localhost:8080/ 你应该会看到你的 "Hello World!"。
 
-Stop the running node server by pressing Ctrl-C.
+停止运行 node 只需按下 Ctrl-C.
 
-Now let’s package this application in a Docker container.
+接下来让我们来打包这个程序到 Docker 容器中.
 
-## Create a Docker container image
+## 创建一个 Docker 容器镜像
 
-Next, create a file, also within `hellonode/` named `Dockerfile`. A Dockerfile describes the image that you want to build. Docker container images can extend from other existing images so for this image, we'll extend from an existing Node image.
+下面, 创建一个文件, 也在`hellonode/` 文件夹中 创建一个叫 `Dockerfile` 的文件. 一个 Dockerfile 定制你想要构建的镜像。 Docker 容器镜像可以基于其他镜像进行拓展，所以我们这个镜像将要基于已经存在的 Node 镜像来构建。
 
 #### Dockerfile
 
@@ -82,30 +82,30 @@ COPY server.js .
 CMD node server.js
 ```
 
-This "recipe" for the Docker image will start from the official Node.js LTS image found on the Docker registry, expose port 8080, copy our `server.js` file to the image and start the Node server.
+这个 "秘方" 会让搭建的 Docker 镜像基于 Docker 镜像仓库的 Node.js LTS镜像, 开放 8080 端口, 复制我们的 `server.js` 文件到镜像，并且启动 Node  服务。
 
-Now build an image of your container by running `docker build`, tagging the image with the Google  Container Registry repo for your `PROJECT_ID`:
+现在运行 `docker build` 来构建你的容器，并用 Google Container Registry 得到的 `PROJECT_ID` 来标记这个容器:
 
 ```shell
 docker build -t gcr.io/PROJECT_ID/hello-node:v1 .
 ```
-Now there is a trusted source for getting an image of your containerized app.
+现在你有了一个，具有一段可以正常运行的代码的容器。
 
-Let's try your image out with Docker:
+让我们用 Docker 来试一下你的镜像:
 
 ```shell
 $ docker run -d -p 8080:8080 gcr.io/PROJECT_ID/hello-node:v1
 325301e6b2bffd1d0049c621866831316d653c0b25a496d04ce0ec6854cb7998
 ```
 
-Visit your app in the browser, or use `curl` or `wget` if you’d like :
+你可以通过浏览器访问你的应用，如果你愿意，你也可以使用`curl` 或者 `wget`:
 
 ```shell
 $ curl http://localhost:8080
 Hello World!
 ```
 
-Let’s now stop the container. In this example, our app was running as Docker process `2c66d0efcbd4`, which we looked up with `docker ps`:
+让我们停止运行这个容器。在这个例子里，我们用`docker ps`查看到容器的 ID 是`2c66d0efcbd4`:
 
 ```shell
 docker ps
@@ -116,46 +116,47 @@ docker stop 2c66d0efcbd4
 2c66d0efcbd4
 ```
 
-Now that the image works as intended and is all tagged with your `PROJECT_ID`, we can push it to the [Google Container Registry](https://cloud.google.com/tools/container-registry/), a private repository for your Docker images accessible from every Google Cloud project (but also from outside Google Cloud Platform) :
+现在镜像已经可以如期运行，并标记了你的`PROJECT_ID`，我们推送它到[Google 容器仓库](https://cloud.google.com/tools/container-registry/), 每一个 Google 云项目具有一个私有 Docker 镜像库 (而且也在 Google 云平台之外) :
 
 ```shell
 gcloud docker push gcr.io/PROJECT_ID/hello-node:v1
 ```
 
-If all goes well, you should be able to see the container image listed in the console: *Compute > Container Engine > Container Registry*. We now have a project-wide Docker image available which Kubernetes can access and orchestrate.
+如果一切顺利, 你应该会在控制台中看到容器镜像: *Compute > Container Engine > Container Registry*. 我们现在有一个项目内可用的， Kubernetes 可以访问和编排的 Docker 镜像.
 
 ![image](/images/hellonode/image_10.png)
 
-## Create your cluster
+## 创建你的群集
 
-A cluster consists of a master API server and a set of worker VMs called nodes.
+集群由一个 master API server 和一组叫做 node 的虚拟机。
 
-Create a cluster via the Console: *Compute > Container Engine > Container Clusters > New container cluster*. Set the name to 'hello-world', leaving all other options default.  You should get a Kubernetes cluster with three nodes, ready to receive your container image.
+通过控制台创建群集: *Compute > Container Engine > Container Clusters > New container cluster*。将名称设置为'hello-world'，使用所有默认设置选项。你会得到一个具有三个可以部署你容器镜像的 node（节点）群集。
 
 ![image](/images/hellonode/image_11.png)
 
-It’s now time to deploy your own containerized application to the Kubernetes cluster! Please ensure that you have [configured](https://cloud.google.com/container-engine/docs/clusters/operations#configuring_kubectl) `kubectl` to use the cluster you just created:
+是时候来部署你的`容器式应用` 到 Kubernetes 集群了!
+请确保你[配置](https://cloud.google.com/container-engine/docs/clusters/operations#configuring_kubectl) 过`kubectl`使用你刚刚创建的集群:
 
 ```shell
 $ gcloud container clusters get-credentials hello-world
 ```
 
-**The rest of this document requires both the Kubernetes client and server version to be 1.2. Run `kubectl version` to see your current versions.**  For 1.1 see [this document](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.1/docs/hellonode.md).
+**文档其余部分都需要 Kubernetes 的客户端和服务端版本为1.2。运行`kubectl version`查看你当前的版本**  1.1版看[这个文档](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.1/docs/hellonode.md).
 
-## Create your pod
+## 创建你的 pod
 
-A Kubernetes **[pod](/docs/user-guide/pods/)** is a group of containers, tied together for the purposes of administration and networking. It can contain a single container or multiple.
+一个 Kubernetes **[pod](/docs/user-guide/pods/)** 是一个容器组， 目的是捆绑管理网络，它可以包含一个或者多个容器。
 
-Create a pod with the `kubectl run` command:
+使用 `kubectl run` 命令来创建一个 pod:
 
 ```shell
 $ kubectl run hello-node --image=gcr.io/PROJECT_ID/hello-node:v1 --port=8080
 deployment "hello-node" created
 ```
 
-As shown in the output, the `kubectl run` created a **[deployment](/docs/user-guide/deployments/)** object.  Deployments are the recommended way for managing creation and scaling of pods.  In this example, a new deployment manages a single pod replica running the *hello-node:v1* image.
+如图所示， `kubectl run` 创建一个 **[deployment](/docs/user-guide/deployments/)**。 推荐使用 `deployment` 创建和扩容 pod。在这个例子中，一个新的`deployment`管理一个运行*hello-node:v1*镜像的单独的 pod 副本。
 
-To view the deployment we just created run:
+要查看我们刚创建`deployment`运行：
 
 ```shell
 $ kubectl get deployments
@@ -163,7 +164,7 @@ NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-node   1         1         1            1           3m
 ```
 
-To view the pod created by the deployment run:
+要查看我们刚通过`deployment`创建`pod`运行：
 
 ```shell
 $ kubectl get pods
@@ -171,51 +172,51 @@ NAME                         READY     STATUS    RESTARTS   AGE
 hello-node-714049816-ztzrb   1/1       Running   0          6m
 ```
 
-To view the stdout / stderr from a pod (hello-node image has no output, so logs will be empty in this case) run:
+要查看 pod 输入或输出错误 (hello-node 镜像没有输出，所以在这记录会是空的) 运行:
 
 ```shell
 kubectl logs <POD-NAME>
 ```
 
-To view metadata about the cluster run:
+查看群集的 metadata 运行:
 
 ```shell
 kubectl cluster-info
 ```
 
-To view cluster events run:
+查看群集的 events 运行:
 
 ```shell
 kubectl get events
 ```
 
-To view the kubectl configuration run:
+查看 kubectl 设置运行:
 
 ```shell
 kubectl config view
 ```
 
-Full documentation for kubectl commands is available **[here](/docs/user-guide/kubectl-overview/)**:
+完整的 kubectl命令 文档 **[在这](/docs/user-guide/kubectl-overview/)**:
 
-At this point you should have our container running under the control of Kubernetes but we still have to make it accessible to the outside world.
+A此时你应该已经让我们的容器在 Kubernetes 的控制下运行了，但是我们还没能够让外界访问它。
 
-## Allow external traffic
+## 允许外部访问
 
-By default, the pod is only accessible by its internal IP within the Kubernetes cluster. In order to make the `hello-node` container accessible from outside the Kubernetes virtual network, you have to expose the pod as a Kubernetes **[service](/docs/user-guide/services/)**.
+默认情况下，pod 只可以在 Kubernetes 群集内部访问，为了使`hello-node`容器可以从 Kubernetes 虚拟网络外访问，你必须用 Kubernetes **[service](/docs/user-guide/services/)** 让 pod 对外开放。
 
-From our development machine we can expose the pod to the public internet using the `kubectl expose` command combined with the `--type="LoadBalancer"` flag.  The flag is needed for the creation of an externally accessible ip:
+在我们的开发机上，我们可以使用`kubectl expose`以及`--type="LoadBalancer"`标识来公开 pod `--type="LoadBalancer"`标志了需要从外部 IP 访问:
 
 ```shell
 kubectl expose deployment hello-node --type="LoadBalancer"
 ```
 
-**If this fails, make sure your client and server are both version 1.2.  See the [Create your cluster](#create-your-cluster) section for details.**
+**如果失败了，请查看你的客户端和服务端版本是否都是1.2，详情请参阅 [创建群集](#create-your-cluster) 部分。**
 
-The flag used in this command specifies that we’ll be using the load-balancer provided by the underlying infrastructure (in this case the [Compute Engine load balancer](https://cloud.google.com/compute/docs/load-balancing/)). Note that we expose the deployment, and not the pod directly.  This will cause the resulting service to load balance traffic across all pods managed by the deployment (in this case only 1 pod, but we will add more replicas later).
+此命令中使用这个标识指定了我们将使用底层架构来提供负载均衡 (是这种情况 [Compute Engine 负载均衡](https://cloud.google.com/compute/docs/load-balancing/))。注意,我们开放的是 deployment, 问不是直接公开 pod.  这将会让所有由 deployment 管理的 pod 负载均衡(这只有一个 pod，我们一会会复制多个).
 
-The Kubernetes master creates the load balancer and related Compute Engine forwarding rules, target pools, and firewall rules to make the service fully accessible from outside of Google Cloud Platform.
+由 Kubernetes master 创建的负载均衡和相关的运算方法，对象池以及防火墙规则，会让这个`service`在 Google 云平台之外可访问.
 
-To find the ip addresses associated with the service run:
+查看该服务关联的多个 IP:
 
 ```shell
 $ kubectl get services hello-node
@@ -223,7 +224,7 @@ NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    SELECTOR         AGE
 hello-node   10.3.246.12                   8080/TCP   run=hello-node   23s
 ```
 
-The `EXTERNAL_IP` may take several minutes to become available and visible.  If the `EXTERNAL_IP` is missing, wait a few minutes and try again.
+ `EXTERNAL_IP` 可能需要过几分钟才可见。如果没有`EXTERNAL_IP`，那么需要等上几分钟再重试。
 
 ```shell
 $ kubectl get services hello-node
@@ -231,21 +232,21 @@ NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    SELECTOR         AGE
 hello-node   10.3.246.12   23.251.159.72   8080/TCP   run=hello-node   2m
 ```
 
-Note there are 2 IP addresses listed, both serving port 8080.  `CLUSTER_IP` is only visible inside your cloud virtual network.  `EXTERNAL_IP` is externally accessible.  In this example, the external IP address is 23.251.159.72.
+注意 这里罗列出了两个 IP，都监听8080端口.  `CLUSTER_IP` 只在你的内部网络中有效。  `EXTERNAL_IP` 是外部的.  这个例子中，外部 IP 是 23.251.159.72.
 
-You should now be able to reach the service by pointing your browser to this address: http://EXTERNAL_IP**:8080** or running `curl http://EXTERNAL_IP:8080`
+现在你应该可以通过这个地址来访问这个`service`: http://EXTERNAL_IP**:8080** 或者运行 `curl http://EXTERNAL_IP:8080`
 
 ![image](/images/hellonode/image_12.png)
 
-## Scale up your website
+## 扩容你的网站
 
-One of the powerful features offered by Kubernetes is how easy it is to scale your application. Suppose you suddenly need more capacity for your application; you can simply tell the deployment to manage a new number of replicas for your pod:
+Kubernetes 的强大功能之一就是他可以很容易的扩容你的应用程序。假设你突然需要增加你的应用;你只需要告诉`deployment`一个新的 pod 副本总数即可:
 
 ```shell
 kubectl scale deployment hello-node --replicas=4
 ```
 
-You now have four replicas of your application, each running independently on the cluster with the load balancer you created earlier and serving traffic to all of them.
+现在你有4个应用副本了， 每个都在群集上独立运行，并能负载均衡他们之间的流量。
 
 ```shell
 $ kubectl get deployment
@@ -262,38 +263,36 @@ hello-node-714049816-sh812   1/1       Running   0          1m
 hello-node-714049816-ztzrb   1/1       Running   0          41m
 ```
 
-Note the **declarative approach** here - rather than starting or stopping new instances you declare how many instances you want to be running. Kubernetes reconciliation loops simply make sure the reality matches what you requested and take action if needed.
+注意 **declarative approach** 在这是要声明你要运行多少实例，而不是启动多少新实例或停止几个实例。Kubernetes reconciliation loops 只要知道你实际要的是什么，然后采取行动。
 
-Here’s a diagram summarizing the state of our Kubernetes cluster:
+这张图显示了我们的 Kubernetes 的状态:
 
 ![image](/images/hellonode/image_13.png)
 
-## Roll out an upgrade to your website
+## 滚动升级你的网站
 
-As always, the application you deployed to production requires bug fixes or additional features. Kubernetes is here to help you deploy a new version to production without impacting your users.
+与往常一样，修复 bug 或者添加功能的应用，部署到生产环境。 Kubernetes 可以让你不影响用户使用的情况下，部署一个新的版本到生产环境。
 
-First, let’s modify the application. On the development machine, edit server.js and update the response message:
+首先, 让我们修改程序。在开发机上，编辑 server.js 的输出消息:
 
 ```javascript
   response.end("Hello Kubernetes World!");
 ```
 
 
-We can now build and publish a new container image to the registry with an incremented tag:
+我们构建并上传一个具有新标识的容器到仓库:
 
 ```shell
 docker build -t gcr.io/PROJECT_ID/hello-node:v2 .
 gcloud docker push gcr.io/PROJECT_ID/hello-node:v2
 ```
 
-Building and pushing this updated image should be much quicker as we take full advantage of the Docker cache.
+构建和上传会非常快，因为我们用到了 Docker 的缓存机制。
 
-We’re now ready for Kubernetes to smoothly update our deployment to the new version of the application.  In order to change
-the image label for our running container, we will need to edit the existing *hello-node deployment* and change the image from
-`gcr.io/PROJECT_ID/hello-node:v1` to `gcr.io/PROJECT_ID/hello-node:v2`.  To do this, we will use the `kubectl edit` command.
-This will open up a text editor displaying the full deployment yaml [configuration](/docs/user-guide/configuring-containers/).  It isn't necessary to understand the full yaml config
-right now, instead just understand that by updating the `spec.template.spec.containers.image` field in the config we are telling
-the deployment to update the pods to use the new image.
+我们现在已经为 Kubernetes 能够顺利更新部署提供了一个新版本的应用程序。为了区分新镜像，我们需要修改即存的 *hello-node deployment*
+`gcr.io/PROJECT_ID/hello-node:v1` 为 `gcr.io/PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl edit` 命令.
+这将打开一个文本编辑器来显示整个`deployment`的 yaml [配置](/docs/user-guide/configuring-containers/)。现在还不用去了解整个 yaml 配置，
+只需要知道通过修改`spec.template.spec.containers.image`来告诉`deployment`来更新 pod 到新的镜像。
 
 ```shell
 kubectl edit deployment hello-node
@@ -349,13 +348,13 @@ spec:
       terminationGracePeriodSeconds: 30
 ```
 
-After making the change save and close the file.
+修改完以后保存并关闭这个文件。
 
 ```
 deployment "hello-node" edited
 ```
 
-This updates the deployment with the new image, causing new pods to be created with the new image and old pods to be deleted.
+这会用新的镜像来更新`deployment`，它会创建新的 pod 并删除旧的 pod。
 
 ```
 $ kubectl get deployments
@@ -363,32 +362,32 @@ NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-node   4         5         4            3           1h
 ```
 
-While this is happening, the users of the services should not see any interruption. After a little while they will start accessing the new version of your application. You can find more details in the [deployment documentation](/docs/user-guide/deployments/).
+当发生这种情况的时候，用户应该不会看到服务中断。过一会，他们就将访问新版本的应用程序了。更多细节你可以查看[deployment 文档](/docs/user-guide/deployments/).
 
-Hopefully with these deployment, scaling and update features you’ll agree that once you’ve setup your environment (your GKE/Kubernetes cluster here), Kubernetes is here to help you focus on the application rather than the infrastructure.
+希望只要你愿意，这个`deployment`, 扩容以及功能更新就会部署到你的环境中 (你的 GKE/Kubernetes 群集), Kubernetes 让你更专注于你的应用，而不用考虑基础设施。
 
-## Observe the Kubernetes Web UI (optional)
+## Kubernetes Web UI (可选)
 
-With Kubernetes 1.2, a graphical web user interface (dashboard) has been introduced. It is enabled by default for 1.2 clusters.
-This user interface allows you to get started quickly and enables some of the functionality found in the CLI as a more approachable and discoverable way of interacting with the system.
+随着Kubernetes 1.2, 图形化 Web 界面（控制台）也已经发布了。在 1.2 群集中会默认启用。
+通过这个用户界面你会很容易上手，并且更容易，方便的发现和使用 CLI 与系统交互。
 
-Enjoy the Kubernetes graphical dashboard and use it for deploying containerized applications, as well as for monitoring and managing your clusters!
+尽情享受 Kubernetes 图形管理，用它来部署容器化应用，以及监视和管理你的群集！
 
 ![image](/images/docs/ui-dashboard-workloadview.png)
 
-Learn more about the web interface by taking the [Dashboard tour](/docs/user-guide/ui/).
+通过[Dashboard 之旅](/docs/user-guide/ui/)更多地了解 Web 界面。
 
-## That's it! Time to tear it down
+## 就这么多，是时候关闭它了
 
-That's it for the demo! So you don't leave this all running and incur charges, let's learn how to tear things down.
+这只是一个演示!所以，要记得关闭它，否则会产生费用的。让我们来学一下如何关闭它。
 
-Delete the Deployment (which also deletes the running pods) and Service (which also deletes your external load balancer):
+删除`deployment` (这也会删除正在运行的 pod) 和 `service` (还会删除外部负载均衡):
 
 ```shell
 kubectl delete service,deployment hello-node
 ```
 
-Delete your cluster:
+删除群集:
 
 ```shell
 $ gcloud container clusters delete hello-world
@@ -400,9 +399,9 @@ target: /projects/kubernetes-codelab/zones/us-central1-f/clusters/hello-world
 zone: us-central1-f
 ```
 
-This deletes the Google Compute Engine instances that are running the cluster.
+这回删除正在运行在 Google Compute Engine 的群集实例。
 
-Finally delete the Docker registry storage bucket hosting your image(s) :
+最后在 Docker 容器仓库中删除你的容器镜像:
 
 ```shell
 $ gsutil ls
@@ -411,4 +410,4 @@ $ gsutil rm -r gs://artifacts.<PROJECT_ID>.appspot.com/
 Removing gs://artifacts.<PROJECT_ID>.appspot.com/...
 ```
 
-Of course, you can also delete the entire project but note that you must first disable billing on the project. Additionally, deleting a project will only happen after the current billing cycle ends.
+当然，你也可以删除整个项目，但请注意，你必须先关闭计费，此外当结算周期结束以后，项目才会被删除。
