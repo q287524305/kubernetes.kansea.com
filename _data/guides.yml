@@ -19,7 +19,7 @@ toc:
   section:
   - title: 安装和设置 kubectl
     path: /docs/user-guide/prereqs/
-  - title: 链接群集
+  - title: 访问集群
     path: /docs/user-guide/accessing-the-cluster/
   - title: 通过`kubeconfig`接入群集
     path: /docs/user-guide/sharing-clusters/

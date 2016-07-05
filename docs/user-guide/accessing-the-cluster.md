@@ -4,28 +4,24 @@
 * TOC
 {:toc}
 
-## Accessing the cluster API
+## 访问群集 API
 
-### Accessing for the first time with kubectl
+### 第一次使用 kubectl 访问
 
-When accessing the Kubernetes API for the first time, we suggest using the
-Kubernetes CLI, `kubectl`.
+我们推荐使用Kubernetes CLI, `kubectl`，访问 Kubernetes。
 
-To access a cluster, you need to know the location of the cluster and have credentials
-to access it.  Typically, this is automatically set-up when you work through
-though a [Getting started guide](/docs/getting-started-guides/),
-or someone else setup the cluster and provided you with credentials and a location.
+访问群集，你需要有凭证并且要知道群集的地址。通常，当你按照[用户指南](/docs/getting-started-guides/)操作，这都是自动设置好的，
+如果是别人建立的群集，那么你需要他为你提供凭证和地址。
 
-Check the location and credentials that kubectl knows about with this command:
+使用 kubectl 命令来查看地址和凭证信息:
 
 ```shell
 $ kubectl config view
 ```
 
-Many of the [examples](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/) provide an introduction to using
-kubectl and complete documentation is found in the [kubectl manual](/docs/user-guide/kubectl/kubectl).
+许多[例子中](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/) 都介绍了如何使用 kubectl 完整的[kubectl 帮助手册](/docs/user-guide/kubectl/kubectl)在这里。
 
-### Directly accessing the REST API
+### 直接访问 REST API
 
 Kubectl handles locating and authenticating to the apiserver.
 If you want to directly access the REST API with an http client like
