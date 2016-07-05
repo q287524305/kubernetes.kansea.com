@@ -1,17 +1,17 @@
 ---
 ---
 
-To deploy and manage applications on Kubernetes, you’ll use the Kubernetes command-line tool, [kubectl](/docs/user-guide/kubectl/kubectl/). It lets you inspect your cluster resources, create, delete, and update components, and much more. You will use it to look at your new cluster and bring up example apps.
+通过 Kubernetes 部署和管理应用，你需要使用 Kubernetes命令行工具， [kubectl](/docs/user-guide/kubectl/kubectl/). 它可以让您检查集群资源，创建、删除和更新组件以及更多功能。您会用它来查看新集群并生成示例应用程序。
 
-## Installing kubectl
+## 安装 kubectl
 
-If you downloaded a pre-compiled [release](https://github.com/kubernetes/kubernetes/releases), kubectl should be under `platforms/<os>/<arch>` from the tar bundle.
+如果你下载了一个预编译 [发布版](https://github.com/kubernetes/kubernetes/releases), kubectl 应该在tar压缩包的 `platforms/<os>/<arch>` 下面。
 
-If you built from source, kubectl should be either under `_output/local/bin/<os>/<arch>` or `_output/dockerized/bin/<os>/<arch>`.
+如果从源码编译，kubectl 也应该在 `_output/local/bin/<os>/<arch>` 或者 `_output/dockerized/bin/<os>/<arch>`之下。
 
-The kubectl binary doesn't have to be installed to be executable, but the rest of the walkthrough will assume that it's in your PATH.
+不必让 kubectl 二进制文件可执行，但用户指南中会假设它在你的 PATH 中。
 
-The simplest way to install is to copy or move kubectl into a dir already in PATH (e.g. `/usr/local/bin`). For example:
+最简单的安装方法就是复制或者移动 kubectl 到 PATH (e.g. `/usr/local/bin`)其中的一个文件夹下。 例如:
 
 ```shell
 # OS X
@@ -20,13 +20,13 @@ $ sudo cp kubernetes/platforms/darwin/amd64/kubectl /usr/local/bin/kubectl
 $ sudo cp kubernetes/platforms/linux/amd64/kubectl /usr/local/bin/kubectl
 ```
 
-You also need to ensure it's executable:
+还需要将它改为可执行的:
 
 ```shell
 $ sudo chmod +x /usr/local/bin/kubectl
 ```
 
-If you prefer not to copy kubectl, you need to ensure the tool is in your path:
+如果你不愿意复制 kubectl，那么你需要确保 kubectl 工具是在您的 path 中:
 
 ```shell
 # OS X
@@ -36,21 +36,22 @@ export PATH=<path/to/kubernetes-directory>/platforms/darwin/amd64:$PATH
 export PATH=<path/to/kubernetes-directory>/platforms/linux/amd64:$PATH
 ```
 
-## Configuring kubectl
+## 配置 kubectl
 
-In order for kubectl to find and access the Kubernetes cluster, it needs a [kubeconfig file](/docs/user-guide/kubeconfig-file), which is created automatically when creating a cluster using kube-up.sh (see the [getting started guides](/docs/getting-started-guides/) for more about creating clusters). If you need access to a cluster you didn't create, see the [Sharing Cluster Access document](/docs/user-guide/sharing-clusters).
-By default, kubectl configuration lives at `~/.kube/config`.
+为了让 kubectl 能够找到并能够访问 Kubernetes 群集，它需要一个[kubeconfig 文件](/docs/user-guide/kubeconfig-file)，使用`kube-up.sh`创建群集的时候会自动创建它。 (有关创建集群请看 [用户指南](/docs/getting-started-guides/))。
+如果你需要访问一个不是你创建的群集，请看 [访问共享集群文档](/docs/user-guide/sharing-clusters)。
+默认情况下，kubectl 配置文件会在`~/.kube/config`。
 
-#### Making sure you're ready
+#### 确保你已经准备好了
 
-Check that kubectl is properly configured by getting the cluster state:
+通过获取群集状态来检测 kubectl 是否正确配置:
 
 ```shell
 $ kubectl cluster-info
 ```
 
-If you see a url response, you are ready to go.
+如果看到了一个网址，那么 OK 了。
 
-## What's next?
+## 接下来是什么?
 
-[Learn how to launch and expose your application.](/docs/user-guide/quick-start)
+[学习如何启动和公开你的应用程序。](/docs/user-guide/quick-start)

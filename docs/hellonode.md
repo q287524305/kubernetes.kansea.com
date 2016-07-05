@@ -4,7 +4,7 @@
 * TOC
 {:toc}
 
-## Introduction
+## 介绍
 
 这个代码实验室的目标是，让你吧一个 node.js 的简单的 Hello World 应用，在 Kubernetes 上部署成为一个复制应用。
 我们会告诉你，如何将你的代码变成一个 Docker 镜像，并且在[Google Container Engine](https://cloud.google.com/container-engine/)上运行它。
