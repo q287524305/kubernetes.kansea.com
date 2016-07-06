@@ -16,7 +16,7 @@ toc:
       path: /docs/admin/authentication/
     - title: 使用认证插件
       path: /docs/admin/authorization/
-    - title: 使用控制器验证
+    - title: 使用Admission Controllers
       path: /docs/admin/admission-controllers/
     - title: 管理服务帐户
       path: /docs/admin/service-accounts-admin/
