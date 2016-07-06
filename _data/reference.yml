@@ -1,66 +1,66 @@
-bigheader: "Reference Documentation"
-abstract: "Design docs, concept definitions, and references for APIs and CLIs."
+bigheader: "参考文档"
+abstract: "APIs 和 CLIs 的设计文档，概念定义以及引用"
 toc:
-- title: Reference Documentation
+- title: 参考文档
   path: /docs/reference/
 
 - title: Kubernetes API
   section:
-  - title: Kubernetes API Overview
+  - title: Kubernetes API 概述
     path: /docs/api/
-  - title: Accessing the API
+  - title: 访问 API
     section:
-    - title: Overview
+    - title: 概述
       path: /docs/admin/accessing-the-api/
-    - title: Authenticating
+    - title: 认证
       path: /docs/admin/authentication/
-    - title: Using Authorization Plugins
+    - title: 使用认证插件
       path: /docs/admin/authorization/
-    - title: Using Admission Controllers
+    - title: 使用控制器验证
       path: /docs/admin/admission-controllers/
-    - title: Managing Service Accounts
+    - title: 管理服务帐户
       path: /docs/admin/service-accounts-admin/
-  - title: Kubernetes API Operations
+  - title: Kubernetes API 操作
     path: /docs/api-reference/v1/operations/
-  - title: Kubernetes API Definitions
+  - title: Kubernetes API 定义
     path: /docs/api-reference/v1/definitions/
-  - title: Kubernetes API Swagger Spec
+  - title: Kubernetes API Swagger 规范
     path: /kubernetes/third_party/swagger-ui/
 
-- title: Extensions API
+- title: 扩展 API
   section:
-  - title: Extensions API Operations
+  - title: 扩展 API 的操作
     path: /docs/api-reference/extensions/v1beta1/operations/
-  - title: Extensions API Definitions
+  - title: 扩展 API 的定义
     path: /docs/api-reference/extensions/v1beta1/definitions/
 
-- title: Autoscaling API
+- title: 自动扩容 API
   section:
-  - title: Autoscaling API Operations
+  - title: 自动扩容 API 的操作
     path: /docs/api-reference/autoscaling/v1/operations/
-  - title: Autoscaling API Definitions
+  - title: 自动扩容 API 的定义
     path: /docs/api-reference/autoscaling/v1/definitions/
 
-- title: Batch API
+- title: 批处理 API
   section:
-  - title: Batch API Operations
+  - title: 批处理 API 的操作
     path: /docs/api-reference/batch/v1/operations/
-  - title: Batch API Definitions
+  - title: 批处理 API 的定义
     path: /docs/api-reference/batch/v1/definitions/
 
 - title: kubectl CLI
   section:
-  - title: kubectl Overview
+  - title: kubectl 概述
     path: /docs/user-guide/kubectl-overview/
-  - title: kubectl for Docker Users
+  - title: 为 Docker 用户准备的 kubectl
     path: /docs/user-guide/docker-cli-to-kubectl/
-  - title: kubectl Usage Conventions
+  - title: kubectl 用法规约
     path: /docs/user-guide/kubectl-conventions/
-  - title: JSONpath Support
+  - title: JSONpath 帮助
     path: /docs/user-guide/jsonpath/
-  - title: kubectl Cheat Sheet
+  - title: kubectl 备忘单
     path: /docs/user-guide/kubectl-cheatsheet/
-  - title: kubectl Commands
+  - title: kubectl 命令
     section:
     - title: kubectl
       path: /docs/user-guide/kubectl/kubectl/
@@ -180,9 +180,9 @@ toc:
   - title: kube-controller-manager
     path: /docs/admin/kube-controller-manager/
 
-- title: Glossary
+- title: 专有名词
   section:
-  - title: Images
+  - title: Images(镜像)
     path: /docs/user-guide/images/
   - title: Pods
     path: /docs/user-guide/pods/
@@ -225,17 +225,17 @@ toc:
   - title: Replica Sets
     path: /docs/user-guide/replicasets/
 
-- title: Kubernetes Design Docs
+- title: Kubernetes 设计文档
   section:
-  - title: Kubernetes Architecture
+  - title: Kubernetes 结构
     path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/architecture.md
-  - title: Kubernetes Design Overview
+  - title: Kubernetes 设计概述
     path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/
-  - title: Security in Kubernetes
+  - title: Kubernetes 安全
     path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/security.md
-  - title: Kubernetes Identity and Access Management
+  - title: Kubernetes 身份和访问管理
     path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/access.md
-  - title: Security Contexts
+  - title: 安全环境
     path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/security_context.md
-  - title: Kubernetes OpenVSwitch GRE/VxLAN networking
+  - title: Kubernetes OpenVSwitch GRE/VxLAN 网络
     path: /docs/admin/ovs-networking/

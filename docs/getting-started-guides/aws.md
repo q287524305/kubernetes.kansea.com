@@ -4,40 +4,38 @@
 * TOC
 {:toc}
 
-## Prerequisites
+## 前提条件
 
-1. You need an AWS account. Visit [http://aws.amazon.com](http://aws.amazon.com) to get started
-2. Install and configure [AWS Command Line Interface](http://aws.amazon.com/cli)
-3. You need an AWS [instance profile and role](http://docs.aws.amazon.com/IAM/latest/UserGuide/instance-profiles.html) with EC2 full access.
+1.您需要一个 AWS 账户，访问[http://aws.amazon.com](http://aws.amazon.com)获得。
+2.安装并配置 [AWS 命令行界面](http://aws.amazon.com/cli)。
+3.你需要一个拥有 EC2 全部权限的 AWS [实例配置文件和角色](http://docs.aws.amazon.com/IAM/latest/UserGuide/instance-profiles.html)。
 
-NOTE: This script use the 'default' AWS profile by default.
-You may explicitly set AWS profile to use using the `AWS_DEFAULT_PROFILE` environment variable:
+注：这个脚本默认使用“默认”的 AWS 实例配置文件。
+您可以使用`AWS_DEFAULT_PROFILE`环境变量来明确地配置 AWS 实例配置文件：
 
 ```shell
 export AWS_DEFAULT_PROFILE=myawsprofile
 ```
 
-## Cluster turnup
+## 启动集群
 
-### Supported procedure: `get-kube`
+### 支持程序: `get-kube`
 
 ```shell
-#Using wget
+#使用 wget
 export KUBERNETES_PROVIDER=aws; wget -q -O - https://get.k8s.io | bash
-#Using cURL
+#使用 cURL
 export KUBERNETES_PROVIDER=aws; curl -sS https://get.k8s.io | bash
 ```
 
-NOTE: This script calls [cluster/kube-up.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/kube-up.sh)
-which in turn calls [cluster/aws/util.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/util.sh)
-using [cluster/aws/config-default.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/config-default.sh).
+注：这个脚本调用[cluster/kube-up.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/kube-up.sh), 而[cluster/kube-up.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/kube-up.sh)反过来使用[cluster/aws/config-default.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/config-default.sh)调用[cluster/aws/util.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/util.sh)。
 
-This process takes about 5 to 10 minutes. Once the cluster is up, the IP addresses of your master and node(s) will be printed,
-as well as information about the default services running in the cluster (monitoring, logging, dns). User credentials and security
-tokens are written in `~/.kube/config`, they will be necessary to use the CLI or the HTTP Basic Auth.
+这个过程需要约5至10分钟。一旦集群启动，你的主虚拟机和节点虚拟机的IP地址将被打印，
+同样地，有关运行在集群中的默认服务（监控，日志，DNS）的信息也会被打印。
+用户凭据和安全令牌都写在`~/.kube/config`中，在使用CLI或HTTP基本认证时需要用到它。
 
-By default, the script will provision a new VPC and a 4 node k8s cluster in us-west-2a (Oregon) with EC2 instances running on Ubuntu.
-You can override the variables defined in [config-default.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/config-default.sh) to change this behavior as follows:
+默认情况下，该脚本将会使用在`us-west-2a`(俄勒冈州)创建一个新的VPC和一个基于 Ubuntu 四节点的k8s集群。
+您可以根据下面的文本，重写定义在[config-default.sh](http://releases.k8s.io/{{page.githubbranch}}/cluster/aws/config-default.sh)中的变量来改变这种默认的配置：
 
 ```shell
 export KUBE_AWS_ZONE=eu-west-1c
@@ -88,23 +86,22 @@ instance storage, you may want to increase the `NODE_ROOT_DISK_SIZE` value,
 although the default value of 32 is probably sufficient for the smaller
 instance types in the m4 family.
 
-The script will also try to create or reuse a keypair called "kubernetes", and IAM profiles called "kubernetes-master" and "kubernetes-minion".
-If these already exist, make sure you want them to be used here.
+该脚本也会尝试创建或者复用名为 “kubernetes” 的密钥对和名为 “kubernetes-master” 及 “kubernetes-minion” 的 IAM 文件。如果这些文件已经存在，请确保您想要在这里使用它们。
 
-NOTE: If using an existing keypair named "kubernetes" then you must set the `AWS_SSH_KEY` key to point to your private key.
+注：如果使用已存在的 “kubernetes” 密钥对，那么您必须设置 `AWS_SSH_KEY` 密钥为您的私有密钥。
 
-### Alternatives
+### 后备方案
 
-CoreOS maintains [a CLI tool](https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html), `kube-aws` that will create and manage a Kubernetes cluster based on [CoreOS](http://www.coreos.com), using AWS tools: EC2, CloudFormation and Autoscaling.
+CoreOS 维护的 [一个 CLI 工具](https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html)， `kube-aws` 可以管理一个基于 [CoreOS](http://www.coreos.com) 的 Kubernetes 集群， 用 AWS 工具: EC2, 自动创建云以及自动扩容。
 
-## Getting started with your cluster
+## 开始使用您的集群
 
-### Command line administration tool: `kubectl`
+### 命令行管理工具： `kubectl`
 
-The cluster startup script will leave you with a `kubernetes` directory on your workstation.
-Alternately, you can download the latest Kubernetes release from [this page](https://github.com/kubernetes/kubernetes/releases).
+集群启动脚本将会在您的工作站留下一个`kubernetes`目录。
+可以与之替代的是，您还可以从[这个页面](https://github.com/kubernetes/kubernetes/releases)下载最新的 Kubernetes 发行版。
 
-Next, add the appropriate binary folder to your `PATH` to access kubectl:
+接下来，在`PATH`中添加适当的二进制文件夹，以便可以访问 kubectl：
 
 ```shell
 # OS X
@@ -114,42 +111,39 @@ export PATH=<path/to/kubernetes-directory>/platforms/darwin/amd64:$PATH
 export PATH=<path/to/kubernetes-directory>/platforms/linux/amd64:$PATH
 ```
 
-An up-to-date documentation page for this tool is available here: [kubectl manual](/docs/user-guide/kubectl/kubectl)
+此工具的最新文档页面可以在这里找到：[kubectl manual](/docs/user-guide/kubectl/kubectl)。
+
+默认情况下，`kubectl`将使用集群启动时生成的`kubeconfig`文件对 API 进行身份验证。更多相关信息,请阅读[kubeconfig 文件](/docs/user-guide/kubeconfig-file)。
 
 By default, `kubectl` will use the `kubeconfig` file generated during the cluster startup for authenticating against the API.
 For more information, please read [kubeconfig files](/docs/user-guide/kubeconfig-file)
 
-### Examples
+### 示例
 
-See [a simple nginx example](/docs/user-guide/simple-nginx) to try out your new cluster.
+看一个[简单的 nginx 示例](/docs/user-guide/simple-nginx)，尝试使用一下你的新集群。
 
-The "Guestbook" application is another popular example to get started with Kubernetes: [guestbook example](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/guestbook/)
+“Guestbook” 应用程序是另外一个流行的 Kubernetes 入门示例: [guestbook 例子](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/guestbook/)。
 
-For more complete applications, please look in the [examples directory](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/)
+更多完整的应用程序,请查看[示例目录](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/)。
 
-## Tearing down the cluster
+## 拆除集群
 
-Make sure the environment variables you used to provision your cluster are still exported, then call the following script inside the
-`kubernetes` directory:
+确保您用来提供给集群的环境变量仍在输出，然后调用下面`kubernetes`目录中的脚本：
 
 ```shell
 cluster/kube-down.sh
 ```
 
-## Support Level
+## 支持级别
 
 
-IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level
+IaaS 提供商       | Config. Mgmt | OS     | 网络  | 文档                                              | Conforms | 支持级别
 -------------------- | ------------ | ------ | ----------  | ---------------------------------------------     | ---------| ----------------------------
 AWS                  | CoreOS       | CoreOS | flannel     | [docs](/docs/getting-started-guides/aws)                                 |          | Community
 AWS                  | Saltstack    | Ubuntu | OVS         | [docs](/docs/getting-started-guides/aws)                                    |          | Community ([@justinsb](https://github.com/justinsb))
 
-For support level information on all solutions, see the [Table of solutions](/docs/getting-started-guides/#table-of-solutions) chart.
+所有方案的支持级别请参阅[方案表格](/docs/getting-started-guides/#table-of-solutions) .
 
-## Further reading
+## 补充阅读
 
-Please see the [Kubernetes docs](/docs/) for more details on administering
-and using a Kubernetes cluster.
-
-
-
+更多关于管理和使用 Kubernetes 集群的细节请参见[Kubernetes 文档](/docs/) 。

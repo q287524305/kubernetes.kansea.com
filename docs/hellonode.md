@@ -13,7 +13,7 @@
 
 ![image](/images/hellonode/image_1.png)
 
-Kubernetes 是可以运行在许多不同环境的开源项目，无论是笔记本还是高可用多点集群，公有云还是本地环境，无论是虚拟机还是裸机。使用例如 Google Container Engine (一个 Google 托管的 Kubernetes 运行环境) 托管环境的话，会让你不用设置底层基础架构而更专注地体验 Kubernetes。
+Kubernetes 是可以运行在许多不同环境的开源项目，无论是笔记本还是高可用多点集群，公有云还是本地环境，无论是虚拟机还是物理机。使用例如 Google Container Engine (一个 Google 托管的 Kubernetes 运行环境) 托管环境的话，会让你不用设置底层基础架构而更专注地体验 Kubernetes。
 
 ## 设置和要求
 

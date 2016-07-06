@@ -1,10 +1,10 @@
-bigheader: "Support"
-abstract: "Troubleshooting resources, frequently asked questions, and community support channels."
+bigheader: "帮助中心"
+abstract: "疑难问题解答，常见问题和社区帮助渠道。"
 toc:
-- title: Support
+- title: 帮助中心
   path: /docs/troubleshooting/
 
-- title: Troubleshooting
+- title: 疑难问题解答
   section:
   - title: Debugging Pods and Replication Controllers
     path: /docs/user-guide/debugging-pods-and-replication-controllers/
@@ -19,7 +19,7 @@ toc:
   - title: Debugging Services
     path: /docs/user-guide/debugging-services/
 
-- title: Frequently Asked Questions
+- title: 经常问的问题
   section:
   - title: User FAQ
     path: https://github.com/kubernetes/kubernetes/wiki/User-FAQ/
@@ -28,7 +28,7 @@ toc:
   - title: Services FAQ
     path: https://github.com/kubernetes/kubernetes/wiki/Services-FAQ/
 
-- title: Other Resources
+- title: 其他资源
   section:
   - title: Kubernetes Issue Tracker on GitHub
     path: https://github.com/kubernetes/kubernetes/issues/

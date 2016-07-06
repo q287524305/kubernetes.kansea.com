@@ -213,7 +213,7 @@ toc:
         path: /docs/getting-started-guides/mesos/
       - title: 基于 Docker 在 Mesos 上部署 Kubernetes
         path: /docs/getting-started-guides/mesos-docker/
-    - title: 裸机
+    - title: 物理机
       section:
       - title: 离线
         path: /docs/getting-started-guides/coreos/bare_metal_offline/

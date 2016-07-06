@@ -11,7 +11,7 @@ $( document ).ready(function() {
     	$("#generalInstructions").hide();
     	$("#continueEdit").show();
     	$("#continueEditButton").text("Edit " + forwarding);
-    	$("#continueEditButton").attr("href", "https://github.com/starboychina/kubernetes.kansea.com/edit/master/" + forwarding)
+    	$("#continueEditButton").attr("href", "https://github.com/starboychina/kubernetes.kansea.com/edit/gh-pages/" + forwarding)
     } else {
         $("#generalInstructions").show();
     	$("#continueEdit").hide();
