@@ -3,15 +3,15 @@
 
 ## kubectl apply
 
-Apply a configuration to a resource by filename or stdin
+通过文件名或控制台输入，对资源进行配置。
 
 ### 摘要
 
 
-Apply a configuration to a resource by filename or stdin.
-The resource will be created if it doesn't exist yet.
+通过文件名或控制台输入，对资源进行配置。
+如果资源不存在，将会新建一个。
 
-JSON and YAML formats are accepted.
+可以使用 JSON 或者 YAML 格式。
 
 ```
 kubectl apply -f FILENAME
@@ -20,21 +20,21 @@ kubectl apply -f FILENAME
 ### 示例
 
 ```
-# Apply the configuration in pod.json to a pod.
+# 将pod.json中的配置应用到pod
 kubectl apply -f ./pod.json
 
-# Apply the JSON passed into stdin to a pod.
+# 将控制台输入的JSON配置应用到Pod
 cat pod.json | kubectl apply -f -
 ```
 
 ### 选项
 
 ```
-  -f, --filename=[]: Filename, directory, or URL to file that contains the configuration to apply
-  -o, --output="": Output mode. Use "-o name" for shorter output (resource/name).
-      --record[=false]: Record current kubectl command in the resource annotation.
-      --schema-cache-dir="~/.kube/schema": If non-empty, load/store cached API schemas in this directory, default is '$HOME/.kube/schema'
-      --validate[=true]: If true, use a schema to validate the input before sending it
+  -f, --filename=[]: 包含配置信息的文件名，目录名或者URL。
+  -o, --output="": 输出模式。"-o name"为快捷输出(资源/name).
+      --record[=false]: 在资源注释中记录当前 kubectl 命令。
+      --schema-cache-dir="~/.kube/schema": 非空则将API schema缓存为指定文件，默认缓存到'$HOME/.kube/schema'
+      --validate[=true]: 如果为true，在发送到服务端前先使用schema来验证输入。
 ```
 
 {% include_relative parent_commands.md %}
@@ -42,5 +42,3 @@ cat pod.json | kubectl apply -f -
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

@@ -160,7 +160,7 @@ toc:
       path: /docs/user-guide/kubectl/kubectl_uncordon/
     - title: kubectl version
       path: /docs/user-guide/kubectl/kubectl_version/
-    - title: Superseded and Deprecated Commands
+    - title: 替代和弃用的命令
       section:
       - title: kubectl namespace
         path: /docs/user-guide/kubectl/kubectl_namespace/

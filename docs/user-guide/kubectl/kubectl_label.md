@@ -47,7 +47,7 @@ kubectl label pods foo bar-
       --all[=false]: select all resources in the namespace of the specified resource types
       --dry-run[=false]: If true, only print the object that would be sent, without sending it.
   -f, --filename=[]: Filename, directory, or URL to a file identifying the resource to update the labels
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --overwrite[=false]: If true, allow labels to be overwritten, otherwise reject label updates that overwrite existing labels.

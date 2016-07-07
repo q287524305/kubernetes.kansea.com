@@ -3,15 +3,14 @@
 
 ## kubectl namespace
 
-SUPERSEDED: Set and view the current Kubernetes namespace
+替代: 设置和查看当前 Kubernetes 命名空间
 
 ### 摘要
 
 
-SUPERSEDED:  Set and view the current Kubernetes namespace scope for command line requests.
+替代:  设置和查看当前 Kubernetes 命名空间范围的命令行.
 
-namespace has been superseded by the context.namespace field of .kubeconfig files.  See 'kubectl config set-context --help' for more details.
-
+命名空间已经被 `.kubeconfig`文件的`context.namespace`所取代。详细信息请参见“kubectl config set-context --help”。
 
 ```
 kubectl namespace [namespace]
@@ -22,5 +21,3 @@ kubectl namespace [namespace]
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

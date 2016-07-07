@@ -46,7 +46,7 @@ kubectl rolling-update frontend-v1 frontend-v2 --rollback
       --dry-run[=false]: If true, print out the changes that would be made, but don't actually make them.
   -f, --filename=[]: Filename or URL to file to use to create the new replication controller.
       --image="": Image to use for upgrading the replication controller. Must be distinct from the existing image (either new image or new image tag).  Can not be used with --filename/-f
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --poll-interval=3s: Time delay between polling for replication controller status after the update. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
@@ -66,5 +66,3 @@ kubectl rolling-update frontend-v1 frontend-v2 --rollback
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

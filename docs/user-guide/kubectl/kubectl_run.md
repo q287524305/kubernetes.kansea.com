@@ -63,7 +63,7 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
   -l, --labels="": Labels to apply to the pod(s).
       --leave-stdin-open[=false]: If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
       --limits="": The resource requirement limits for this container.  For example, 'cpu=200m,memory=512Mi'
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --overrides="": An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.

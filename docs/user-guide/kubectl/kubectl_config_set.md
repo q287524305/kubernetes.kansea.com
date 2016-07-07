@@ -3,14 +3,14 @@
 
 ## kubectl config set
 
-Sets an individual value in a kubeconfig file
+在kubeconfig配置文件中设置一个单独的值。
 
 ### 摘要
 
 
-Sets an individual value in a kubeconfig file
-PROPERTY_NAME is a dot delimited name where each token represents either a attribute name or a map key.  Map keys may not contain dots.
-PROPERTY_VALUE is the new value you wish to set.
+在kubeconfig配置文件中设置一个单独的值
+PROPERTY_NAME 使用“.”进行分隔，每段代表一个属性名或者map的键，map的键不能包含“.”。
+PROPERTY_VALUE 需要设置的新值。
 
 ```
 kubectl config set PROPERTY_NAME PROPERTY_VALUE
@@ -21,5 +21,3 @@ kubectl config set PROPERTY_NAME PROPERTY_VALUE
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-
-

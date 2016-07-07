@@ -41,7 +41,7 @@ kubectl create secret docker-registry NAME --docker-username=user --docker-passw
       --docker-username="": Username for Docker registry authentication
       --dry-run[=false]: If true, only print the object that would be sent, without sending it.
       --generator="secret-for-docker-registry/v1": The name of the API generator to use.
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.

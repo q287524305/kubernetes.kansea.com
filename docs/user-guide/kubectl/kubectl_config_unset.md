@@ -3,13 +3,13 @@
 
 ## kubectl config unset
 
-Unsets an individual value in a kubeconfig file
+在kubeconfig配置文件中清除一个单独的值。
 
 ### 摘要
 
 
-Unsets an individual value in a kubeconfig file
-PROPERTY_NAME is a dot delimited name where each token represents either a attribute name or a map key.  Map keys may not contain dots.
+在kubeconfig配置文件中清除一个单独的值。
+PROPERTY_NAME 使用“.”进行分隔，每段代表一个属性名或者map的键，map的键不能包含“.”。
 
 ```
 kubectl config unset PROPERTY_NAME
@@ -20,5 +20,3 @@ kubectl config unset PROPERTY_NAME
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-
-

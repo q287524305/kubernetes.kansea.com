@@ -2,12 +2,12 @@
 ---
 ## kubectl cluster-info
 
-Display cluster info
+显示集群信息。
 
 ### 摘要
 
 
-Display addresses of the master and services with label kubernetes.io/cluster-service=true
+显示 master 节点，和带有`kubernetes.io/cluster-service=true`标签的 services 的地址。
 
 ```
 kubectl cluster-info
@@ -18,5 +18,3 @@ kubectl cluster-info
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

@@ -36,7 +36,7 @@ kubectl autoscale rc foo --max=5 --cpu-percent=80
       --max=-1: The upper limit for the number of pods that can be set by the autoscaler. Required.
       --min=-1: The lower limit for the number of pods that can be set by the autoscaler. If it's not specified or negative, the server will apply a default value.
       --name="": The name for the newly created object. If not specified, the name of the input resource will be used.
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --record[=false]: Record current kubectl command in the resource annotation.

@@ -3,12 +3,12 @@
 
 ## kubectl config use-context
 
-Sets the current-context in a kubeconfig file
+使用kubeconfig中的一个环境项作为当前配置。
 
 ### 摘要
 
 
-Sets the current-context in a kubeconfig file
+使用kubeconfig中的一个环境项作为当前配置。
 
 ```
 kubectl config use-context CONTEXT_NAME
@@ -19,5 +19,3 @@ kubectl config use-context CONTEXT_NAME
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-
-

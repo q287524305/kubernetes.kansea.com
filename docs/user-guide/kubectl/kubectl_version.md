@@ -3,12 +3,12 @@
 
 ## kubectl version
 
-Print the client and server version information.
+输出服务端和客户端的版本信息。
 
 ### 摘要
 
 
-Print the client and server version information.
+输出服务端和客户端的版本信息。
 
 ```
 kubectl version
@@ -17,7 +17,7 @@ kubectl version
 ### 选项
 
 ```
-      --client[=false]: Client version only (no server required).
+      --client[=false]: 仅输出客户端版本（无需连接服务器）。
 ```
 
 {% include_relative parent_commands.md %}
@@ -25,5 +25,3 @@ kubectl version
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

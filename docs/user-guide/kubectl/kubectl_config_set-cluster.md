@@ -3,13 +3,13 @@
 
 ## kubectl config set-cluster
 
-Sets a cluster entry in kubeconfig
+在kubeconfig配置文件中设置一个集群项。
 
 ### 摘要
 
 
-Sets a cluster entry in kubeconfig.
-Specifying a name that already exists will merge new fields on top of existing values for those fields.
+在kubeconfig配置文件中设置一个集群项。
+如果指定了一个已存在的名字，将合并新字段并覆盖旧字段。
 
 ```
 kubectl config set-cluster NAME [--server=server] [--certificate-authority=path/to/certficate/authority] [--insecure-skip-tls-verify=true]
@@ -18,24 +18,24 @@ kubectl config set-cluster NAME [--server=server] [--certificate-authority=path/
 ### 示例
 
 ```
-# Set only the server field on the e2e cluster entry without touching other values.
+# 仅设置e2e集群项中的server字段，不影响其他字段
 kubectl config set-cluster e2e --server=https://1.2.3.4
 
-# Embed certificate authority data for the e2e cluster entry
+# 向e2e集群项中添加认证鉴权数据
 kubectl config set-cluster e2e --certificate-authority=~/.kube/e2e/kubernetes.ca.crt
 
-# Disable cert checking for the dev cluster entry
+# 取消dev集群项中的证书检查
 kubectl config set-cluster e2e --insecure-skip-tls-verify=true
 ```
 
 ### 选项
 
 ```
-      --api-version="": api-version for the cluster entry in kubeconfig
-      --certificate-authority="": path to certificate-authority for the cluster entry in kubeconfig
-      --embed-certs[=false]: embed-certs for the cluster entry in kubeconfig
-      --insecure-skip-tls-verify[=false]: insecure-skip-tls-verify for the cluster entry in kubeconfig
-      --server="": server for the cluster entry in kubeconfig
+      --api-version="": 设置kuebconfig配置文件中集群选项中的api-version。
+      --certificate-authority="": 设置kuebconfig配置文件中集群选项中的certificate-authority路径。
+      --embed-certs[=false]: 在是否则kubeconfig配置文件中嵌入客户端证书/key。
+      --insecure-skip-tls-verify[=false]: 设置kuebconfig配置文件中集群选项中的insecure-skip-tls-verify开关。
+      --server="": 设置kuebconfig配置文件中集群选项中的server。
 ```
 
 {% include_relative parent_commands.md %}
@@ -43,5 +43,3 @@ kubectl config set-cluster e2e --insecure-skip-tls-verify=true
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-
-

@@ -2,12 +2,12 @@
 ---
 ## kubectl api-versions
 
-Print the supported API versions on the server, in the form of "group/version".
+以“组/版本”的格式输出服务端支持的API版本。
 
 ### 摘要
 
 
-Print the supported API versions on the server, in the form of "group/version".
+以“组/版本”的格式输出服务端支持的API版本。
 
 ```
 kubectl api-versions
@@ -18,5 +18,3 @@ kubectl api-versions
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-

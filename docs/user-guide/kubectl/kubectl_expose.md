@@ -54,7 +54,7 @@ kubectl expose rs nginx --port=80 --target-port=8000
   -l, --labels="": Labels to apply to the service created by this call.
       --load-balancer-ip="": IP to assign to to the Load Balancer. If empty, an ephemeral IP will be created and used (cloud-provider specific).
       --name="": The name for the newly created object.
-      --no-headers[=false]: When using the default output, don't print headers.
+      --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --overrides="": An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.

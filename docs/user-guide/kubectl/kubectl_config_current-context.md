@@ -3,12 +3,12 @@
 
 ## kubectl config current-context
 
-Displays the current-context
+显示 current-context
 
 ### 摘要
 
 
-Displays the current-context
+显示 current-context
 
 ```
 kubectl config current-context
@@ -17,7 +17,7 @@ kubectl config current-context
 ### 示例
 
 ```
-# Display the current-context
+# 显示 current-context
 kubectl config current-context
 ```
 
@@ -26,5 +26,3 @@ kubectl config current-context
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-
-
