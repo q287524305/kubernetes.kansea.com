@@ -79,7 +79,7 @@ SSH to it using the key that was created and using the _core_ user and you can l
     ad13bf84...	<master IP>	   role=master
     e9af8293...	<node #2 IP>   role=node
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

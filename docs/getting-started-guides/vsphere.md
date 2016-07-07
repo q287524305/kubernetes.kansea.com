@@ -95,7 +95,7 @@ can log into any VM as the `kube` user to poke around and figure out what is
 going on (find yourself authorized with your SSH key, or use the password
 `kube` otherwise).
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

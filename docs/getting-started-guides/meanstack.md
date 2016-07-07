@@ -172,7 +172,6 @@ $ gcloud beta container \
 ![image](/images/docs/meanstack/image_4.png)
 
 
-## **Step 5: Creating the Database Service**
 ## **第五步：创建数据库服务**
 
 需要做三件事:

@@ -87,7 +87,7 @@ Once your cluster has been created you can [test it out](/docs/getting-started-g
 
 For more complete applications, please look in the [examples directory](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/)
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

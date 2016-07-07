@@ -238,7 +238,7 @@ KUBERNETES_PROVIDER=openstack-heat ./cluster/kube-down.sh
 ```
 If you have changed the default `$STACK_NAME`, you must specify the name. Note that this will not remove any Cinder volumes created by Kubernetes.
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

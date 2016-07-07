@@ -229,7 +229,7 @@ If you don't wish care about the Azure bill, you can tear down the cluster. It's
 
 By the way, with the scripts shown, you can deploy multiple clusters, if you like :)
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level
@@ -240,7 +240,7 @@ Azure                | CoreOS       | CoreOS | Weave       | [docs](/docs/gettin
 For support level information on all solutions, see the [Table of solutions](/docs/getting-started-guides/#table-of-solutions) chart.
 
 
-## Further reading
+## 深入阅读
 
 Please see the [Kubernetes docs](/docs/) for more details on administering
 and using a Kubernetes cluster

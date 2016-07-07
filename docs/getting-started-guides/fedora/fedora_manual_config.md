@@ -202,7 +202,7 @@ kubectl delete -f ./node.json
 
 You should have a functional cluster, check out [101](/docs/user-guide/walkthrough/)!
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

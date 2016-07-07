@@ -153,6 +153,6 @@ Terminated pods aren't currently automatically deleted, so that you can observe 
 
 On the other hand, containers and their logs are eventually deleted automatically in order to free up disk space on the nodes.
 
-## What's next?
+## 接下来是什么??
 
 [Learn about deploying continuously running applications.](/docs/user-guide/deploying-applications)

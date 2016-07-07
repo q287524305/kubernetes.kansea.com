@@ -694,7 +694,7 @@ Kill all pods:
 for i in `kubectl get pods | awk '{print $1}'`; do kubectl delete pod $i; done
 ```
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

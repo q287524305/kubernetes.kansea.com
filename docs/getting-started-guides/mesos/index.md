@@ -302,7 +302,7 @@ Address 1: 10.10.10.10
 Name:      kubernetes
 Address 1: 10.10.10.1
 ```
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

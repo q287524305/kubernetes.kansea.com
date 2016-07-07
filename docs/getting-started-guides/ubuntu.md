@@ -282,7 +282,7 @@ To make sure the version of the upgraded cluster is what you expect, you will fi
 * upgrade all components or master: `$ kubectl version`. Check the *Server Version*.
 * upgrade node `vcap@10.10.102.223`: `$ ssh -t vcap@10.10.102.223 'cd /opt/bin && sudo ./kubelet --version'`* 
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

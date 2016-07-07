@@ -464,7 +464,7 @@ In a data center environment, it is recommended to configure Calico to peer with
 
 The Calico documentation contains more information on how to configure Calico to [peer with existing infrastructure](https://github.com/projectcalico/calico-containers/blob/master/docs/ExternalConnectivity.md).
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

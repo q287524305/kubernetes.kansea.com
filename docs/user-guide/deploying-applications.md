@@ -92,6 +92,6 @@ map[matchLabels:map[run:my-nginx]]{% endraw %}
 You could also specify the `selector` explicitly, such as if you wanted to specify labels in the pod template that you didn't want to select on, but you should ensure that the selector will match the labels of the pods created from the pod template, and that it won't match pods created by other Deployments. The most straightforward way to ensure the latter is to create a unique label value for the Deployment, and to specify it in both the pod template's labels and in the selector's
 matchLabels.
 
-## What's next?
+## 接下来是什么??
 
 [Learn about exposing applications to users and clients, and connecting tiers of your application together.](/docs/user-guide/connecting-applications)

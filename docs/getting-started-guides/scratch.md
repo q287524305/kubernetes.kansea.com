@@ -838,7 +838,7 @@ pinging or SSH-ing from one node to another.
 If you run into trouble, please see the section on [troubleshooting](/docs/getting-started-guides/gce#troubleshooting), post to the
 [google-containers group](https://groups.google.com/forum/#!forum/google-containers), or come ask questions on [Slack](/docs/troubleshooting#slack).
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

@@ -128,7 +128,7 @@ $ dcos kubectl get pods --all-namespaces
     ```shell
 $ dcos package uninstall kubernetes
     ```
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

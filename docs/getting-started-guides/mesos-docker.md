@@ -306,7 +306,7 @@ Breakdown:
 - `build/run.sh` - executes a command in the build container
 - `build/release.sh` - cross compiles Kubernetes for all supported architectures and operating systems (slow)
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

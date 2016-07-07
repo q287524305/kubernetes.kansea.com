@@ -211,6 +211,6 @@ $ kubectl get pods/pod-w-message -o go-template="{{range .status.containerStatus
 0
 {% endraw %}```
 
-## What's next?
+## 接下来是什么??
 
 [Learn more about managing deployments.](/docs/user-guide/managing-deployments)

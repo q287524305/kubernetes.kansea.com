@@ -124,7 +124,7 @@ To calculate number of desired replicas based only on custom metrics CPU utiliza
 target should be set to a very large value (e.g. 100000%). Then CPU-related logic 
 will want only 1 replica, leaving the decision about higher replica count to cusom metrics (and min/max limits).
 
-## Further reading
+## 深入阅读
 
 * Design documentation: [Horizontal Pod Autoscaling](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/horizontal-pod-autoscaler.md).
 * kubectl autoscale command: [kubectl autoscale](/docs/user-guide/kubectl/kubectl_autoscale).

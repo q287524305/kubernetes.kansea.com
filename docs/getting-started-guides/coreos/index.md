@@ -88,7 +88,7 @@ Configure a single master, single worker cluster on VMware ESXi.
 
 Configure a standalone Kubernetes or a Kubernetes cluster with [Foreman](https://theforeman.org).
 
-## Support Level
+## 支持级别
 
 
 IaaS Provider        | Config. Mgmt | OS     | Networking  | Docs                                              | Conforms | Support Level

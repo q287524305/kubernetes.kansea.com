@@ -97,6 +97,6 @@ Per pod IP configuration is provider-specific, so when making networking changes
 
 We should define a grains.conf key that captures more specifically what network configuration environment is being used to avoid future confusion across providers.
 
-## Further reading
+## 深入阅读
 
 The [cluster/saltbase](http://releases.k8s.io/{{page.githubbranch}}/cluster/saltbase/) tree has more details on the current SaltStack configuration.
