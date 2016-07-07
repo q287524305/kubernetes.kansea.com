@@ -155,7 +155,10 @@ default is `"None"`).
 As with the userspace proxy, the net result is that any traffic bound for the
 `Service`'s IP:Port is proxied to an appropriate backend without the clients
 knowing anything about Kubernetes or `Services` or `Pods`. This should be
-faster and more reliable than the userspace proxy.
+faster and more reliable than the userspace proxy. However, unlike the
+userspace proxier, the iptables proxier cannot automatically retry another
+`Pod` if the one it initially selects does not respond, so it depends on
+having working [readiness probes](/docs/user-guide/production-pods/#liveness-and-readiness-probes-aka-health-checks).
 
 ![Services overview diagram for iptables proxy](/images/docs/services-iptables-overview.svg)
 
@@ -316,6 +319,44 @@ Kubernetes的`ServiceTypes`能让你指定你想要哪一种服务。默认的�
 ```
 
 从外部负载均衡器的流量将会被引到后端的`Pod`，然而具体这个如何实现则要看云提供商。一些云提供商允许指定`loadBalancerIP`。在这种场景，负载均衡器将随用户指定的`loadBalancerIP`一起创建。如果字段`loadBalancerIP`没有指定，该负载均衡器会被指定一个短暂性的IP。如果指定了`loadBalancerIP`，但是云提供商不支持这个特性，这个字段会被忽略。
+
+#### SSL support on AWS
+For partial SSL support on clusters running on AWS, starting with 1.3 two
+annotations can be added to a `LoadBalancer` service:
+
+```
+    "metadata": {
+        "name": "my-service",
+        "annotations": {
+            "service.beta.kubernetes.io/aws-load-balancer-ssl-cert": "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+        }
+    },
+```
+
+The first specifies which certificate to use. It can be either a
+certificate from a third party issuer that was uploaded to IAM or one created
+within AWS Certificate Manager.
+
+```
+    "metadata": {
+        "name": "my-service",
+        "annotations": {
+            "service.beta.kubernetes.io/aws-load-balancer-backend-protocol=": "(https|http|ssl|tcp)"
+        }
+    },
+```
+
+The second annotation specificies which protocol a pod speaks. For HTTPS and
+SSL, the ELB will expect the pod to authenticate itself over the encrypted
+connection.
+
+HTTP and HTTPS will select layer 7 proxying: the ELB will terminate
+the connection with the user, parse headers and inject the `X-Forwarded-For`
+header with the user's IP address (pods will only see the IP address of the
+ELB at the other end of its connection) when forwarding requests.
+
+TCP and SSL will select layer 4 proxying: the ELB will forward traffic without
+modifying the headers.
 
 ### 外部IP
 
