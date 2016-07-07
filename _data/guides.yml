@@ -58,6 +58,8 @@ toc:
     path: /docs/user-guide/config-best-practices/
   - title: 使用 kubectl 管理资源
     path: /docs/user-guide/working-with-resources/
+  - title: Garbage collection
+    path: /docs/user-guide/garbage-collector/
 
 - title: 批量作业
   section:
@@ -113,6 +115,8 @@ toc:
     path: /docs/user-guide/downward-api/volume
   - title: 持久卷指南
     path: /docs/user-guide/persistent-volumes/walkthrough/
+  - title: Bootstrapping Pet Sets
+    path: /docs/user-guide/petset/bootstrapping/
 
 - title: 监控，日志，和调试容器
   section:
@@ -131,7 +135,7 @@ toc:
   - title: 端口转接
     path: /docs/user-guide/connecting-to-applications-port-forward/
   - title: 用 Explorer 来验证运行环境
-    path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/explorer
+    path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/explorer
 
 - title: 创建群集
   section:
@@ -207,7 +211,7 @@ toc:
         section:
         - title: 通过 rkt 运行 Kubernetes
           path: /docs/getting-started-guides/rkt/
-        - title: 在不同的 UX 上使用 rkt 容器的节点
+        - title: 使用 rkt 需要注意的问题
           path: /docs/getting-started-guides/rkt/notes/
       - title: 在 Mesos 上部署 Kubernetes
         path: /docs/getting-started-guides/mesos/
@@ -258,6 +262,8 @@ toc:
     path: /docs/admin/cluster-components/
   - title: 配置 etcd
     path: /docs/admin/etcd/
+  - title: Federating Clusters
+    path: /docs/admin/federation/
   - title: 使用多个群集
     path: /docs/admin/multi-cluster/
   - title: 修改群集大小
@@ -269,7 +275,7 @@ toc:
   - title: Pods，Services 使用 DNS
     path: /docs/admin/dns/
   - title: 设定和配置 DNS
-    path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/cluster-dns
+    path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/cluster-dns
   - title: Master <-> Node 的通讯
     path: /docs/admin/master-node-communication/
   - title: 网络插件
@@ -278,5 +284,9 @@ toc:
     path: /docs/admin/static-pods/
   - title: 配置垃圾回收
     path: /docs/admin/garbage-collection/
+  - title: Configuring Out Of Resource Handling
+    path: /docs/admin/out-of-resource/
   - title: 利用 Salt 配置 Kubernetes
     path: /docs/admin/salt/
+  - title: Monitoring Node Health
+    path: /docs/admin/node-problem/

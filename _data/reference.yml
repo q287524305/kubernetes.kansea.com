@@ -224,18 +224,22 @@ toc:
     path: /docs/admin/resource-quota/
   - title: Replica Sets
     path: /docs/user-guide/replicasets/
+  - title: Pet Sets
+    path: /docs/user-guide/petset/
+  - title: Network Policies
+    path: /docs/user-guide/networkpolicies/
 
 - title: Kubernetes 设计文档
   section:
   - title: Kubernetes 结构
-    path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/architecture.md
+    path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/architecture.md
   - title: Kubernetes 设计概述
-    path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/
+    path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/
   - title: Kubernetes 安全
-    path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/security.md
+    path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/security.md
   - title: Kubernetes 身份和访问管理
-    path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/access.md
+    path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/access.md
   - title: 安全环境
-    path: https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/design/security_context.md
+    path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/security_context.md
   - title: Kubernetes OpenVSwitch GRE/VxLAN 网络
     path: /docs/admin/ovs-networking/
