@@ -1,19 +1,19 @@
-bigheader: "Samples"
-abstract: "A collection of example applications that show how to use Kubernetes."
+bigheader: "范例"
+abstract: "展示如何使用Kubernetes的应用示例集合。"
 toc:
-- title: Samples
+- title: 示例
   path: /docs/samples/
 
-- title: Storage / Database / KV
+- title: 存储/数据库/ KV
   section:
-  - title: Apache Cassandra Database
+  - title: Apache Cassandra 数据库
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/cassandra
   - title: Ceph
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/rbd/
   - title: CephFS
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/cephfs/
   - title: GlusterFS
-    path: /https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/glusterfs/
+    path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/glusterfs/
   - title: Hazelcast
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/hazelcast
   - title: iSCSI
@@ -29,23 +29,23 @@ toc:
   - title: Vitess
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/vitess/
 
-- title: Big Data
+- title: 大数据
   section:
   - title: Apache Spark
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/spark
   - title: Apache Storm
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/storm
 
-- title: Messaging / Queueing
+- title: 消息 / 排队
   section:
   - title: Celery + RabbitMQ
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/celery-rabbitmq
   - title: Hazelcast
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/hazelcast
 
-- title: Miscellaneous
+- title: 其它
   section:
-  - title: Meteor Applications
+  - title: Meteor 应用程序
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/meteor/
   - title: Elasticsearch
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/elasticsearch/
@@ -54,20 +54,20 @@ toc:
   - title: Selenium
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/selenium/
 
-- title: Monitoring and Logging
+- title: 监控和日志
   section:
-  - title: Elasticsearch/Kibana Logging Demonstration
+  - title: Elasticsearch/Kibana Logging 示范
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/logging-demo/
   - title: NewRelic
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/newrelic
 
-- title: Multi-tier Applications
+- title: 多层应用程序
   section:
   - title: Guestbook - Go Server
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/guestbook-go/
   - title: GuestBook - PHP Server
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/guestbook/
-  - title: MEAN stack on Google Cloud Platform
+  - title: Google 云平台上搭建 MEAN stack
     path: /docs/getting-started-guides/meanstack/
   - title: MySQL + Wordpress
     path: https://github.com/kubernetes/kubernetes/tree/release-1.2/examples/mysql-wordpress-pd/

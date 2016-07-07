@@ -1,42 +1,42 @@
 ---
 ---
 
-**By: Sandeep Dinesh** - _July 29, 2015_
+**By: Sandeep Dinesh** - _2015年7月29日_
 
 ![image](/images/docs/meanstack/image_0.png)
 
-In [a recent post](http://blog.sandeepdinesh.com/2015/07/running-mean-web-application-in-docker.html), I talked about running a MEAN stack with [Docker Containers.](http://docker.com/)
+在 [最近的文章中](http://blog.sandeepdinesh.com/2015/07/running-mean-web-application-in-docker.html)，我讲过如何通过 [Docker 容器](http://docker.com/)来运行 MEAN stack
 
-Manually deploying Containers is all fine and dandy, but is rather fragile and clumsy. What happens if the app crashes? How can the app be updated? Rolled back?
+可以很好的很轻松的手动部署容器，但是也是比较笨的非常容易出错方法。程序崩溃会怎样？如何更新应用？回滚？
 
-Thankfully, there is a system we can use to manage our containers in a cluster environment called Kubernetes. Even better, Google has a managed version of Kubernetes called [Google Container Engine](https://cloud.google.com/container-engine/) so you can get up and running in minutes.
+令人欣慰的是，现在有一个叫 Kubernetes 的系统，可以让我们来管理我们的容器。更好的消息是，Google 有一个 Kubernetes 的版本管理 叫做[Google Container Engine](https://cloud.google.com/container-engine/) 让你可以在几分钟内搭建起来MEAN stack
 
 * TOC
 {:toc}
 
-## The Basics of Using Kubernetes
+## Kubernetes 基础知识
 
-Before we jump in and start kube’ing it up, it’s important to understand some of the fundamentals of Kubernetes.
+在我们开始 kube 之前，了解一些 Kubernetes 的基础知识是非常重要的。
 
-* Containers: These are the Docker, rtk, AppC, or whatever Container you are running. You can think of these like subatomic particles; everything is made up of them, but you rarely (if ever) interact with them directly.
-* Pods: Pods are the basic component of Kubernetes. They are a group of Containers that are scheduled, live, and die together. Why would you want to have a group of containers instead of just a single container? Let’s say you had a log processor, a web server, and a database. If you couldn't use Pods, you would have to bundle the log processor in the web server and database containers, and each time you updated one you would have to update the other. With Pods, you can just reuse the same log processor for both the web server and database.
-* Replication Controllers: This is the management component of Kubernetes, and it’s pretty cool. You give it a set of Pods, tell it "I want three copies of this," and it creates those copies on your cluster. It will do its best to keep those copies always running, so if one crashes it will start another.
-* Services: This is the other side to Replication Controllers. A service is the single point of contact for a group of Pods. For example, let’s say you have a Replication Controller that creates four copies of a web server pod. A Service will split the traffic to each of the four copies. Services are "permanent" while the pods behind them can come and go, so it’s a good idea to use Services.
+* 容器：这些都是 Docker，rtk，AppC，或者任何可以运行的容器。你可以把它们想象为原子粒子;所有大小都由他们组成,但是你几乎不会(也许曾经)直接和他们交互。
+* Pods：Pods 是 Kubernetes 的基本组成部分。它封装了一组容器，一起存活。那么为什么你需要一个容器组而不是一个单独的容器呢？比如说，你有一个日志处理器，web 服务器和数据库。如果你不适用 Pods，那就必须让web服务器，数据库，以及日志处理器能够互相访问，并且没更新其中一个，另外的两个也必须要更新。适用 Pods 你可以适用同一个web 服务器，数据库以及日志处理器。
+* Replication Controllers：这是 Kubernetes 的管理组件，它非常好用。你设置一组 Pods 告诉他我想要“三个和它一样的副本”，然后它会群集上创建这些副本，它会确保这些副本正常运行。如果崩溃了，它会重建一个新的。
+* Services：这个是Replication Controllers的另一半。`Services`是一组 Pods 的单独连接点。例如，如果你有4组Replication Controllers控制的副本，`Services`会“永久”的让这些 Pods 进进出出，所以用`Services`是一个号办法。
 
 
-## Step 1: Creating the Container
+## 第一步：创建容器
 
-In my previous post, I used off-the-shelf containers to keep things simple.
+在我以前的帖子里，为了方便，我都使用现成的容器。
 
-I had a stock MongoDB container and a stock Node.js container. The Mongo container ran fine without any modification. However, I had to manually enter the Node container to pull and run the code. Obviously this isn't ideal in Kubernetes land, as you aren't supposed to log into your servers!
+我有一个现成的 MongoDB 容器和 Node.js 容器。Mongo容器不用做任何修改就可以很好的运行。但是，我不得不手动创建 Node 容器。显然，在 Kubernetes 的领土上，这不是理想做法。因为你不应该到服务器去操作!
 
-Instead, you have to build a custom container that has the code already inside it and runs automatically.
+相反，你应该创建一个已经有源代码的容器，并让它自动运行。
 
-To do this, you need to use more Docker. Make sure you have the latest version installed for the rest of this tutorial.
+要做到这点，你要更多的使用 Docker。确保在一下教程中你用的是最新版本。
 
-Getting the code:
+获取代码：
 
-Before starting, let’s get some code to run. You can follow along on your personal machine or a Linux VM in the cloud. I recommend using Linux or a Linux VM; running Docker on Mac and Windows is outside the scope of this tutorial.
+在开始之前，让我们运行一些代码。你可以在你的电脑上，或者 云端的 Linux 虚拟机上跟我操作。我建议使用 Linux 或者 Linux 虚拟机；本教程不深究如何 Mac 和 Windows 上运行。
 
 ```shell
 $ git clone https://github.com/ijason/NodeJS-Sample-App.git app
@@ -44,13 +44,13 @@ $ mv app/EmployeeDB/* app/
 $ sed -i -- 's/localhost/mongo/g' ./app/app.js
 ```
 
-This is the same sample app we ran before. The second line just moves everything from the `EmployeeDB` subfolder up into the app folder so it’s easier to access. The third line, once again, replaces the hardcoded `localhost` with the `mongo` proxy.
+这时我们以前运行过的例子。第二行只是移动`EmployeeDB`文件夹到`app`文件夹，以便容易操作，第三行，使用`mongo`代理来替换`localhost`的硬编码.
 
-Building the Docker image:
+构建 Docker 镜像:
 
-First, you need a `Dockerfile`. This is basically the list of instructions Docker uses to build a container image.
+首先,你需要一个`Dockerfile`。它是创建 Docker 镜像的基本指令文件。
 
-Here is the `Dockerfile` for the web server:
+这个是 web 服务器的`Dockerfile`；
 
 ```shell
 FROM node:4.4
@@ -63,18 +63,17 @@ RUN npm install
 CMD ["node", "app.js"]
 ```
 
-A `Dockerfile` is pretty self explanatory, and this one is dead simple.
+`Dockerfile`是非常容易理解的，而这一个简单的要死。
 
-First, it uses the official Node.js LTS image as the base image.
+首先，它使用 Node。js 的 LTS 正式镜像作为基础镜像。
 
-Then, it creates a folder to store the code, `cd`s into that directory, copies the code in, and installs the dependencies with npm.
+然后，创建一个保存代码的文件夹，`cd`切换到那个文件夹，复制代码文件进去，并用 npm 安装相关依赖。
 
-Finally, it specifies the command Docker should run when the container starts, which is to start the app.
+最后，这个特别的命令，是 Docker 容器运行时调用它去启动 app 的。
 
+## 第二步：构建容器
 
-## Step 2: Building our Container
-
-Right now, the directory should look like this:
+现在，这个文件夹应该是这样的：
 
 ```shell
 $ ls
@@ -82,76 +81,77 @@ $ ls
 Dockerfile app
 ```
 
-Let’s build.
+让我们创建它吧。
 
 ```shell
 $ docker build -t myapp .
 ```
 
-This will build a new Docker image for your app. This might take a few minutes as it is downloading and building everything.
+它会为你的应用创建一个新的 Docker 容器。它会花上一段时间，自动下载一切需要的，并构建它。
 
-After that is done, test it out:
+等它完成后，让我们来测试它：
 
 ```shell
 $ docker run myapp
 ```
 
-At this point, you should have a server running on `http://localhost:3000` (or wherever Docker tells you). The website will error out as there is no database running, but we know it works!
+这时候，你应该有一个服务运行在`http://localhost:3000`（或者 Docker 告诉你的地址）。因为还没运行数据库，这个网站会报错。但是，可以自动它是可以运行的。
 
 ![image](/images/docs/meanstack/image_1.png)
 
+## 第三步：上传容器
 
-## Step 3: Pushing our Container
+现在你有一个自定义的 Docker 镜像，现在要在云端也可以访问它。
 
-Now you have a custom Docker image, you have to actually access it from the cloud.
+正如我们将要用`Google Container Engine`使用这个镜像一样，最好吧镜像上传到[Google Container Registry](https://cloud.google.com/tools/container-registry/)。这个容器仓库是建立在[Google Cloud Storage](https://cloud.google.com/storage/)上面的，所以你可以扩展储存空间并且可以快速的访这个容器引擎。
 
-As we are going to be using the image with Google Container Engine, the best place to push the image is the [Google Container Registry](https://cloud.google.com/tools/container-registry/). The Container Registry is built on top of [Google Cloud Storage](https://cloud.google.com/storage/), so you get the advantage of scalable storage and very fast access from Container Engine.
 
-First, make sure you have the latest version of the [Google Cloud SDK installed](https://cloud.google.com/sdk/).
+首先，你需要安装[Google Cloud SDK installed](https://cloud.google.com/sdk/)的最新版本。
 
-[Windows users click here.](https://dl.google.com/dl/cloudsdk/release/GoogleCloudSDKInstaller.exe)
+[Windows 用户点击这里。](https://dl.google.com/dl/cloudsdk/release/GoogleCloudSDKInstaller.exe)
 
-For Linux/Mac:
+Linux/Mac:
 
 ```shell
 $ curl https://sdk.cloud.google.com | bash
 ```
 
-Then, make sure you log in and update.
+然后，你需要登录并更新组件。
 
 ```shell
 $ gcloud auth login
 $ gcloud components update
 ```
 
-You're ready to push your container live, but you'll need a destination. Create a Project in [the Google Cloud Platform Console](https://console.developers.google.com/), and leave it blank. Use the Project ID below, and push your project live.
+你已经准备好上传容器了，但是你需要自动保存到哪里。在[Google 云平台控制中心](https://console.developers.google.com/)创建一个空的项目，使用下面的项目 ID 来上传你的项目。
 
 ```shell
 $ docker tag myapp gcr.io/<YOUR-PROJECT-ID>/myapp
 $ gcloud docker push gcr.io/<YOUR-PROJECT-ID>/myapp
 ```
 
-After some time, it will finish. You can check the console to see the container has been pushed up.
+稍等一会，它就会完成。你可以在控制中心看到这个容器已经上传了。
 
 ![image](/images/docs/meanstack/image_2.png)
 
 
-## **Step 4: Creating the Cluster**
+## **第四步: 创建群集**
 
-So now you have the custom container, let’s create a cluster to run it.
+现在，有了这个自定义容器。让我们创建一个群集来运行它。
 
-Currently, a cluster can be as small as one machine to as big as 100 machines. You can pick any machine type you want, so you can have a cluster of a single `f1-micro` instance, 100 `n1-standard-32` instances (3,200 cores!), and anything in between.
 
-For this tutorial I'm going to use the following:
+目前，一个群集可以是一台或者100台机器，你可以选择任何机器，这样你就可以有一个`f1-micro`群集，100个`n1-standard-32`实例(3,200 核!)，或者它们之间的任意大小的群集。
 
-* Create a cluster named `mean-cluster`
-* Give it a size of 2 nodes
-* Machine type will be `n1-standard-1`
-* Zone will be `us-central-1f` (Use a zone close to you)
+在本教程中我们做以下操作；
 
-There are two ways to create this cluster. Take your pick.
+* 创建一个叫`mean-cluster`群集
+* 给群集两个 node
+* 机器类型用`n1-standard-1`
+* 区域选择`us-central-1f`(用一个离你近的)
 
-**Command Line:**
+有两个办法来创建全集，任由你选择。
+
+**命令行:**
 
 ```shell
 $ gcloud beta container \
@@ -167,20 +167,21 @@ $ gcloud beta container \
 
 ![image](/images/docs/meanstack/image_3.png)
 
-After a few minutes, you should see this in the console.
+几分钟后，你就可以在控制中心看到这个。
 
 ![image](/images/docs/meanstack/image_4.png)
 
 
 ## **Step 5: Creating the Database Service**
+## **第五步：创建数据库服务**
 
-Three things need to be created:
+需要做三件事:
 
-1. Persistent Disk to store the data (pods are ephemeral, so we shouldn't save data locally)
-2. Replication Controller running MongoDB
-3. Service mapping to that Replication Controller
+1. 持久储存数据(pod 是临时的，所以我们不应该在本地保存)
+2. 用Replication Controller运行 MongoDB
+3. 映射服务到Replication Controller
 
-To create the disk, run this:
+运行这个来创建磁盘：
 
 ```shell
 $ gcloud compute disks create \
@@ -190,9 +191,9 @@ $ gcloud compute disks create \
  mongo-disk
 ```
 
-Pick the same zone as your cluster and an appropriate disk size for your application.
+给你的应用选择同一区域的群集和一个大小合适的硬盘。
 
-Now, we need to create a Replication Controller that will run the database. I’m using a Replication Controller and not a Pod, because if a standalone Pod dies, it won't restart automatically.
+现在，我们需要创建一个运行数据库的 Replication Controller。我用的是 Replication Controller 而不是 pod，因为如果一个独立的 pod 死掉了，他不会自动重启。
 
 ### `db-controller.yml`
 
@@ -227,7 +228,7 @@ spec:
            fsType: ext4
 ```
 
-We call the controller `mongo-controller`, specify one replica, and open the appropriate ports. The image is `mongo`, which is the off the shelf MongoDB image.
+我们叫这个控制器为`mongo-controller`，指定一个副本，并打开相应端口。`mongo`镜像是一个已存的 MongoDB 镜像
 
 The `volumes` section creates the volume for Kubernetes to use. There is a Google Container Engine-specific `gcePersistentDisk` section that maps the disk we made into a Kubernetes volume, and we mount the volume into the `/data/db` directory (as described in the MongoDB Docker documentation)
 
