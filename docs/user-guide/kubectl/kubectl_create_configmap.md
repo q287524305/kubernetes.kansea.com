@@ -5,7 +5,7 @@
 
 Create a configMap from a local file, directory or literal value.
 
-### Synopsis
+### 摘要
 
 
 Create a configmap based on a file, directory, or specified literal value.
@@ -24,7 +24,7 @@ symlinks, devices, pipes, etc).
 kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run]
 ```
 
-### Examples
+### 示例
 
 ```
   # Create a new configmap named my-config with keys for each file in folder bar
@@ -37,7 +37,7 @@ kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from
   kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
 ```
 
-### Options
+### 选项
 
 ```
       --dry-run[=false]: If true, only print the object that would be sent, without sending it.
@@ -56,34 +56,9 @@ kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from
       --validate[=true]: If true, use a schema to validate the input before sending it
 ```
 
-### Options inherited from parent commands
+{% include_relative parent_commands.md %}
 
-```
-      --alsologtostderr[=false]: log to standard error as well as files
-      --certificate-authority="": Path to a cert. file for the certificate authority.
-      --client-certificate="": Path to a client certificate file for TLS.
-      --client-key="": Path to a client key file for TLS.
-      --cluster="": The name of the kubeconfig cluster to use
-      --context="": The name of the kubeconfig context to use
-      --insecure-skip-tls-verify[=false]: If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure.
-      --kubeconfig="": Path to the kubeconfig file to use for CLI requests.
-      --log-backtrace-at=:0: when logging hits line file:N, emit a stack trace
-      --log-dir="": If non-empty, write log files in this directory
-      --log-flush-frequency=5s: Maximum number of seconds between log flushes
-      --logtostderr[=true]: log to standard error instead of files
-      --match-server-version[=false]: Require server version to match client version
-      --namespace="": If present, the namespace scope for this CLI request.
-      --password="": Password for basic authentication to the API server.
-  -s, --server="": The address and port of the Kubernetes API server
-      --stderrthreshold=2: logs at or above this threshold go to stderr
-      --token="": Bearer token for authentication to the API server.
-      --user="": The name of the kubeconfig user to use
-      --username="": Username for basic authentication to the API server.
-      --v=0: log level for V logs
-      --vmodule=: comma-separated list of pattern=N settings for file-filtered logging
-```
-
-### SEE ALSO
+### 参见
 
 * [kubectl create](/docs/user-guide/kubectl/kubectl_create/)	 - Create a resource by filename or stdin
 

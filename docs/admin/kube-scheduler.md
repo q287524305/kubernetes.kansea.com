@@ -5,7 +5,7 @@
 
 
 
-### Synopsis
+### 摘要
 
 
 The Kubernetes scheduler is a policy-rich, topology-aware,
@@ -20,7 +20,7 @@ through the API as necessary.
 kube-scheduler
 ```
 
-### Options
+### 选项
 
 ```
       --address="0.0.0.0": The IP address to serve on (set to 0.0.0.0 for all interfaces)

@@ -5,7 +5,7 @@
 
 
 
-### Synopsis
+### 摘要
 
 
 The Kubernetes controller manager is a daemon that embeds
@@ -21,7 +21,7 @@ controller, and serviceaccounts controller.
 kube-controller-manager
 ```
 
-### Options
+### 选项
 
 ```
       --address=0.0.0.0: The IP address to serve on (set to 0.0.0.0 for all interfaces)

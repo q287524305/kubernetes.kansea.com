@@ -5,7 +5,7 @@
 
 
 
-### Synopsis
+### 摘要
 
 
 The Kubernetes API server validates and configures data
@@ -17,7 +17,7 @@ cluster's shared state through which all other components interact.
 kube-apiserver
 ```
 
-### Options
+### 选项
 
 ```
       --admission-control="AlwaysAdmit": Ordered list of plug-ins to do admission control of resources into cluster. Comma-delimited list of: AlwaysAdmit, AlwaysDeny, AlwaysPullImages, DenyEscalatingExec, DenyExecOnPrivileged, InitialResources, LimitRanger, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, PersistentVolumeLabel, ResourceQuota, SecurityContextDeny, ServiceAccount

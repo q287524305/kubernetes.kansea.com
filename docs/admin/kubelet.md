@@ -5,7 +5,7 @@
 
 
 
-### Synopsis
+### 摘要
 
 
 The kubelet is the primary "node agent" that runs on each
@@ -30,7 +30,7 @@ HTTP server: The kubelet can also listen for HTTP and respond to a simple API
 kubelet
 ```
 
-### Options
+### 选项
 
 ```
       --address=0.0.0.0: The IP address for the Kubelet to serve on (set to 0.0.0.0 for all interfaces)

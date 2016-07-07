@@ -117,7 +117,7 @@ up the verbosity:
 
     kubectl --v=8 version
 
-### Examples
+### 示例
 
  1. Alice can do anything to all resources:                  `{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user": "alice", "namespace": "*", "resource": "*", "apiGroup": "*"}}`
  2. Kubelet can read any pods:                               `{"apiVersion": "abac.authorization.kubernetes.io/v1beta1", "kind": "Policy", "spec": {"user": "kubelet", "namespace": "*", "resource": "pods", "readonly": true}}`

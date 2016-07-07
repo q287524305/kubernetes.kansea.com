@@ -3,88 +3,58 @@
 
 ## kubectl edit
 
-Edit a resource on the server
+编辑服务端的资源。
 
-### Synopsis
+### 摘要
 
 
-Edit a resource from the default editor.
+使用系统默认编辑器编辑服务端的资源。
 
-The edit command allows you to directly edit any API resource you can retrieve via the
-command line tools. It will open the editor defined by your KUBE_EDITOR, or EDITOR
-environment variables, or fall back to 'vi' for Linux or 'notepad' for Windows.
-You can edit multiple objects, although changes are applied one at a time. The command
-accepts filenames as well as command line arguments, although the files you point to must
-be previously saved versions of resources.
+edit 命令允许你直接编辑使用命令行工具获取的任何资源。此命令将打开你通过 KUBE_EDITOR 或者 EDITOR 环境变量定义的编辑器，
+或者直接在 Linux 上使用“vi” 或者windows 的”notepad”。你可以同时编辑多个资源，但所有的变更都只会一次性
+提交。除了命令行参数外，此命令也接受文件名，但所直指定的文件必须使用早于当前的资源版本。
 
 The files to edit will be output in the default API version, or a version specified
 by --output-version. The default format is YAML - if you would like to edit in JSON
 pass -o json. The flag --windows-line-endings can be used to force Windows line endings,
 otherwise the default for your operating system will be used.
+所编辑的文件将使用默认的API版本输出，或者通过`--output-version`选项显式指定。默认的输出格式是YAML，
+如果你需要使用JSON格式编辑，使用`-o json`选项。`--windows-line-endings`则可以强制使用 windows 行尾符，不指定的话将会使用操作系统默认值。
 
-In the event an error occurs while updating, a temporary file will be created on disk
-that contains your unapplied changes. The most common error when updating a resource
-is another editor changing the resource on the server. When this occurs, you will have
-to apply your changes to the newer version of the resource, or update your temporary
-saved copy to include the latest resource version.
+如果当更新资源的时候出现错误，将会在磁盘上创建一个临时文件，记录未成功的更新。更新资源时最常见的错误
+是其他人也在更新服务端的资源。当这种情况发生时，你需要将你所作的更改应用到最新版本的资源上，或者编辑
+保存的临时文件，使用最新的资源版本。
 
 ```
 kubectl edit (RESOURCE/NAME | -f FILENAME)
 ```
 
-### Examples
+### 示例
 
 ```
-  # Edit the service named 'docker-registry':
+  # 编辑名为“docker-registry”的service
   kubectl edit svc/docker-registry
 
-  # Use an alternative editor
+  # 使用一个不同的编辑器
   KUBE_EDITOR="nano" kubectl edit svc/docker-registry
 
-  # Edit the service 'docker-registry' in JSON using the v1 API format:
+  # 编辑名为“docker-registry”的service，使用JSON格式、v1 API版本
   kubectl edit svc/docker-registry --output-version=v1 -o json
 ```
 
-### Options
+### 选项
 
 ```
-  -f, --filename=[]: Filename, directory, or URL to file to use to edit the resource
-  -o, --output="yaml": Output format. One of: yaml|json.
-      --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
-      --record[=false]: Record current kubectl command in the resource annotation.
-      --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.
-      --windows-line-endings[=false]: Use Windows line-endings (default Unix line-endings)
+  -f, --filename=[]: 用来指定待编辑资源的文件名，目录名或者URL。
+  -o, --output="yaml": 输出格式，可选yaml或者json中的一种。
+      --output-version="": 输出资源使用的API版本（例如'extensions/v1beta1'）。
+      --record[=false]: 在资源注释里记录当前 kubectl 命令。
+      --save-config[=false]: 如果为true，当前对象的配置会保存在它的注释里。如果以后还要执行此 kubectl 命令的话，这会非常有用。
+      --windows-line-endings[=false]: 使用 Windows 行尾符（默认为 Unix 行尾符）
 ```
 
-### Options inherited from parent commands
+{% include_relative parent_commands.md %}
 
-```
-      --alsologtostderr[=false]: log to standard error as well as files
-      --certificate-authority="": Path to a cert. file for the certificate authority.
-      --client-certificate="": Path to a client certificate file for TLS.
-      --client-key="": Path to a client key file for TLS.
-      --cluster="": The name of the kubeconfig cluster to use
-      --context="": The name of the kubeconfig context to use
-      --insecure-skip-tls-verify[=false]: If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure.
-      --kubeconfig="": Path to the kubeconfig file to use for CLI requests.
-      --log-backtrace-at=:0: when logging hits line file:N, emit a stack trace
-      --log-dir="": If non-empty, write log files in this directory
-      --log-flush-frequency=5s: Maximum number of seconds between log flushes
-      --logtostderr[=true]: log to standard error instead of files
-      --match-server-version[=false]: Require server version to match client version
-      --namespace="": If present, the namespace scope for this CLI request.
-      --password="": Password for basic authentication to the API server.
-  -s, --server="": The address and port of the Kubernetes API server
-      --stderrthreshold=2: logs at or above this threshold go to stderr
-      --token="": Bearer token for authentication to the API server.
-      --user="": The name of the kubeconfig user to use
-      --username="": Username for basic authentication to the API server.
-      --v=0: log level for V logs
-      --vmodule=: comma-separated list of pattern=N settings for file-filtered logging
-```
+### 参见
 
-### SEE ALSO
-
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - kubectl controls the Kubernetes cluster manager
-
-###### Auto generated by spf13/cobra on 2-Mar-2016
+* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用 kubectl 来管理 Kubernetes 集群。

@@ -202,7 +202,7 @@ As mentioned above, you use the `kubectl cluster-info` command to retrieve the s
 
 If you haven't specified a name for your port, you don't have to specify *port_name* in the URL
 
-##### Examples
+##### 示例
 
  * To access the Elasticsearch service endpoint `_search?q=user:kimchy`, you would use:   `http://104.197.5.247/api/v1/proxy/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy`
  * To access the Elasticsearch cluster health information `_cluster/health?pretty=true`, you would use:   `https://104.197.5.247/api/v1/proxy/namespaces/kube-system/services/elasticsearch-logging/_cluster/health?pretty=true`

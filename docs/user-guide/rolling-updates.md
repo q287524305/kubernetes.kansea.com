@@ -47,7 +47,7 @@ The configuration file must:
 Replication controller configuration files are described in
 [Creating Replication Controllers](/docs/user-guide/replication-controller/operations/).
 
-### Examples
+### 示例
 
     // Update pods of frontend-v1 using new replication controller data in frontend-v2.json.
     $ kubectl rolling-update frontend-v1 -f frontend-v2.json
@@ -76,7 +76,7 @@ to a new `image:latest` will fail, even if the image at that tag has changed.
 Moreover, the use of `:latest` is not recommended, see 
 [Best Practices for Configuration](/docs/user-guide/config-best-practices/#container-images) for more information.
 
-### Examples
+### 示例
 
     // Update the pods of frontend-v1 to frontend-v2
     $ kubectl rolling-update frontend-v1 frontend-v2 --image=image:v2

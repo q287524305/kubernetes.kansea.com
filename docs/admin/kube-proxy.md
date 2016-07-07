@@ -5,7 +5,7 @@
 
 
 
-### Synopsis
+### 摘要
 
 
 The Kubernetes network proxy runs on each node. This
@@ -20,7 +20,7 @@ with the apiserver API to configure the proxy.
 kube-proxy
 ```
 
-### Options
+### 选项
 
 ```
       --bind-address=0.0.0.0: The IP address for the proxy server to serve on (set to 0.0.0.0 for all interfaces)

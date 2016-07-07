@@ -140,7 +140,7 @@ Remember: See the [kubectl](/docs/user-guide/kubectl/kubectl) reference document
 
 To define custom columns and output only the details that you want into a table, you can use the `custom-columns` option. You can choose to define the custom columns inline or use a template file: `-o=custom-columns=<spec>` or `-o=custom-columns-file=<filename>`.
 
-##### Examples
+##### 示例
 
 Inline:
 
