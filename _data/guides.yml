@@ -126,8 +126,6 @@ toc:
     path: /docs/getting-started-guides/logging/
   - title: 使用 Elasticsearch 和 Kibana 记录日志
     path: /docs/getting-started-guides/logging-elasticsearch/
-  - title: Elasticsearch/Kibana 日志示范
-    path: /docs/user-guide/logging-demo
   - title: 使用`kubectl exec`在容器中执行命令行
     path: /docs/user-guide/getting-into-containers/
   - title: 代理连接

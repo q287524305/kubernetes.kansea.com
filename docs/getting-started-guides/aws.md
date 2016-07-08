@@ -115,9 +115,6 @@ export PATH=<path/to/kubernetes-directory>/platforms/linux/amd64:$PATH
 
 默认情况下，`kubectl`将使用集群启动时生成的`kubeconfig`文件对 API 进行身份验证。更多相关信息,请阅读[kubeconfig 文件](/docs/user-guide/kubeconfig-file)。
 
-By default, `kubectl` will use the `kubeconfig` file generated during the cluster startup for authenticating against the API.
-For more information, please read [kubeconfig files](/docs/user-guide/kubeconfig-file)
-
 ### 示例
 
 看一个[简单的 nginx 示例](/docs/user-guide/simple-nginx)，尝试使用一下你的新集群。
