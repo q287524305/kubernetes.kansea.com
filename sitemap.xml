@@ -8,11 +8,11 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>http://kubernetes.io/</loc>
+  <loc>http://kubernetes.kansea.com/</loc>
   <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
 </url>
 {% for page in site.pages %}<url>
-  <loc>http://kubernetes.io{{ page.url }}</loc>
+  <loc>http://kubernetes.kansea.com{{ page.url }}</loc>
   <lastmod>{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
 </url>{% endfor %}
 </urlset>

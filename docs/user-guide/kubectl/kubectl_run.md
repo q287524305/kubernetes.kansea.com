@@ -3,13 +3,13 @@
 
 ## kubectl run
 
-Run a particular image on the cluster.
+在集群上运行指定镜像。
 
 ### 摘要
 
 
-Create and run a particular image, possibly replicated.
-Creates a deployment or job to manage the created container(s).
+创建并运行一个指定的可复制的镜像。
+创建一个`deployment`或者`job`来管理创建的容器。
 
 ```
 kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=replicas] [--dry-run=bool] [--overrides=inline-json] [--command] -- [COMMAND] [args...]
@@ -18,49 +18,49 @@ kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=rep
 ### 示例
 
 ```
-# Start a single instance of nginx.
+# 启动一个 Nginx 实例。
 kubectl run nginx --image=nginx
 
-# Start a single instance of hazelcast and let the container expose port 5701 .
+# 启动一个 hazelcast 单个实例，并开放容器的5701端口。
 kubectl run hazelcast --image=hazelcast --port=5701
 
-# Start a single instance of hazelcast and set environment variables "DNS_DOMAIN=cluster" and "POD_NAMESPACE=default" in the container.
+# 运行一个 hazelcast 单个实例，并设置容器的环境变量"DNS_DOMAIN=cluster" and "POD_NAMESPACE=default"。
 kubectl run hazelcast --image=hazelcast --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
 
-# Start a replicated instance of nginx.
+# 启动一个 replicated 实例去复制 nginx。
 kubectl run nginx --image=nginx --replicas=5
 
-# Dry run. Print the corresponding API objects without creating them.
+# 试运行。不创建他们的情况下，打印出所有相关的 API 对象。
 kubectl run nginx --image=nginx --dry-run
 
-# Start a single instance of nginx, but overload the spec of the deployment with a partial set of values parsed from JSON.
+# 用可解析的 JSON 来覆盖加载 `deployment` 的 `spec`，来运行一个 nginx 单个实例。
 kubectl run nginx --image=nginx --overrides='{ "apiVersion": "v1", "spec": { ... } }'
 
-# Start a single instance of busybox and keep it in the foreground, don't restart it if it exits.
+# 运行一个在前台运行的 busybox 单个实例，如果退出不会重启。
 kubectl run -i --tty busybox --image=busybox --restart=Never
 
-# Start the nginx container using the default command, but use custom arguments (arg1 .. argN) for that command.
+# 使用默认命令来启动 nginx 容器，并且传递自定义参数(arg1 .. argN)给 nginx。
 kubectl run nginx --image=nginx -- <arg1> <arg2> ... <argN>
 
-# Start the nginx container using a different command and custom arguments.
+# 使用不同命令或者自定义参数来启动 nginx 容器。
 kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
 
-# Start the perl container to compute π to 2000 places and print it out.
+# 启动 perl 容器来计算 bpi(2000) 并打印出结果。
 kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
 
 ### 选项
 
 ```
-      --attach[=false]: If true, wait for the Pod to start running, and then attach to the Pod as if 'kubectl attach ...' were called.  Default false, unless '-i/--interactive' is set, in which case the default is true.
-      --command[=false]: If true and extra arguments are present, use them as the 'command' field in the container, rather than the 'args' field which is the default.
-      --dry-run[=false]: If true, only print the object that would be sent, without sending it.
-      --env=[]: Environment variables to set in the container
-      --expose[=false]: If true, a public, external service is created for the container(s) which are run
+      --attach[=false]: 如果为true, 那么等 pod 开始运行之后，链接到这个 pod 和运行 'kubectl attach ...'一样。默认是 false，除非设置了 '-i/--interactive' 默认才会是 true。
+      --command[=false]: 如果为 true 并且有其他参数，那么在容器中运行这个'command'，而不是默认的'args'。
+      --dry-run[=false]: 如果为 true，则仅仅打印这个对象，而不会执行命令。
+      --env=[]: 设置容器的环境变量。
+      --expose[=false]: 如果为 true， 会为这个运行的容器创建一个公开的 service。
       --generator="": The name of the API generator to use.  Default is 'deployment/v1beta1' if --restart=Always, otherwise the default is 'job/v1'.  This will happen only for cluster version at least 1.2, for olders we will fallback to 'run/v1' for --restart=Always, 'run-pod/v1' for others.
       --hostport=-1: The host port mapping for the container port. To demonstrate a single-machine container.
-      --image="": The image for the container to run.
-  -l, --labels="": Labels to apply to the pod(s).
+      --image="": 用来运行的容器镜像。
+  -l, --labels="": pod 的标签。
       --leave-stdin-open[=false]: If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
       --limits="": The resource requirement limits for this container.  For example, 'cpu=200m,memory=512Mi'
       --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
@@ -89,5 +89,3 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
 ### 参见
 
 * [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
