@@ -72,9 +72,11 @@
 ## 深入阅读
 
 API 资源
+
   * [使用Resouce](/docs/user-guide/working-with-resources)
 
 Pods 和容器
+
   * [Pod的生命周期和重启策略](/docs/user-guide/pod-states)
   * [生命周期中的钩子](/docs/user-guide/container-environment)
   * [计算资源，如CPU和内存](/docs/user-guide/compute-resources)
