@@ -6,17 +6,17 @@ toc:
 
 - title: 疑难问题解答
   section:
-  - title: Debugging Pods and Replication Controllers
+  - title: 调试 Pods 和 Replication Controllers
     path: /docs/user-guide/debugging-pods-and-replication-controllers/
-  - title: Application Introspection and Debugging
+  - title: 应用的自检和调试
     path: /docs/user-guide/introspection-and-debugging/
-  - title: Retrieving Logs
+  - title: 检索日志
     path: /docs/user-guide/logging/
-  - title: Troubleshooting Applications
+  - title: 应用故障排除
     path: /docs/user-guide/application-troubleshooting/
-  - title: Troubleshooting Clusters
+  - title: 群集故障排除
     path: /docs/admin/cluster-troubleshooting/
-  - title: Debugging Services
+  - title: 调试服务
     path: /docs/user-guide/debugging-services/
 
 - title: 经常问的问题
@@ -30,15 +30,15 @@ toc:
 
 - title: 其他资源
   section:
-  - title: Kubernetes Issue Tracker on GitHub
+  - title: 在 GitHub 上追踪 Kubernetes 问题
     path: https://github.com/kubernetes/kubernetes/issues/
-  - title: Report a Security Vulnerability
+  - title: 报告安全问题
     path: /docs/reporting-security-issues/
-  - title: Release Notes
+  - title: 发行说明
     path: https://github.com/kubernetes/kubernetes/releases/
-  - title: Release Roadmap
+  - title: 发布路线图
     path: https://github.com/kubernetes/kubernetes/milestones/
-  - title: Contributing to Kubernetes Documentation
+  - title: 贡献 Kubernetes 文档
     path: /editdocs/
-  - title: New Template Instructions
+  - title: 新模板的说明
     path: /docs/templatedemos/

@@ -1,135 +1,128 @@
 ---
 ---
 
-Primary system and API concepts are documented in the [User guide](/docs/user-guide/).
+[用户指南](/docs/user-guide/)记录了主系统和API概念。
 
-Overall API conventions are described in the [API conventions doc](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api-conventions.md).
+[API规范文档](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api-conventions.md)描述了API整体规范。
 
-Remote access to the API is discussed in the [access doc](/docs/admin/accessing-the-api).
+远程访问API在[访问文档](/docs/admin/accessing-the-api)有讨论。
 
-The Kubernetes API also serves as the foundation for the declarative configuration schema for the system. The [Kubectl](/docs/user-guide/kubectl/kubectl) command-line tool can be used to create, update, delete, and get API objects.
+Kubernetes API是系统描述性配置的基础。 [Kubectl](/docs/user-guide/kubectl/kubectl) 命令行工具被用于创建，更新，删除，获取API对象。
 
-Kubernetes also stores its serialized state (currently in [etcd](https://coreos.com/docs/distributed-configuration/getting-started-with-etcd/)) in terms of the API resources.
+Kubernetes 通过API资源存储自己序列化状态(现在存储在[etcd](https://coreos.com/docs/distributed-configuration/getting-started-with-etcd/))。
 
-Kubernetes itself is decomposed into multiple components, which interact through its API.
+Kubernetes 被分成多个组件，各部分通过API相互交互。
 
-## API changes
+## API 更改
 
-In our experience, any system that is successful needs to grow and change as new use cases emerge or existing ones change. Therefore, we expect the Kubernetes API to continuously change and grow. However, we intend to not break compatibility with existing clients, for an extended period of time. In general, new API resources and new resource fields can be expected to be added frequently. Elimination of resources or fields will require following a deprecation process. The precise deprecation policy for eliminating features is TBD, but once we reach our 1.0 milestone, there will be a specific policy.
+根据经验，任何成功的系统都需要成长和改变，可能是一个新的示例出现，也可能是对已有系统进行更改。因此，我们希望Kubernetes API也可以持续的改变和成长。在较长一段时间内，我们不打算中断已有客户端。一般情况，经常会有新的API资源和新的资源字段增加。删除资源或者字段会有一个跟踪废弃流程。删除功能有一个小的废弃策略叫做TBD，但是Kubernetes到达1.0版本时，将会有一个详细的策略代替。
 
-What constitutes a compatible change and how to change the API are detailed by the [API change document](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api_changes.md).
+如何构成一个兼容性的改变以及如何更改API的详细信息都在[API变化文档](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api_changes.md)。
 
 ## API Swagger definitions
 
 Complete API details are documented using [Swagger v1.2](http://swagger.io/). The Kubernetes apiserver (aka "master") exposes an API that can be used to retrieve the Swagger Kubernetes API spec, by default at located at `/swaggerapi`, and a UI to browse the API documentation at `/swagger-ui`.
+Kubernetes用 [Swagger v1.2](http://swagger.io/) 记录API所有细节。Kubernetes apiserver (aka "master")提供了一个API接口用于获取 Swagger Kubernetes API 规范 ，默认在路径`/swaggerapi`下，`/swagger-ui`是可以使用浏览器查看API文档的UI
+。
 
-We also host a version of the [latest API documentation UI](http://kubernetes.io/kubernetes/third_party/swagger-ui/). This is updated with the latest release, so if you are using a different version of Kubernetes you will want to use the spec from your apiserver.
+我们会定期更新[最新 API 文档的 UI](http://kubernetes.io/kubernetes/third_party/swagger-ui/)。如果你使用不同斑斑的 Kubernetes，你需要使用不同的规范。
 
-Kubernetes implements an alternative Protobuf based serialization format for the API that is primarily intended for intra-cluster communication, documented in the [design proposal](https://github.com/kubernetes/kubernetes/blob/{{ page.githubbranch }}/docs/proposals/protobuf.md) and the IDL files for each schema are located in the Go packages that define the API objects.
+Kubernetes 实现一个用于集群内通信的基于 API 规范的另一种 Protobuf，记录每一个位于 Go packages 内定义的 API 对象。
 
-## API versioning
+## API 版本
 
-To make it easier to eliminate fields or restructure resource representations, Kubernetes supports
-multiple API versions, each at a different API path, such as `/api/v1` or
-`/apis/extensions/v1beta1`.
+为了使删除字段或者重构资源表示更加容易，Kubernetes支持多个API版本。每一个版本都在不同API路径下，例如 `/api/v1` 或者`/apis/extensions/v1beta1`。
 
-We chose to version at the API level rather than at the resource or field level to ensure that the API presents a clear, consistent view of system resources and behavior, and to enable controlling access to end-of-lifed and/or experimental APIs. The JSON and Protobuf serialization schemas follow the same guidelines for schema changes - all descriptions below cover both formats.
+我们选择版本时时根据API而不是根据资源或者字段来确认的，API为系统资源和行为提供了一个清晰的，一致性的视图，并且可以控制访问生命周期结束和／或测试的APIs。JSON 和 Protobuf格式遵循相同标准，下面所有描述都覆盖这两种格式。
 
-Note that API versioning and Software versioning are only indirectly related.  The [API and release
-versioning proposal](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/versioning.md) describes the relationship between API versioning and
-software versioning.
+注意API版本控制和软件版本控制只能间接的相关联。文档[API 和发布版方案](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/versioning.md) 描述了API版本控制和软件版本控制两者之间的关系。
 
 
-Different API versions imply different levels of stability and support.  The criteria for each level are described
-in more detail in the [API Changes documentation](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api_changes.md#alpha-beta-and-stable-versions).  They are summarized here:
+不同的API版本会有不同级别的稳定性和支持。每个级别的详细描述包含在文档[API 文档的更改](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/api_changes.md#alpha-beta-and-stable-versions)中。 内容主要概括如下：
 
-- Alpha level:
-  - The version names contain `alpha` (e.g. `v1alpha1`).
-  - May be buggy.  Enabling the feature may expose bugs.  Disabled by default.
-  - Support for feature may be dropped at any time without notice.
-  - The API may change in incompatible ways in a later software release without notice.
-  - Recommended for use only in short-lived testing clusters, due to increased risk of bugs and lack of long-term support.
-- Beta level:
-  - The version names contain `beta` (e.g. `v2beta3`).
-  - Code is well tested.  Enabling the feature is considered safe.  Enabled by default.
-  - Support for the overall feature will not be dropped, though details may change.
-  - The schema and/or semantics of objects may change in incompatible ways in a subsequent beta or stable release.  When this happens,
-    we will provide instructions for migrating to the next version.  This may require deleting, editing, and re-creating
-    API objects.  The editing process may require some thought.   This may require downtime for applications that rely on the feature.
-  - Recommended for only non-business-critical uses because of potential for incompatible changes in subsequent releases.  If you have
-    multiple clusters which can be upgraded independently, you may be able to relax this restriction.
-  - **Please do try our beta features and give feedback on them!  Once they exit beta, it may not be practical for us to make more changes.**
-- Stable level:
-  - The version name is `vX` where `X` is an integer.
-  - Stable versions of features will appear in released software for many subsequent versions.
+- Alpha 级别:
+    - 版本名称包含了 `alpha` (例如:`v1alpha1`)。
+    - 可能是有问题的。实现的功能可能隐含问题，功能默认是不可用的。
+    - 支持的功能可能在没有通知的情况下随时删除。
+    - API的更改可能存在冲突，但是在后续的软件发布中不会有任何通知。
+    - 由于bugs风险的增加和缺乏长期的支持，推荐在短暂的集群测试中使用。
+- Beta 级别:
+    - 版本名称包含了 `beta` (例如: `v2beta3`)。
+    - 代码已经测试过。实现的功能认为是安全的，功能默认是可用的。
+    - 所有已支持的功能不会被删除，细节可能会发生变化。
+    - 对象的模式和／或定义在随后的beta版本或者稳定版本可能以不兼容的方式改变。在这种情况下，Kubernetes会提供合并到下一个版本的指南。这一过程中可能会要求删除，编译和重新创建API对象。编译过程中可能会要求一些选择。根据不同的功能可能会需要一些应用的下载时间。
+    - 在随后的发布中存在一些非兼容性的更改，所已推荐在不重要的非商业化的情况下使用。如果你已经有多个集群，并且可以单独更新，你可以放宽这个限制。
+    - **请尝试我们的bete版本功能并且给出反馈！因为已经是beta版本，对于我们来说太多的更改可能不太实用。**
+- Stable 级别:
+    - 版本名称中包含 `vX` 这里的`X`是一个整数.
+    - 稳定版本的功能在后续的版本发布中会一直存在。
 
-## API groups
+## API 群组
 
-To make it easier to extend the Kubernetes API, we are in the process of implementing [*API
-groups*](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/proposals/api-group.md).  These are simply different interfaces to read and/or modify the
-same underlying resources.  The API group is specified in a REST path and in the `apiVersion` field
-of a serialized object.
+为了使扩展 Kubernetes API更加简单，
+我们正在实现[*API群组*](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/proposals/api-group.md)。
+API群组是一些可以读和／或更改相同基础资源的简单的不同的接口。API群组被定义在一个REST路径下，
+在`apiVersion`的一个序列化对象的字段。
 
-Currently there are two API groups in use:
+当前有两个API群组在使用：
 
-1. the "core" group, which is at REST path `/api/v1` and is not specified as part of the `apiVersion` field, e.g.
-   `apiVersion: v1`.
-1. the "extensions" group, which is at REST path `/apis/extensions/$VERSION`, and which uses
-  `apiVersion: extensions/$VERSION` (e.g. currently `apiVersion: extensions/v1beta1`).
-  This holds types which will probably move to another API group eventually.
-1. the "componentconfig" and "metrics" API groups.
+1. "core"群组，在REST路径`/api/v1`下，但不是`apiVersion`字段的一部分。例如: `apiVersion: v1`。
+1. "extensions"群组, 在REST路径`/apis/extensions/$VERSION`下, 并且使用  `apiVersion: extensions/$VERSION` (例如: 当前是`apiVersion: extensions/v1beta1`)。
+  最终这个持有类型可能会移动到其他的 API 组。
+1. "componentconfig" 和 "metrics" API 群组。
 
 
-In the future we expect that there will be more API groups, all at REST path `/apis/$API_GROUP` and
-using `apiVersion: $API_GROUP/$VERSION`.  We expect that there will be a way for [third parties to
-create their own API groups](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/extending-api.md), and to avoid naming collisions.
+未来我们希望有更多的 API 群组，并且所有的群组都在 REST 路径
+`/apis/$API_GROUP`下，并且使用`apiVersion: $API_GROUP/$VERSION`。
+我们希望将来有一种方式支持[第三方可以创建自己的 API 群组](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/extending-api.md)，并且可以避免命名冲突。
 
-## Enabling resources in the extensions group
 
-DaemonSets, Deployments, HorizontalPodAutoscalers, Ingress, Jobs and ReplicaSets are enabled by default.
-Other extensions resources can be enabled by setting runtime-config on
-apiserver. runtime-config accepts comma separated values. For ex: to disable deployments and jobs, set
-`--runtime-config=extensions/v1beta1/deployments=false,extensions/v1beta1/jobs=false`
+## 扩展资源
 
-## v1beta1, v1beta2, and v1beta3 are deprecated; please move to v1 ASAP
+默认情况下DaemonSets， Deployments， HorizontalPodAutoscalers， Ingress，Jobs和ReplicaSets都是可用的。
+其他的扩展资源通过设置 apiserver 的 runtime-config 使其可用。
+runtime-config 可通过都逗号分开多个值。
+例如：禁用deployments和jobs，`--runtime-config=extensions/v1beta1/deployments=false,extensions/v1beta1/jobs=false`
 
-As of June 4, 2015, the Kubernetes v1 API has been enabled by default. The v1beta1 and v1beta2 APIs were deleted on June 1, 2015. v1beta3 is planned to be deleted on July 6, 2015.
+## v1beta1, v1beta2, 和 v1beta3 已经废弃；请转到v1 ASAP
 
-### v1 conversion tips (from v1beta3)
+2015年6月4日，开始默认启用Kubernetes v1 API。v1beta1 和 v1beta2 APIs 在2015年6月1日删除。v1beta3 计划会在2015年6月6日删除。
 
-We're working to convert all documentation and examples to v1. Use `kubectl create --validate` in order to validate your json or yaml against our Swagger spec.
+### v1 转换技巧(从 v1beta3 )
 
-Changes to services are the most significant difference between v1beta3 and v1.
+我们已经将所有文档和例子转换成 v1 版本。使用`kubectl create --validate`命令可以使你的 json 或者 yaml 遵循 Swagger spec 规范。
 
-* The `service.spec.portalIP` property is renamed to `service.spec.clusterIP`.
-* The `service.spec.createExternalLoadBalancer` property is removed. Specify `service.spec.type: "LoadBalancer"` to create an external load balancer instead.
-* The `service.spec.publicIPs` property is deprecated and now called `service.spec.deprecatedPublicIPs`. This property will be removed entirely when v1beta3 is removed. The vast majority of users of this field were using it to expose services on ports on the node. Those users should specify `service.spec.type: "NodePort"` instead. Read [External Services](/docs/user-guide/services/#external-services) for more info. If this is not sufficient for your use case, please file an issue or contact @thockin.
+v1beta3 和 v1 版本之间最重要的不同是 services 的改变。
 
-Some other difference between v1beta3 and v1:
+* `service.spec.portalIP`属性重命名为`service.spec.clusterIP`。
+* `service.spec.createExternalLoadBalancer`已经被删除。 定义了`service.spec.type: "LoadBalancer"`来代替，用于创建外部负载均衡。
+* `service.spec.publicIPs`属性已经被废弃，现在叫做`service.spec.deprecatedPublicIPs`。当v1beta3删除时，这个属性也会被完全删除。这个字段的多数用户使用这个字段来公开nodes上的services端口。现在这些用户应该使用`service.spec.type: "NodePort"`来代替。 获取更多信息可阅读[External Services](/docs/user-guide/services/#external-services)。如果这些还是不能满足你的需求，请提交issue或者联系 @thockin。
 
-* The `pod.spec.containers[*].privileged` and `pod.spec.containers[*].capabilities` properties are now nested under the `pod.spec.containers[*].securityContext` property. See [Security Contexts](/docs/user-guide/security-context).
-* The `pod.spec.host` property is renamed to `pod.spec.nodeName`.
-* The `endpoints.subsets[*].addresses.IP` property is renamed to `endpoints.subsets[*].addresses.ip`.
-* The `pod.status.containerStatuses[*].state.termination` and `pod.status.containerStatuses[*].lastState.termination` properties are renamed to `pod.status.containerStatuses[*].state.terminated` and `pod.status.containerStatuses[*].lastState.terminated` respectively.
-* The `pod.status.Condition` property is renamed to `pod.status.conditions`.
-* The `status.details.id` property is renamed to `status.details.name`.
+v1beta3 和 v1 版本之间其他的不同：
 
-### v1beta3 conversion tips (from v1beta1/2)
+* `pod.spec.containers[*].privileged`和`pod.spec.containers[*].capabilities`属性已经合并到`pod.spec.containers[*].securityContext`属性。可以查看文档[Security Contexts](/docs/user-guide/security-context)。
+* `pod.spec.host`属性被重命名为`pod.spec.nodeName`。
+* `endpoints.subsets[*].addresses.IP`被重命名为`endpoints.subsets[*].addresses.ip`。
+* `pod.status.containerStatuses[*].state.termination`和`pod.status.containerStatuses[*].lastState.termination`属性被分别重命名为`pod.status.containerStatuses[*].state.terminated`和`pod.status.containerStatuses[*].lastState.terminated`。
+* `pod.status.Condition`属性被重命名为`pod.status.conditions`。
+* `status.details.id`属性被重命名为`status.details.name`。
 
-Some important differences between v1beta1/2 and v1beta3:
+### v1beta3 转换技巧(从 v1beta1/2)
 
-* The resource `id` is now called `name`.
-* `name`, `labels`, `annotations`, and other metadata are now nested in a map called `metadata`
-* `desiredState` is now called `spec`, and `currentState` is now called `status`
-* `/minions` has been moved to `/nodes`, and the resource has kind `Node`
-* The namespace is required (for all namespaced resources) and has moved from a URL parameter to the path: `/api/v1beta3/namespaces/{namespace}/{resource_collection}/{resource_name}`. If you were not using a namespace before, use `default` here.
-* The names of all resource collections are now lower cased - instead of `replicationControllers`, use `replicationcontrollers`.
-* To watch for changes to a resource, open an HTTP or Websocket connection to the collection query and provide the `?watch=true` query parameter along with the desired `resourceVersion` parameter to watch from.
-* The `labels` query parameter has been renamed to `labelSelector`.
-* The `fields` query parameter has been renamed to `fieldSelector`.
-* The container `entrypoint` has been renamed to `command`, and `command` has been renamed to `args`.
-* Container, volume, and node resources are expressed as nested maps (e.g., `resources{cpu:1}`) rather than as individual fields, and resource values support [scaling suffixes](/docs/user-guide/compute-resources/#specifying-resource-quantities) rather than fixed scales (e.g., milli-cores).
-* Restart policy is represented simply as a string (e.g., `"Always"`) rather than as a nested map (`always{}`).
-* Pull policies changed from `PullAlways`, `PullNever`, and `PullIfNotPresent` to `Always`, `Never`, and `IfNotPresent`.
-* The volume `source` is inlined into `volume` rather than nested.
-* Host volumes have been changed from `hostDir` to `hostPath` to better reflect that they can be files or directories.
+v1beta1/2 和 v1beta3 重要不同点:
+
+* 资源`id`现在称作`name`.
+* `name`，`labels`，`annotations`，和其他元数据现在内嵌在一个称作`metadata`的map中
+* `desiredState` 现在称作`spec`，`currentState` 现在称作`status``
+* `/minions` 已经被移到`/nodes`, 且资源包括各种 `Node`
+* namesapce 是必要条件(对于所有资源namesapce)且已经从一个URL参数改为路径：`/api/v1beta3/namespaces/{namespace}/{resource_collection}/{resource_name}`. 如果之前你没有使用过 namespace，在这可以使用`default`。
+* 所有资源收集器的名字已经小写 - 已经废弃 `replicationControllers`，使用 `replicationcontrollers`来代替。
+* 查看某个资源的改变，可打开一个 HTTP 或者 Websocket 连接查询，并且提供`?watch=true`请求参数和`resourceVersion`参数进行查询。
+* `labels`查询参数已经被重命名为`labelSelector`。
+* `fields`查询参数已经被重命名为`fieldSelector`。
+* Container中的`entrypoint`已经被重命名为`command`，而`command`被重命名为`args`.
+* Container, volume, 和 node资源的定义已经被内嵌到一个 map (例如： `resources{cpu:1}`)并没有作为独立的字段，并且资源数值支持[后缀](/docs/user-guide/compute-resources/#specifying-resource-quantities) 而不是固定的(例如： milli-cores)。
+* 重新启动策略简单的使用(例如：`"Always"`)而不是作为一个内嵌的map(`always{}`).
+* Pull策略从`PullAlways`, `PullNever`，和`PullIfNotPresent`变成了`Always`，`Never`，和`IfNotPresent`。
+* volume `source`被内联到`volume`而非嵌套。
+* 宿主机volumes已经从`hostDir`变成了`hostPath`，这样做的好处是，挂载的可以是一个文件也可以是一个路径。

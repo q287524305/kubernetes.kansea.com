@@ -34,6 +34,7 @@ make release
 ### 下载 Kubernetes 并且自动设置一个群集
 
 `https://get.k8s.io` 这个脚本可以使用 `wget` 或者 `curl` 来自动下载 Kubernetes，并在你的私有云中创建群集。
+
 ```shell
 # wget version
 export KUBERNETES_PROVIDER=YOUR_PROVIDER; wget -q -O - https://get.k8s.io | bash

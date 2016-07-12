@@ -180,7 +180,7 @@ toc:
   - title: kube-controller-manager
     path: /docs/admin/kube-controller-manager/
 
-- title: 专有名词
+- title: 术语
   section:
   - title: Images(镜像)
     path: /docs/user-guide/images/

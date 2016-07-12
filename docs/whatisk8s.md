@@ -29,10 +29,10 @@ Kubernetes项目是Google在2014年启动的。Kubernetes构建在[Google公司�
 
 ![为何要使用容器技术?](/images/docs/why_containers.svg)
 
-在 *Old Way* 是在主机上，通过包管理器安装应用程序来部署。这样做的缺点是，必将涉及到系统的应用程序，配置，库，以及生命周期等问题。
+*Old Way* 是在主机上，通过包管理器安装应用程序来部署。这样做的缺点是，必将涉及到系统的应用程序，配置，库，以及生命周期等问题。
 为了构建一个能够更新和回滚的虚拟机镜像，虚拟机会变得非常笨重。
 
-在 *New Way* 是基于操作系统级虚拟化，而不是硬件虚拟化的容器来部署。这些容器彼此隔离：它们有自己的文件系统，也不能访问对方的程序，他们的运算和资源都是隔离的。
+*New Way* 是基于操作系统级虚拟化，而不是硬件虚拟化的容器来部署。这些容器彼此隔离：它们有自己的文件系统，也不能访问对方的程序，他们的运算和资源都是隔离的。
 它们比虚拟机更容易建立，并且因为它们与底层系统没有耦合关系，所以可以很方便的在所有云服务器上分发。
 
 
@@ -63,7 +63,8 @@ Kubernetes项目是Google在2014年启动的。Kubernetes构建在[Google公司�
 
 #### 为什么需要 Kubernetes，它能做什么?
 
-Kubernetes不仅仅只能调度编排物理机或者虚拟机上的容器， However, Kubernetes also allows developers to 'cut the cord' to physical and virtual machines, moving from a **host-centric** infrastructure to a **container-centric** infrastructure, which provides the full advantages and benefits inherent to containers. Kubernetes provides the infrastructure to build a truly **container-centric** development environment.
+Kubernetes不仅仅只能调度编排物理机或者虚拟机上的容器， 然而，Kubernetes 还可允许开发者剪断与物理机或者虚拟机的脐带，从 **以主机为中心** 的基础设施转移到一个以 **容器为中心** 的基础设施上，继承容器的所有优势和好处。
+Kubernetes 提供了一个，能够建立真正 **以容器为中心的** 开发环境的基础设施。
 
 Kubernetes 可以满足一般生产环境的需求, 例如:
 
