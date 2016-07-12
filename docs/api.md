@@ -21,7 +21,6 @@ Kubernetes 被分成多个组件，各部分通过API相互交互。
 
 ## API Swagger definitions
 
-Complete API details are documented using [Swagger v1.2](http://swagger.io/). The Kubernetes apiserver (aka "master") exposes an API that can be used to retrieve the Swagger Kubernetes API spec, by default at located at `/swaggerapi`, and a UI to browse the API documentation at `/swagger-ui`.
 Kubernetes用 [Swagger v1.2](http://swagger.io/) 记录API所有细节。Kubernetes apiserver (aka "master")提供了一个API接口用于获取 Swagger Kubernetes API 规范 ，默认在路径`/swaggerapi`下，`/swagger-ui`是可以使用浏览器查看API文档的UI
 。
 
@@ -82,6 +81,7 @@ API群组是一些可以读和／或更改相同基础资源的简单的不同�
 默认情况下DaemonSets， Deployments， HorizontalPodAutoscalers， Ingress，Jobs和ReplicaSets都是可用的。
 其他的扩展资源通过设置 apiserver 的 runtime-config 使其可用。
 runtime-config 可通过都逗号分开多个值。
+
 例如：禁用deployments和jobs，`--runtime-config=extensions/v1beta1/deployments=false,extensions/v1beta1/jobs=false`
 
 ## v1beta1, v1beta2, 和 v1beta3 已经废弃；请转到v1 ASAP
