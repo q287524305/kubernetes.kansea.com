@@ -18,7 +18,7 @@ toc:
       path: /docs/admin/authorization/
     - title: 使用Admission Controllers
       path: /docs/admin/admission-controllers/
-    - title: 管理服务帐户
+    - title: 管理 Service Accounts
       path: /docs/admin/service-accounts-admin/
   - title: Kubernetes API 操作
     path: /docs/api-reference/v1/operations/

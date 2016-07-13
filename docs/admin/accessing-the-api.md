@@ -1,9 +1,9 @@
 ---
 ---
 
-This document describes how access to the Kubernetes API is controlled.
+本文档介绍如何访问 Kubernetes API
 
-## Overview
+## 概述
 
 Users [access the API](/docs/user-guide/accessing-the-cluster) using `kubectl`,
 client libraries, or by making REST requests.  Both human users and
@@ -58,7 +58,7 @@ users in its object store.
 
 Once the request is authenticated as coming from a specific user,
 it moves to a generic authorization step.  This is shown as step **2** in the
-diagram. 
+diagram.
 
 The input to the Authorization step are attributes of the REST request, including:
   - the username determined by the Authentication step.
@@ -70,7 +70,7 @@ The input to the Authorization step are attributes of the REST request, includin
 
 There are multiple supported Authorization Modules.  The cluster creator configures the API
 server with which Authorization Modules should be used.  When multiple Authorization Modules
-are configured, each is checked in sequence, and if any Module authorizes the request, 
+are configured, each is checked in sequence, and if any Module authorizes the request,
 then the request can proceed.  If all deny the request, then the request is denied (HTTP status
 code 403).
 
@@ -103,7 +103,7 @@ They act on objects being created, deleted, updated or connected (proxy), but no
 
 Multiple admission controllers can be configured.  Each is called in order.
 
-This is shown as step **3** in the diagram. 
+This is shown as step **3** in the diagram.
 
 Unlike Authentication and Authorization Modules, if any admission controller module
 rejects, then the request is immediately rejected.
@@ -117,12 +117,12 @@ Once a request passes all admission controllers, it is validated using the valid
 for the corresponding API object, and then written to the object store (shown as step **4**).
 
 
-## API Server Ports and IPs 
+## API 服务的端口和 IP
 
 The previous discussion applies to requests sent to the secure port of the API server
 (the typical case).  The API server can actually serve on 2 ports:
 
-By default the Kubernetes APIserver serves HTTP on 2 ports:
+默认情况，Kubernetes API Server 提供HTTP的两个端口：
 
   1. `Localhost Port`:
 
@@ -136,8 +136,8 @@ By default the Kubernetes APIserver serves HTTP on 2 ports:
           - protected by need to have host access
 
   2. `Secure Port`:
- 
-          - use whenever possible 
+
+          - use whenever possible
           - uses TLS.  Set cert with `--tls-cert-file` and key with `--tls-private-key-file` flag.
           - default is port 6443, change with `--secure-port` flag.
           - default IP is first non-localhost network interface, change with `--bind-address` flag.
@@ -149,4 +149,3 @@ When the cluster is created by `kube-up.sh`, on Google Compute Engine (GCE),
 and on several other cloud providers, the API server serves on port 443.  On
 GCE, a firewall rule is configured on the project to allow external HTTPS
 access to the API. Other cluster setup methods vary.
-

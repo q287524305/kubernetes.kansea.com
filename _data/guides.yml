@@ -221,7 +221,7 @@ toc:
         path: /docs/getting-started-guides/coreos/bare_metal_offline/
       - title: 基于 Ansible 配置 Fedora
         path: /docs/getting-started-guides/fedora/fedora_ansible_config/
-      - title: Fedora (但节点)
+      - title: Fedora (单节点)
         path: /docs/getting-started-guides/fedora/fedora_manual_config/
       - title: Fedora (多节点)
         path: /docs/getting-started-guides/fedora/flannel_multi_node_cluster/
