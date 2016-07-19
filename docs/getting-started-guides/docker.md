@@ -59,6 +59,11 @@ docker run -d \
 
 > `amd64` 以外的架构，有可能不稳定, 但如果你想尝试一下的话，可以设置为 `arm`, `arm64` 或者 `ppc64le`。 Kubernetes `v1.3.0-alpha.2` 以上的版本才开始支持 ARM. ARM 64-bit 和 PowerPC 64 需要 `v1.3.0-alpha.3` 或更高版本。 [在这](https://github.com/kubernetes/kubernetes/issues/17981)查看·multi-arch·支持进度
 
+> If you are behind a proxy, you need to pass the proxy setup to curl in the containers to pull the certificates. Create a .curlrc under /root folder (because the containers are running as root) with the following line:
+```
+proxy = <your_proxy_server>:<port>
+```
+
 This actually runs the kubelet, which in turn runs a [pod](/docs/user-guide/pods/) that contains the other master components.
 
 ** **安全警告** ** services exposed via Kubernetes using Hyperkube are available on the host node's public network interface / IP address.  Because of this, this guide is not suitable for any host node/server that is directly internet accessible.  Refer to [#21735](https://github.com/kubernetes/kubernetes/issues/21735) for addtional info.
@@ -178,7 +183,7 @@ docker-machine ssh `docker-machine active`
 ```
 
 ```shell
-sudo umount `cat /proc/mounts | grep /var/lib/kubelet | awk '{print $2}'`
+grep /var/lib/kubelet /proc/mounts | awk '{print $2}' | sudo xargs -n1 umount
 sudo rm -rf /var/lib/kubelet
 ```
 

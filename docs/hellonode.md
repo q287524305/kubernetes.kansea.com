@@ -105,6 +105,7 @@ $ curl http://localhost:8080
 Hello World!
 ```
 
+**如果你得到一个来自于 `Docker for Mac`的 `Connection refused` 信息，请确认你使用的是 Docker 最新版本 (1.12 或者更高).** 
 让我们停止运行这个容器。在这个例子里，我们用`docker ps`查看到容器的 ID 是`2c66d0efcbd4`:
 
 ```shell
@@ -220,16 +221,16 @@ kubectl expose deployment hello-node --type="LoadBalancer"
 
 ```shell
 $ kubectl get services hello-node
-NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    SELECTOR         AGE
-hello-node   10.3.246.12                   8080/TCP   run=hello-node   23s
+NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    AGE
+hello-node   10.3.246.12                   8080/TCP   23s
 ```
 
  `EXTERNAL_IP` 可能需要过几分钟才可见。如果没有`EXTERNAL_IP`，那么需要等上几分钟再重试。
 
 ```shell
 $ kubectl get services hello-node
-NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    SELECTOR         AGE
-hello-node   10.3.246.12   23.251.159.72   8080/TCP   run=hello-node   2m
+NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    AGE
+hello-node   10.3.246.12   23.251.159.72   8080/TCP   2m
 ```
 
 注意 这里罗列出了两个 IP，都监听8080端口.  `CLUSTER_IP` 只在你的内部网络中有效。  `EXTERNAL_IP` 是外部的.  这个例子中，外部 IP 是 23.251.159.72.

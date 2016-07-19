@@ -24,7 +24,7 @@ ps`）。一些Kubernetes组件需要root权限运行，这样这些组件才能
 
 #### go
 
-[go](https://golang.org/doc/install) 版本至少 1.3+，请确保安装好go并配置好 ``$PATH``。
+[go](https://golang.org/doc/install) 版本至少 1.4+，请确保安装好go并配置好 ``$PATH``。
 
 ### 启动集群
 
@@ -62,10 +62,16 @@ cluster/kubectl.sh run my-nginx --image=nginx --replicas=2 --port=80
   exit
 ## end wait
 
-## 查看 kubernetes 相关信息
+## 为 nginx 创建一个开放80端口的 service，
+cluster/kubectl.sh expose deployment my-nginx --port=80 --name=my-nginx
+
+## 查看 Kubernetes! 相关信息
 cluster/kubectl.sh get pods
 cluster/kubectl.sh get services
 cluster/kubectl.sh get deployments
+
+## Test the nginx service with the IP/port from "get services" command
+curl http://10.X.X.X:80/
 ```
 
 ### 运行用户定义的pod

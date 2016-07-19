@@ -26,7 +26,8 @@ Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的�
 
 本地服务器方案有：
 
-- [基于本地 Docker](/docs/getting-started-guides/docker) (推荐，容易上手)
+- [Minikube](/docs/getting-started-guides/minikube/) (推荐)
+- [基于本地 Docker](/docs/getting-started-guides/docker)
 - [无虚拟机本地集群](/docs/getting-started-guides/locally) (Linux)
 - [Vagrant](/docs/getting-started-guides/vagrant)
 
@@ -70,12 +71,22 @@ Kubernetes可以在云服务提供商和物理机环境运行，并支持很多�
 
 #### 私有虚拟机
 
+<<<<<<< HEAD
 - [Vagrant](/docs/getting-started-guides/coreos) (采用CoreOS和flannel)
 - [CloudStack](/docs/getting-started-guides/cloudstack) 采用Ansible，CoreOS和flannel）
 - [Vmware](/docs/getting-started-guides/vsphere)  （采用Debian）
 - [juju.md](/docs/getting-started-guides/juju) （采用Juju，Ubuntu和flannel）
 - [Vmware](/docs/getting-started-guides/coreos) （采用CoreOS和flannel）
 - [libvirt-coreos.md](/docs/getting-started-guides/libvirt-coreos)  （采用CoreOS）
+=======
+- [Vagrant](/docs/getting-started-guides/coreos) (uses CoreOS and flannel)
+- [CloudStack](/docs/getting-started-guides/cloudstack) (uses Ansible, CoreOS and flannel)
+- [Vmware vSphere](/docs/getting-started-guides/vsphere)  (uses Debian)
+- [Vmware Photon Controller](/docs/getting-started-guides/photon-controller)  (uses Debian)
+- [juju.md](/docs/getting-started-guides/juju) (uses Juju, Ubuntu and flannel)
+- [Vmware](/docs/getting-started-guides/coreos)  (uses CoreOS and flannel)
+- [libvirt-coreos.md](/docs/getting-started-guides/libvirt-coreos)  (uses CoreOS)
+>>>>>>> 2ac973c0dd5984820428b35dca5f48c17e7f7287
 - [oVirt](/docs/getting-started-guides/ovirt)
 - [OpenStack Heat](/docs/getting-started-guides/openstack-heat) (采用 CentOS 和 flannel)
 - [libvirt](/docs/getting-started-guides/fedora/flannel_multi_node_cluster) (采用 Fedora 和 flannel)
@@ -128,12 +139,14 @@ Vagrant              | CoreOS       | CoreOS | flannel     | [docs](/docs/gettin
 Bare-metal (Offline) | CoreOS       | CoreOS | flannel     | [docs](/docs/getting-started-guides/coreos/bare_metal_offline)              |          | Community ([@jeffbean](https://github.com/jeffbean))
 Bare-metal           | CoreOS       | CoreOS | Calico      | [docs](/docs/getting-started-guides/coreos/bare_metal_calico)               |          | Community ([@caseydavenport](https://github.com/caseydavenport))
 CloudStack           | Ansible      | CoreOS | flannel     | [docs](/docs/getting-started-guides/cloudstack)                             |          | Community ([@runseb](https://github.com/runseb))
-Vmware               |              | Debian | OVS         | [docs](/docs/getting-started-guides/vsphere)                                |          | Community ([@pietern](https://github.com/pietern))
+Vmware vSphere       | Saltstack    | Debian | OVS         | [docs](/docs/getting-started-guides/vsphere)                                |          | Community ([@imkin](https://github.com/imkin))
+Vmware Photon        | Saltstack    | Debian | OVS         | [docs](/docs/getting-started-guides/photon-controller)                      |          | Community ([@alainroy](https://github.com/alainroy))
 Bare-metal           | custom       | CentOS | _none_      | [docs](/docs/getting-started-guides/centos/centos_manual_config)            |          | Community ([@coolsvap](https://github.com/coolsvap))
 AWS                  | Juju         | Ubuntu | flannel     | [docs](/docs/getting-started-guides/juju)                                   |          | [Community](https://github.com/whitmo/bundle-kubernetes) ( [@whit](https://github.com/whitmo), [@matt](https://github.com/mbruzek), [@chuck](https://github.com/chuckbutler) )
 OpenStack/HPCloud    | Juju         | Ubuntu | flannel     | [docs](/docs/getting-started-guides/juju)                                   |          | [Community](https://github.com/whitmo/bundle-kubernetes) ( [@whit](https://github.com/whitmo), [@matt](https://github.com/mbruzek), [@chuck](https://github.com/chuckbutler) )
 Joyent               | Juju         | Ubuntu | flannel     | [docs](/docs/getting-started-guides/juju)                                   |          | [Community](https://github.com/whitmo/bundle-kubernetes) ( [@whit](https://github.com/whitmo), [@matt](https://github.com/mbruzek), [@chuck](https://github.com/chuckbutler) )
-AWS                  | Saltstack    | Ubuntu | OVS         | [docs](/docs/getting-started-guides/aws)                                    |          | Community ([@justinsb](https://github.com/justinsb))
+AWS                  | Saltstack    | Debian | AWS         | [docs](/docs/getting-started-guides/aws)                                    |          | Community ([@justinsb](https://github.com/justinsb))
+AWS                  | kops         | Debian | AWS         | [docs](https://github.com/kubernetes/kops)                                  |          | Community ([@justinsb](https://github.com/justinsb))
 Bare-metal           | custom       | Ubuntu | Calico      | [docs](/docs/getting-started-guides/ubuntu-calico)                          |          | Community ([@djosborne](https://github.com/djosborne))
 Bare-metal           | custom       | Ubuntu | flannel     | [docs](/docs/getting-started-guides/ubuntu)                                 |          | Community ([@resouer](https://github.com/resouer), [@WIZARD-CXY](https://github.com/WIZARD-CXY))
 libvirt/KVM          | CoreOS       | CoreOS | libvirt/KVM | [docs](/docs/getting-started-guides/libvirt-coreos)                         |          | Community ([@lhuard1A](https://github.com/lhuard1A))

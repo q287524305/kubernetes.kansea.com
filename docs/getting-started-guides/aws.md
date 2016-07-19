@@ -50,11 +50,11 @@ export INSTANCE_PREFIX=k8s
 
 If you don't specify master and minion sizes, the scripts will attempt to guess
 the correct size of the master and worker nodes based on `${NUM_NODES}`. In
-version 1.2 these default are:
+version 1.3 these default are:
 
-* For the master, for clusters of less than 150 nodes it will use an
-  `m3.medium`, for clusters of greater than 150 nodes it will use an
-  `m3.large`.
+* For the master, for clusters of less than 5 nodes it will use an
+  `m3.medium`, for 6-10 nodes it will use an `m3.large`;
+  for 11-100 nodes it will use an `m3.xlarge`.
 
 * For worker nodes, for clusters less than 50 nodes it will use a `t2.micro`,
   for clusters between 50 and 150 nodes it will use a `t2.small` and for
@@ -92,7 +92,10 @@ instance types in the m4 family.
 
 ### 后备方案
 
-CoreOS 维护的 [一个 CLI 工具](https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html)， `kube-aws` 可以管理一个基于 [CoreOS](http://www.coreos.com) 的 Kubernetes 集群， 用 AWS 工具: EC2, 自动创建云以及自动扩容。
+* [kops](https://github.com/kubernetes/kops) "kubernetes-ops" 是一个支持 AWS Kubernetes 群集的生命周期管理工具。
+  that supports AWS.
+
+* CoreOS 维护的 [一个 CLI 工具](https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html)， `kube-aws` 可以管理一个基于 [CoreOS](http://www.coreos.com) 的 Kubernetes 集群， 用 AWS 工具: EC2, 自动创建云以及自动扩容。
 
 ## 开始使用您的集群
 
@@ -135,9 +138,10 @@ cluster/kube-down.sh
 
 
 IaaS 提供商       | Config. Mgmt | OS     | 网络  | 文档                                              | Conforms | 支持级别
--------------------- | ------------ | ------ | ----------  | ---------------------------------------------     | ---------| ----------------------------
-AWS                  | CoreOS       | CoreOS | flannel     | [docs](/docs/getting-started-guides/aws)                                 |          | Community
-AWS                  | Saltstack    | Ubuntu | OVS         | [docs](/docs/getting-started-guides/aws)                                    |          | Community ([@justinsb](https://github.com/justinsb))
+-------------------- | ------------ | ------------- | ----------  | --------------------------------------------- | ---------| ----------------------------
+AWS                  | Saltstack    | Debian/Ubuntu | k8s (VPC)   | [docs](/docs/getting-started-guides/aws)      |          | Community ([@justinsb](https://github.com/justinsb))
+AWS                  | kops         | Debian        | k8s (VPC)   | [docs](https://github.com/kubernetes/kops)    |          | Community ([@justinsb](https://github.com/justinsb))
+AWS                  | CoreOS       | CoreOS        | flannel     | [docs](/docs/getting-started-guides/aws)      |          | Community
 
 所有方案的支持级别请参阅[方案表格](/docs/getting-started-guides/#table-of-solutions) .
 
