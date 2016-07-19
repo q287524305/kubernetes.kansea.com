@@ -89,13 +89,16 @@ Kubernetes 可以满足一般生产环境的需求, 例如:
 #### Kubernetes 是一个什么样的平台，为什么这么设计呢?
 
 尽管 Kubernetes 提供了很多种解决方案，但总会有一些意想不到的应用场景。
-Application-specific workflows can be streamlined to accelerate developer velocity. Ad hoc orchestration that is acceptable initially often requires robust automation at scale. This is why Kubernetes was also designed to serve as a platform for building an ecosystem of components and tools to make it easier to deploy, scale, and manage applications.
+往往一开始需要更强大的自动化特定编排，可以让应用程序开发流程简单化，加速开发速度。这也是为什么 Kubernetes 设计成为用于组件构建和工具组成的生态系统，使之便于部署，扩展和管理应用程序的一个平台。
 
-[Labels](/docs/user-guide/labels/) empower users to organize their resources however they please. [Annotations](/docs/user-guide/annotations/) enable users to decorate resources with custom information to facilitate their workflows and provide an easy way for management tools to checkpoint state.
+[Labels](/docs/user-guide/labels/) 可以让用户随心所欲的来组织他们的资源。
+[Annotations](/docs/user-guide/annotations/) 能够让用户自自定义布置资源信息,以方便他们的工作流程，并提供管理工具，让检查变得更简单。
 
-Additionally, the [Kubernetes control plane](/docs/admin/cluster-components) is built upon the same [APIs](/docs/api/) that are available to developers and users. Users can write their own controllers, [schedulers](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/docs/devel/scheduler.md), etc., if they choose, with [their own APIs](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/extending-api.md) that can be targeted by a general-purpose [command-line tool](/docs/user-guide/kubectl-overview/).
+此外, [Kubernetes 控制面板](/docs/admin/cluster-components) 可以让开发人员用相同的 [APIs](/docs/api/) 来构建。
+用户可以编写自己的控制器，调度等。
+如果选择使用[他们自己的 APIs](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/extending-api.md),可以通过[命令行工具](/docs/user-guide/kubectl-overview/)去实现。
 
-This [design](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/principles.md) has enabled a number of other systems to build atop Kubernetes.
+这样的[设计](https://github.com/kubernetes/kubernetes/blob/{{page.githubbranch}}/docs/design/principles.md)使其他系统可以打造在 Kubernetes 之上。
 
 #### Kubernetes 不是:
 

@@ -11,53 +11,53 @@ By default, Dashboard is installed as a cluster addon. It is enabled by default 
 * TOC
 {:toc}
 
-## Dashboard access
+## 访问仪表盘
 
-Navigate in your Browser to the following URL:
+在浏览器中输入以下网址:
 ```
 https://<kubernetes-master>/ui
 ```
-This redirects to the following URL:
+它会重定向到以下网址:
 ```
 https://<kubernetes-master>/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
 ```
-The Dashboard UI lives in the `kube-system` [namespace](/docs/admin/namespaces/), but shows all resources from all namespaces in your environment.
+仪表盘在`kube-system` [namespace](/docs/admin/namespaces/)之下，但是它会显示你的环境下的所有 namespaces 的资源。
 
-If you find that you are not able to access Dashboard, you can install and open the latest stable release by running the following command:
+如果不能访问仪表盘，你可以运行一下命令来安装最新稳定版：
 
 ```
 kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
 ```
 
-Then, navigate to
+然后打开
 
 ```
 https://<kubernetes-master>/ui
 ```
 
-In case you have to provide a password, use the following command to find it out:
+如果需要密码的话，可以使用下面的命令来找到它：
 
 ```
 kubectl config view
 ```
 
-## Welcome page
+## 欢迎页面
 
-When accessing Dashboard on an empty cluster for the first time, the Welcome page is displayed. This page contains a link to this document as well as a button to deploy your first application. In addition, you can view which system applications are running by **default** in the `kube-system` [namespace](/docs/admin/namespaces/) of your cluster, for example monitoring applications such as Heapster.
+当第一次访问一个空的群集上的仪表盘，它会显示欢迎页面。此页面包含这个文档的链接，以及一个首次部署应用的按钮。此外，还可以查看在`kube-system` [namespace](/docs/admin/namespaces/)中 **默认** 运行的应用。 例如类似 Heapster 的监控应用。
 
 ![Kubernetes Dashboard welcome page](/images/docs/ui-dashboard-zerostate.png)
 
-## Deploying containerized applications
+## 部署容器化应用
 
-Dashboard lets you create and deploy a containerized application as a Replication Controller and corresponding Service with a simple wizard. You can either manually specify application details, or upload a YAML or JSON file containing the required information.
+Dashboard（仪表盘）可以让你创建和部署容器化应用作为一个 Replication Controller 和 相应 Service的简单向导。你可以手动指定应用程序的设置，或者上传一个包含所需信息的 YAML 或者 JSON 文件
 
-To access the deploy wizard from the Welcome page, click the respective button. To access the wizard at a later point in time, click the **DEPLOY APP** or **UPLOAD YAML** link in the upper right corner of any page listing workloads.
+要访问欢迎页面上的部署向导，点击相应的按钮。以后在任何页面点击右上角的 **DEPLOY APP** 或者 **UPLOAD YAML** 链接，来访问该向导。
 
 ![Deploy wizard](/images/docs/ui-dashboard-deploy-simple.png)
 
-### Specifying application details
+### 指定应用的详细配置
 
-The deploy wizard expects that you provide the following information:
+部署向导需要你提供一下信息：
 
 - **App name** (mandatory): Name for your application. A [label](/docs/user-guide/labels/) with the name will be added to the Replication Controller and Service, if any, that will be deployed.
 
