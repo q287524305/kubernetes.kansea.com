@@ -29,7 +29,7 @@ toc:
 - title: 用户指南
   path: /docs/user-guide/
 
-- title: Web UI (仪表盘)
+- title: Web UI (控制面板)
   path: /docs/user-guide/ui/
 
 - title: Workload 部署和管理

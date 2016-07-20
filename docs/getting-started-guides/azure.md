@@ -117,7 +117,7 @@ kubectl create -f https://raw.githubusercontent.com/colemickens/azkube/v0.0.5/te
 kubectl create -f https://raw.githubusercontent.com/colemickens/azkube/v0.0.5/templates/coreos/addons/kube-dashboard.yaml
 ```
 
-然后在这里就可以看到仪表盘: `http://localhost:8001/api/v1/proxy/namespaces/kube-system/services/dashboard-canary`。
+然后在这里就可以看到控制面板: `http://localhost:8001/api/v1/proxy/namespaces/kube-system/services/dashboard-canary`。
 
 #### 示例: Guestbook
 

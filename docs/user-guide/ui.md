@@ -11,7 +11,7 @@ By default, Dashboard is installed as a cluster addon. It is enabled by default 
 * TOC
 {:toc}
 
-## 访问仪表盘
+## 访问控制面板
 
 在浏览器中输入以下网址:
 ```
@@ -21,9 +21,9 @@ https://<kubernetes-master>/ui
 ```
 https://<kubernetes-master>/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
 ```
-仪表盘在`kube-system` [namespace](/docs/admin/namespaces/)之下，但是它会显示你的环境下的所有 namespaces 的资源。
+控制面板在`kube-system` [namespace](/docs/admin/namespaces/)之下，但是它会显示你的环境下的所有 namespaces 的资源。
 
-如果不能访问仪表盘，你可以运行一下命令来安装最新稳定版：
+如果不能访问控制面板，你可以运行一下命令来安装最新稳定版：
 
 ```
 kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
@@ -43,13 +43,13 @@ kubectl config view
 
 ## 欢迎页面
 
-当第一次访问一个空的群集上的仪表盘，它会显示欢迎页面。此页面包含这个文档的链接，以及一个首次部署应用的按钮。此外，还可以查看在`kube-system` [namespace](/docs/admin/namespaces/)中 **默认** 运行的应用。 例如类似 Heapster 的监控应用。
+当第一次访问一个空的群集上的控制面板，它会显示欢迎页面。此页面包含这个文档的链接，以及一个首次部署应用的按钮。此外，还可以查看在`kube-system` [namespace](/docs/admin/namespaces/)中 **默认** 运行的应用。 例如类似 Heapster 的监控应用。
 
 ![Kubernetes Dashboard welcome page](/images/docs/ui-dashboard-zerostate.png)
 
 ## 部署容器化应用
 
-Dashboard（仪表盘）可以让你创建和部署容器化应用作为一个 Replication Controller 和 相应 Service的简单向导。你可以手动指定应用程序的设置，或者上传一个包含所需信息的 YAML 或者 JSON 文件
+Dashboard（控制面板）可以让你创建和部署容器化应用作为一个 Replication Controller 和 相应 Service的简单向导。你可以手动指定应用程序的设置，或者上传一个包含所需信息的 YAML 或者 JSON 文件
 
 要访问欢迎页面上的部署向导，点击相应的按钮。以后在任何页面点击右上角的 **DEPLOY APP** 或者 **UPLOAD YAML** 链接，来访问该向导。
 
