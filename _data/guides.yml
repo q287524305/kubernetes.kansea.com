@@ -82,6 +82,8 @@ toc:
     path: /docs/user-guide/load-balancer/
   - title: 配置私有云的防火墙
     path: /docs/user-guide/services-firewalls/
+  - title: Cross-cluster Service Discovery using Federated Services
+    path: /docs/user-guide/federation/federated-services/
 
 - title: 容器 和 Pods
   section:

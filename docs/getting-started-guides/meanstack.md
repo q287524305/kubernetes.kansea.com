@@ -194,44 +194,43 @@ $ gcloud compute disks create \
 
 现在，我们需要创建一个运行数据库的 Replication Controller。我用的是 Replication Controller 而不是 pod，因为如果一个独立的 pod 死掉了，他不会自动重启。
 
-### `db-controller.yml`
+### `db-deployment.yml`
 
 ```yaml
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
- labels:
-   name: mongo
- name: mongo-controller
+  name: mongo-deployment
 spec:
- replicas: 1
- template:
-   metadata:
-     labels:
-       name: mongo
-   spec:
-     containers:
-     - image: mongo
-       name: mongo
-       ports:
-       - name: mongo
-         containerPort: 27017
-         hostPort: 27017
-       volumeMounts:
-           - name: mongo-persistent-storage
-             mountPath: /data/db
-     volumes:
-       - name: mongo-persistent-storage
-         gcePersistentDisk:
-           pdName: mongo-disk
-           fsType: ext4
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: mongo
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        ports:
+        - name: mongo
+          containerPort: 27017
+          hostPort: 27017
+        volumeMounts:
+          - name: mongo-persistent-storage
+            mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage
+          gcePersistentDisk:
+            pdName: mongo-disk
+            fsType: ext4
+
 ```
 
 我们叫这个控制器为`mongo-controller`，指定一个副本，并打开相应端口。`mongo`镜像是一个已存的 MongoDB 镜像
 
 The `volumes` section creates the volume for Kubernetes to use. There is a Google Container Engine-specific `gcePersistentDisk` section that maps the disk we made into a Kubernetes volume, and we mount the volume into the `/data/db` directory (as described in the MongoDB Docker documentation)
 
-Now we have the Controller, let’s create the Service:
+Now we have the Deployment, let’s create the Service:
 
 ### `db-service.yml`
 
@@ -250,7 +249,7 @@ spec:
    name: mongo
 ```
 
-Again, pretty simple stuff. We "select" the mongo Controller to be served, open up the ports, and call the service `mongo`.
+Again, pretty simple stuff. We "select" the mongo Deployment to be served, open up the ports, and call the service `mongo`.
 
 This is just like the "link" command line option we used with Docker in my previous post. Instead of connecting to `localhost`, we connect to `mongo`, and Kubernetes redirects traffic to the mongo service!
 
@@ -261,7 +260,7 @@ $ ls
 
 Dockerfile
 app
-db-controller.yml
+db-deployment.yml
 db-service.yml
 ```
 
@@ -273,10 +272,10 @@ First, let’s "log in" to the cluster
 $ gcloud container clusters get-credentials mean-cluster
 ```
 
-Now create the controller.
+Now create the Deployment.
 
 ```shell
-$ kubectl create -f db-controller.yml
+$ kubectl create -f db-deployment.yml
 ```
 
 And the Service.
@@ -299,7 +298,7 @@ Once you see the mongo pod in running status, we are good to go!
 $ kubectl get pods
 
 NAME                    READY  REASON   RESTARTS AGE
-mongo-controller-xxxx   1/1    Running  0        3m
+mongo-deployment-xxxx   1/1    Running  0        3m
 ```
 
 
@@ -309,36 +308,35 @@ Now the database is running, let’s start the web server.
 
 We need two things:
 
-1. Replication Controller to spin up and down web server pods
+1. Deployment to spin up and down web server pods
 2. Service to expose our website to the interwebs
 
-Let’s look at the Replication Controller configuration:
+Let’s look at the Deployment configuration:
 
-### `web-controller.yml`
+### `web-deployment.yml`
 
 ```yaml
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
- labels:
-   name: web
- name: web-controller
+  name: web-deployment
 spec:
- replicas: 2
- template:
-   metadata:
-     labels:
-       name: web
-   spec:
-     containers:
-     - image: gcr.io/<YOUR-PROJECT-ID>/myapp
-       name: web
-       ports:
-       - containerPort: 3000
-         name: http-server
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: gcr.io/<YOUR-PROJECT-ID>/myapp
+        name: web
+        ports:
+        - name: http-server
+          containerPort: 3000
+
 ```
 
-Here, we create a controller called `web-controller`, and we tell it to create two replicas. Replicas of what you ask? You may notice the `template` section looks just like a Pod configuration, and that's because it is. We are creating a Pod with our custom Node.js container and exposing port 3000.
+Here, we create a deployment called `web-deployment`, and we tell it to create two replicas. Replicas of what you ask? You may notice the `template` section looks just like a Pod configuration, and that's because it is. We are creating a Pod with our custom Node.js container and exposing port 3000.
 
 
 Now for the Service
@@ -372,16 +370,21 @@ At this point, the local directory looks like this
 ```shell
 $ ls
 
-Dockerfile app db-pod.yml db-service.yml web-service.yml web-controller.yml
+Dockerfile 
+app
+db-deployment.yml
+db-service.yml
+web-service.yml
+web-deployment.yml
 ```
 
 
 ## Step 8: Running the Web Server
 
-Create the Controller.
+Create the Deployment.
 
 ```shell
-$ kubectl create -f web-controller.yml
+$ kubectl create -f web-deployment.yml
 ```
 
 And the Service.
@@ -402,9 +405,9 @@ Once you see the web pods in running status, we are good to go!
 $ kubectl get pods
 
 NAME                   READY     REASON    RESTARTS   AGE
-mongo-controller-xxxx  1/1       Running   0          4m
-web-controller-xxxx    1/1       Running   0          1m
-web-controller-xxxx    1/1       Running   0          1m
+mongo-deployment-xxxx  1/1       Running   0          4m
+web-deployment-xxxx    1/1       Running   0          1m
+web-deployment-xxxx    1/1       Running   0          1m
 ```
 
 
