@@ -105,7 +105,12 @@ $ curl http://localhost:8080
 Hello World!
 ```
 
-**如果你得到一个来自于 `Docker for Mac`的 `Connection refused` 信息，请确认你使用的是 Docker 最新版本 (1.12 或者更高).** 
+**如果你得到一个来自于 `Docker for Mac`的 `Connection refused` 信息，请确认你使用的是 Docker 最新版本 (1.12 或者更高).如果你在 OSX 上用的是 `Docker Toolbox`,确保你用的是虚拟机的 IP 而不是 localhost**
+
+```shell
+$ curl "http://$(docker-machine ip YOUR-VM-MACHINE-NAME):8080"
+```
+
 让我们停止运行这个容器。在这个例子里，我们用`docker ps`查看到容器的 ID 是`2c66d0efcbd4`:
 
 ```shell
