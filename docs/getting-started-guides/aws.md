@@ -126,6 +126,10 @@ export PATH=<path/to/kubernetes-directory>/platforms/linux/amd64:$PATH
 
 更多完整的应用程序,请查看[示例目录](https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/)。
 
+## Scaling the cluster
+
+Adding and removing nodes through `kubectl` is not supported. You can still scale the amount of nodes manually through adjustments of the 'Desired' and 'Max' properties within the [Auto Scaling Group](http://docs.aws.amazon.com/autoscaling/latest/userguide/as-manual-scaling.html), which was created during the installation.
+
 ## 拆除集群
 
 确保您用来提供给集群的环境变量仍在输出，然后调用下面`kubernetes`目录中的脚本：

@@ -252,9 +252,24 @@ add-on](http://releases.k8s.io/{{page.githubbranch}}/cluster/addons/README.md)�
 
 这个选项让开发者可以减少对Kubernetes系统的耦合度，在他们想要的时候，能让他们自由决定如何用自己的方式去发现这些服务。应用仍然使用一个自注册的模式，并且其它服务发现的系统的适配器可以轻易的基于这个API被构建出来。
 
-## 发布 services - service的类型
+For such `Services` a cluster IP is not allocated, the kube proxy does not handle
+these services, and there is no load balancing or proxying done by the platform
+for them. How DNS is automatically configured depends on if the service has
+selectors or not.
 
-对于你的应用中的有些部分（如前端），你可能想对外开放一个服务（在集群之外，可能是公网）的IP地址，其他的服务值只应该在集群里面才可见。
+### With selectors
+
+For headless services that define selectors, the endpoints controller creates
+`Endpoints` records in the API, and modifies the DNS configuration to return A
+records (addresses) which point directly to the `Pods` backing the `Service`.
+
+### Without selectors
+
+For headless services that do not define selectors, the endpoints controller does
+not create `Endpoints` records. However, the DNS system looks for and configures
+A records for any `Endpoints` that share a name with the service.
+<<<<<
+## 发布 services - service的类型
 
 Kubernetes的`ServiceTypes`能让你指定你想要哪一种服务。默认的和基础的是`ClusterIP`，这会开放一个服务可以在集群内部进行连接。`NodePort` 和`LoadBalancer`是两种会将服务开放给外部网络的类型。
 

@@ -147,7 +147,7 @@ gcloud docker push gcr.io/PROJECT_ID/hello-node:v1
 $ gcloud container clusters get-credentials hello-world
 ```
 
-**文档其余部分都需要 Kubernetes 的客户端和服务端版本为1.2。运行`kubectl version`查看你当前的版本**  1.1版看[这个文档](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.1/docs/hellonode.md).
+**文档其余部分都需要 Kubernetes 的客户端和服务端版本为1.3。运行`kubectl version`查看你当前的版本**  1.2版看[这个文档](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.2/docs/hellonode.md).
 
 ## 创建你的 pod
 
@@ -216,7 +216,7 @@ A此时你应该已经让我们的容器在 Kubernetes 的控制下运行了，�
 kubectl expose deployment hello-node --type="LoadBalancer"
 ```
 
-**如果失败了，请查看你的客户端和服务端版本是否都是1.2，详情请参阅 [创建群集](#create-your-cluster) 部分。**
+**如果失败了，请查看你的客户端和服务端版本是否都是1.3，详情请参阅 [创建群集](#create-your-cluster) 部分。**
 
 此命令中使用这个标识指定了我们将使用底层架构来提供负载均衡 (是这种情况 [Compute Engine 负载均衡](https://cloud.google.com/compute/docs/load-balancing/))。注意,我们开放的是 deployment, 问不是直接公开 pod.  这将会让所有由 deployment 管理的 pod 负载均衡(这只有一个 pod，我们一会会复制多个).
 
@@ -296,68 +296,13 @@ gcloud docker push gcr.io/PROJECT_ID/hello-node:v2
 构建和上传会非常快，因为我们用到了 Docker 的缓存机制。
 
 我们现在已经为 Kubernetes 能够顺利更新部署提供了一个新版本的应用程序。为了区分新镜像，我们需要修改即存的 *hello-node deployment*
-`gcr.io/PROJECT_ID/hello-node:v1` 为 `gcr.io/PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl edit` 命令.
+`gcr.io/PROJECT_ID/hello-node:v1` 为 `gcr.io/PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl set image` 命令.
 这将打开一个文本编辑器来显示整个`deployment`的 yaml [配置](/docs/user-guide/configuring-containers/)。现在还不用去了解整个 yaml 配置，
 只需要知道通过修改`spec.template.spec.containers.image`来告诉`deployment`来更新 pod 到新的镜像。
 
 ```shell
-kubectl edit deployment hello-node
-```
-
-```yaml
-# Please edit the object below. Lines beginning with a '#' will be ignored,
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-#
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
-  creationTimestamp: 2016-03-24T17:55:28Z
-  generation: 3
-  labels:
-    run: hello-node
-  name: hello-node
-  namespace: default
-  resourceVersion: "151017"
-  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/hello-node
-  uid: 981fe302-f1e9-11e5-9a78-42010af00005
-spec:
-  replicas: 4
-  selector:
-    matchLabels:
-      run: hello-node
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        run: hello-node
-    spec:
-      containers:
-      - image: gcr.io/PROJECT_ID/hello-node:v1 # Update this line
-        imagePullPolicy: IfNotPresent
-        name: hello-node
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-```
-
-修改完以后保存并关闭这个文件。
-
-```
-deployment "hello-node" edited
+$ kubectl set image deployment/hello-node hello-node=gcr.io/PROJECT_ID/hello-node:v2
+deployment "hello-node" image updated
 ```
 
 这会用新的镜像来更新`deployment`，它会创建新的 pod 并删除旧的 pod。
@@ -374,7 +319,7 @@ hello-node   4         5         4            3           1h
 
 ## Kubernetes Web UI (可选)
 
-随着Kubernetes 1.2, 图形化 Web 界面（控制台）也已经发布了。在 1.2 群集中会默认启用。
+随着Kubernetes, 图形化 Web 界面（控制台）也已经发布了。在群集中会默认启用。
 通过这个用户界面你会很容易上手，并且更容易，方便的发现和使用 CLI 与系统交互。
 
 尽情享受 Kubernetes 图形管理，用它来部署容器化应用，以及监视和管理你的群集！
@@ -397,12 +342,13 @@ kubectl delete service,deployment hello-node
 
 ```shell
 $ gcloud container clusters delete hello-world
-Waiting for cluster deletion...done.
-name: operation-xxxxxxxxxxxxxxxx
-operationType: deleteCluster
-status: done
-target: /projects/kubernetes-codelab/zones/us-central1-f/clusters/hello-world
-zone: us-central1-f
+The following clusters will be deleted.
+ - [hello-world] in [us-central1-f]
+
+Do you want to continue (Y/n)?
+
+Deleting cluster hello-world...done.
+Deleted [https://container.googleapis.com/v1/projects/<PROJECT_ID>/zones/us-central1-f/clusters/hello-world].
 ```
 
 这回删除正在运行在 Google Compute Engine 的群集实例。

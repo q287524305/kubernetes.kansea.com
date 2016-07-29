@@ -41,6 +41,12 @@ export KUBERNETES_PROVIDER=vagrant
 环境变量 `KUBERNETES_PROVIDER` 用来告诉所有不同的集群管理脚本该使用哪一个脚本管理器（比如Vagrant）。如果你忘记设置这个变量，默认假设你运行Google Compute Engine上运行k8s。
 默认情况下，Vagrant会创建一个单独的master VM（被称为kubernetes-master），以及一个节点VM（被称为kubernetes-node-1）。每个VM会占用1G内存，所以确保你有至少2G-4G的空余内存（以及合适的空闲硬盘空间）。
 
+If you'd like more than one node, set the `NUM_NODES` environment variable to the number you want:
+
+```sh
+export NUM_NODES=3
+```
+
 Vagrant 会提供集群中每台机器运行 Kuberbetes 所有必须的组件。每台机器会花费几分钟完成初始化设置。
 
 如果你下载了多个Vagrant provider，Kubernetes通常会选择最恰当的那个。但是，你可以通过设置环境变量[`VAGRANT_DEFAULT_PROVIDER`](https://docs.vagrantup.com/v2/providers/default.html) 的值来让Kubernetes使用哪个Vagrant provider:

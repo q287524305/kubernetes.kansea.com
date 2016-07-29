@@ -121,5 +121,5 @@ Admission Controller的该功能已经并入`NamespaceLifecycle`插件。
 Kubernetes1.0，我们强烈建议使用如下的许可控制插件集合（按顺序排列）：
 
 ```shell
---admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota
+--admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,PersistentVolumeLabel,ResourceQuota
 ```
