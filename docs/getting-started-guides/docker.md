@@ -16,42 +16,63 @@
 
 **注意: 下面这些步骤没有经过[Docker For Mac 和 Docker For Windows](https://blog.docker.com/2016/03/docker-for-mac-windows-beta/)的验证。**
 
-1. 你必须拥有一台安装有 Docker 的机器。
-2. 选择使用什么版本的 Kubernetes，设置 ` ${K8S_VERSION}`  为高于或等于 "V1.2.0" 的版本号，如果你想使用稳定版的话，那么你可以运行一下命令:
+1. 你必须拥有一台安装有 Docker "1.10"以上的机器。
+2. 启用挂载。 在需要挂卷到其他容器时，Hyperkube 才会在容器中运行，例如在持久存储的情况下。所需步骤均依赖于系统的初始化。
 
-```sh
-export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-```
 
-或者获取最新版本(包括不稳定版本):
+  在 **systemd** 的情况下，更改 Docker 挂载标识为共享
+  ```shell
+    DOCKER_CONF=$(systemctl cat docker | head -1 | awk '{print $2}')
+    sed -i.bak 's/^\(MountFlags=\).*/\1shared/' $DOCKER_CONF
+    systemctl daemon-reload
+    systemctl restart docker
+  ```
 
-```sh
-export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/latest.txt)
-```
+  **除此以外**，使用 Hyperkube 手动设置安装点为共享:
+  ```shell
+    mkdir -p /var/lib/kubelet
+    mount --bind /var/lib/kubelet /var/lib/kubelet
+    mount --make-shared /var/lib/kubelet
+  ```
+
 
 ### 运行
 
-```shell
-export ARCH=amd64
-docker run -d \
-    --volume=/:/rootfs:ro \
-    --volume=/sys:/sys:rw \
-    --volume=/var/lib/docker/:/var/lib/docker:rw \
-    --volume=/var/lib/kubelet/:/var/lib/kubelet:rw,shared \
-    --volume=/var/run:/var/run:rw \
-    --net=host \
-    --pid=host \
-    --privileged \
-    gcr.io/google_containers/hyperkube-${ARCH}:${K8S_VERSION} \
-    /hyperkube kubelet \
-        --containerized \
-        --hostname-override=127.0.0.1 \
-        --api-servers=http://localhost:8080 \
-        --config=/etc/kubernetes/manifests \
-        --cluster-dns=10.0.0.10 \
-        --cluster-domain=cluster.local \
-        --allow-privileged --v=2
-```
+1. Decide which Kubernetes version to use. Set the `${K8S_VERSION}` variable to a version of Kubernetes >= "v1.2.0".
+
+  如果你要使用 **稳定版** 的 Kubernetes，则运行:
+
+  ```sh
+  export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+  ```
+
+  **最新版本** (包含不稳定版本):
+
+  ```sh
+  export K8S_VERSION=$(curl -sS https://storage.googleapis.com/kubernetes-release/release/latest.txt)
+  ```
+
+2. Start Hyperkube
+
+  ```shell
+  export ARCH=amd64
+  docker run -d \
+      --volume=/sys:/sys:rw \
+      --volume=/var/lib/docker/:/var/lib/docker:rw \
+      --volume=/var/lib/kubelet/:/var/lib/kubelet:rw,shared \
+      --volume=/var/run:/var/run:rw \
+      --net=host \
+      --pid=host \
+      --privileged \
+      gcr.io/google_containers/hyperkube-${ARCH}:${K8S_VERSION} \
+      /hyperkube kubelet \
+          --hostname-override=127.0.0.1 \
+          --api-servers=http://localhost:8080 \
+          --config=/etc/kubernetes/manifests \
+          --cluster-dns=10.0.0.10 \
+          --cluster-domain=cluster.local \
+          --allow-privileged --v=2
+  ```
 
 > 注意 `--cluster-dns` 和 `--cluster-domain` 是用来部署 dns 的, 如果不需要 dns 的话可以不设置。
 
