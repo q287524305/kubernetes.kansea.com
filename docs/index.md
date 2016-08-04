@@ -1,4 +1,8 @@
 ---
+assignees:
+- bgrant0607
+- thockin
+
 ---
 <style>
 h2, h3, h4 {
@@ -74,7 +78,7 @@ h2, h3, h4 {
   </div>
   <div class="col3rd">
     <h3>快速入门</h3>
-    <p>我们会用Docker在你的机器上创建一个Kubernetes实例，并在上面运行一个简单的Node.js "Hello World"应用。只需要5分钟，你就可以得到一个可部署的应用。</p>
+    <p>在快速入门中, 我们会用Docker在你的机器上创建一个Kubernetes实例，并在上面运行一个简单的Node.js "Hello World"应用。只需要几分钟，你就在Google Container Engine上从零开始搭建一个可部署的 Kubernetes 应用。</p>
     <a href="/docs/hellonode/" class="button">让我们开始吧</a>
   </div>
   <div class="col3rd">
@@ -93,7 +97,7 @@ h2, h3, h4 {
 <a href="https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/guestbook" target="_blank" class="shadowbox">
   <img src="/images/docs/redis.svg"><br/>Guestbook + Redis
 </a>
-<a href="https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/cassandra" target="_blank" class="shadowbox">
+<a href="https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/storage/cassandra" target="_blank" class="shadowbox">
   <img src="/images/docs/cassandra.svg"><br/>Cloud Native Cassandra
 </a>
 <a href="https://github.com/kubernetes/kubernetes/tree/{{page.githubbranch}}/examples/mysql-wordpress-pd/" target="_blank" class="shadowbox">

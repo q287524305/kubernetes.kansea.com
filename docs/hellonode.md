@@ -1,4 +1,8 @@
 ---
+assignees:
+- dchen1107
+- pwittrock
+
 ---
 
 * TOC
@@ -23,13 +27,21 @@ Kubernetes 是可以运行在许多不同环境的开源项目，无论是笔记
 
 ![image](/images/hellonode/image_3.png)
 
-记住这个项目 ID; 下面将称它为`PROJECT_ID`。
+记住这个项目 ID; 下面将称它为`PROJECT_ID`。把 项目 ID 存储到一个变量会很方便使用。
 
-接下来, 在开发者控制台[启用结算](https://console.developers.google.com/billing) 以便使用 Google 云资源 and [开启容器引擎 API](https://console.developers.google.com/project/_/kubernetes/list).
+确保你有一个 Linux 终端，你将使用它的命令行来控制你的群集。你可以使用 [Google Cloud Shell](https://console.cloud.google.com?cloudshell=true)。按照这个教程它会预安装，所以你可以跳过下面大多数的环境配置。
 
-新用户会获得[300美元的试用额度](https://console.developers.google.com/billing/freetrial?hl=en). 运行本示例只会用掉几美元的额度。Google 容器引擎的定价在[这里](https://cloud.google.com/container-engine/pricing).
+用下面的命令来储存你的项目 ID 到一个变量，会让接下来的操作非常便捷。
 
-下面, 你要[下载 Node.js](https://nodejs.org/en/download/).
+ ```shell
+ export $PROJECT_ID="your-project-id"
+ ```
+
+接下来, 在开发者控制台[启用结算](https://console.cloud.google.com/billing) 以便使用 Google 云资源 and [开启容器引擎 API](https://console.cloud.google.com/project/_/kubernetes/list).
+
+新用户会获得[300美元的试用额度](https://console.cloud.google.com/billing/freetrial?hl=en). 运行本示例只会用掉几美元的额度。Google 容器引擎的定价在[这里](https://cloud.google.com/container-engine/pricing).
+
+下面, 你要[下载 Node.js](https://nodejs.org/en/download/).You can skip this and the steps for installing Docker and Cloud SDK if you're using Cloud Shell.
 
 并且安装 [Docker](https://docs.docker.com/engine/installation/) 和 [Google Cloud SDK](https://cloud.google.com/sdk/).
 
@@ -63,7 +75,7 @@ www.listen(8080);
 node server.js
 ```
 
-在浏览器打开 http://localhost:8080/ 你应该会看到你的 "Hello World!"。
+在浏览器打开 http://localhost:8080/ 你应该会看到你的 "Hello World!"。如果你用 Cloud Shell，那么你需要使用[Web Preview](https://cloud.google.com/shell/docs/using-web-preview)来打开这个 URL。
 
 停止运行 node 只需按下 Ctrl-C.
 
@@ -87,14 +99,14 @@ CMD node server.js
 现在运行 `docker build` 来构建你的容器，并用 Google Container Registry 得到的 `PROJECT_ID` 来标记这个容器:
 
 ```shell
-docker build -t gcr.io/PROJECT_ID/hello-node:v1 .
+docker build -t gcr.io/$PROJECT_ID/hello-node:v1 .
 ```
 现在你有了一个，具有一段可以正常运行的代码的容器。
 
 让我们用 Docker 来试一下你的镜像:
 
 ```shell
-$ docker run -d -p 8080:8080 gcr.io/PROJECT_ID/hello-node:v1
+$ docker run -d -p 8080:8080 gcr.io/$PROJECT_ID/hello-node:v1
 325301e6b2bffd1d0049c621866831316d653c0b25a496d04ce0ec6854cb7998
 ```
 
@@ -116,7 +128,7 @@ $ curl "http://$(docker-machine ip YOUR-VM-MACHINE-NAME):8080"
 ```shell
 docker ps
 CONTAINER ID        IMAGE                              COMMAND
-2c66d0efcbd4        gcr.io/PROJECT_ID/hello-node:v1    "/bin/sh -c 'node    
+2c66d0efcbd4        gcr.io/$PROJECT_ID/hello-node:v1    "/bin/sh -c 'node    
 
 docker stop 2c66d0efcbd4
 2c66d0efcbd4
@@ -125,7 +137,7 @@ docker stop 2c66d0efcbd4
 现在镜像已经可以如期运行，并标记了你的`PROJECT_ID`，我们推送它到[Google 容器仓库](https://cloud.google.com/tools/container-registry/), 每一个 Google 云项目具有一个私有 Docker 镜像库 (而且也在 Google 云平台之外) :
 
 ```shell
-gcloud docker push gcr.io/PROJECT_ID/hello-node:v1
+gcloud docker push gcr.io/$PROJECT_ID/hello-node:v1
 ```
 
 如果一切顺利, 你应该会在控制台中看到容器镜像: *Compute > Container Engine > Container Registry*. 我们现在有一个项目内可用的， Kubernetes 可以访问和编排的 Docker 镜像.
@@ -141,10 +153,11 @@ gcloud docker push gcr.io/PROJECT_ID/hello-node:v1
 ![image](/images/hellonode/image_11.png)
 
 是时候来部署你的`容器式应用` 到 Kubernetes 集群了!
-请确保你[配置](https://cloud.google.com/container-engine/docs/clusters/operations#configuring_kubectl) 过`kubectl`使用你刚刚创建的集群:
+请确保你[配置](https://cloud.google.com/container-engine/docs/clusters/operations#configuring_kubectl) 过`kubectl`使用你刚刚创建的集群
+(确保`--zone`标识的值与你的群集 zone 匹配):
 
 ```shell
-$ gcloud container clusters get-credentials hello-world
+$ gcloud container clusters get-credentials --zone us-central1-f hello-world
 ```
 
 **文档其余部分都需要 Kubernetes 的客户端和服务端版本为1.3。运行`kubectl version`查看你当前的版本**  1.2版看[这个文档](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.2/docs/hellonode.md).
@@ -156,7 +169,7 @@ $ gcloud container clusters get-credentials hello-world
 使用 `kubectl run` 命令来创建一个 pod:
 
 ```shell
-$ kubectl run hello-node --image=gcr.io/PROJECT_ID/hello-node:v1 --port=8080
+$ kubectl run hello-node --image=gcr.io/$PROJECT_ID/hello-node:v1 --port=8080
 deployment "hello-node" created
 ```
 
@@ -289,19 +302,17 @@ hello-node-714049816-ztzrb   1/1       Running   0          41m
 我们构建并上传一个具有新标识的容器到仓库:
 
 ```shell
-docker build -t gcr.io/PROJECT_ID/hello-node:v2 .
-gcloud docker push gcr.io/PROJECT_ID/hello-node:v2
+docker build -t gcr.io/$PROJECT_ID/hello-node:v2 .
+gcloud docker push gcr.io/$PROJECT_ID/hello-node:v2
 ```
 
 构建和上传会非常快，因为我们用到了 Docker 的缓存机制。
 
 我们现在已经为 Kubernetes 能够顺利更新部署提供了一个新版本的应用程序。为了区分新镜像，我们需要修改即存的 *hello-node deployment*
-`gcr.io/PROJECT_ID/hello-node:v1` 为 `gcr.io/PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl set image` 命令.
-这将打开一个文本编辑器来显示整个`deployment`的 yaml [配置](/docs/user-guide/configuring-containers/)。现在还不用去了解整个 yaml 配置，
-只需要知道通过修改`spec.template.spec.containers.image`来告诉`deployment`来更新 pod 到新的镜像。
+`gcr.io/$PROJECT_ID/hello-node:v1` 为 `gcr.io/$PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl set image` 命令.
 
 ```shell
-$ kubectl set image deployment/hello-node hello-node=gcr.io/PROJECT_ID/hello-node:v2
+$ kubectl set image deployment/hello-node hello-node=gcr.io/$PROJECT_ID/hello-node:v2
 deployment "hello-node" image updated
 ```
 
@@ -341,14 +352,14 @@ kubectl delete service,deployment hello-node
 删除群集:
 
 ```shell
-$ gcloud container clusters delete hello-world
+$ gcloud container clusters delete --zone us-central1-f hello-world
 The following clusters will be deleted.
  - [hello-world] in [us-central1-f]
 
 Do you want to continue (Y/n)?
 
 Deleting cluster hello-world...done.
-Deleted [https://container.googleapis.com/v1/projects/<PROJECT_ID>/zones/us-central1-f/clusters/hello-world].
+Deleted [https://container.googleapis.com/v1/projects/<$PROJECT_ID>/zones/us-central1-f/clusters/hello-world].
 ```
 
 这回删除正在运行在 Google Compute Engine 的群集实例。
@@ -357,9 +368,9 @@ Deleted [https://container.googleapis.com/v1/projects/<PROJECT_ID>/zones/us-cent
 
 ```shell
 $ gsutil ls
-gs://artifacts.<PROJECT_ID>.appspot.com/
-$ gsutil rm -r gs://artifacts.<PROJECT_ID>.appspot.com/
-Removing gs://artifacts.<PROJECT_ID>.appspot.com/...
+gs://artifacts.<$PROJECT_ID>.appspot.com/
+$ gsutil rm -r gs://artifacts.<$PROJECT_ID>.appspot.com/
+Removing gs://artifacts.<$PROJECT_ID>.appspot.com/...
 ```
 
 当然，你也可以删除整个项目，但请注意，你必须先关闭计费，此外当结算周期结束以后，项目才会被删除。

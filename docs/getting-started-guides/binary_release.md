@@ -1,4 +1,8 @@
 ---
+assignees:
+- david-mcmahon
+- jbeda
+
 ---
 
 你可以从代码编译或者下载一个预发布版。如果你不打算自己开发 Kubernetes，那么我建议你下载一个预发布版。

@@ -1,4 +1,8 @@
 ---
+assignees:
+- eparis
+- erictune
+
 ---
 
 如果你确信发现了一个漏洞，或者报告一个安全问题，请按照下列步骤操作，适用于 Kubernetes 1.0或更高的版本。

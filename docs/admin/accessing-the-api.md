@@ -1,4 +1,9 @@
 ---
+assignees:
+- bgrant0607
+- erictune
+- lavalamp
+
 ---
 
 本文档介绍如何访问 Kubernetes API

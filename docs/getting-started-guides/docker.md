@@ -1,4 +1,9 @@
 ---
+assignees:
+- asridharan
+- brendandburns
+- fgrzadkowski
+
 ---
 
 **停住你的脚步。现在开始，在本地环境下推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**
@@ -64,6 +69,7 @@
       --net=host \
       --pid=host \
       --privileged \
+	  --name=kubelet \
       gcr.io/google_containers/hyperkube-${ARCH}:${K8S_VERSION} \
       /hyperkube kubelet \
           --hostname-override=127.0.0.1 \
@@ -173,7 +179,7 @@ echo $ip
 在浏览器中输入这个 IP:
 
 ```shell{% raw %}
-kubectl get svc nginx --template={{.spec.clusterIP}}
+curl $ip
 {% endraw %}```
 
 在 macOS 中，使用以下命令，访问虚拟机中的 Docker:
@@ -188,14 +194,22 @@ docker-machine ssh `docker-machine active` curl $ip
 
 ### 关闭群集
 
-1. 删除所有容器和 kubelet:
+1\. 删除 Nginx 服务和 deployment:
 
-Many of these containers run under the management of the `kubelet` binary, which attempts to keep containers running, even if they fail.
-So, in order to turn down the cluster, you need to first kill the kubelet container, and then any other containers.
+If you plan on re-creating your nginx deployment and service you will need to clean it up.
 
-You may use `docker rm -f $(docker ps -aq)`, note this removes _all_ containers running under Docker, so use with caution.
+```shell
+kubectl delete service,deployments nginx
+```
 
-2. 清理文件系统:
+2\. Delete all the containers including the kubelet:
+
+```shell
+docker rm -f kubelet
+docker rm -f `docker ps | grep k8s | awk '{print $1}'`
+```
+
+3\. 清理文件系统:
 
 在 macOS 中，需要先通过 ssh 连接到 docker 虚拟机:
 

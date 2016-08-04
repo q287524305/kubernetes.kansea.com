@@ -1,5 +1,12 @@
 ---
+assignees:
+- lavalamp
+- thockin
+
 ---
+
+* TOC
+{:toc}
 
 This document describes several topics related to the lifecycle of a cluster: creating a new cluster,
 upgrading your cluster's
@@ -102,6 +109,7 @@ On GKE you configure cluster autoscaler either on cluster creation or update or 
 to the corresponding `gcloud` commands.
 
 Examples:
+
 ```shell
 gcloud container clusters create mytestcluster --zone=us-central1-b --enable-autoscaling=true --min-nodes=3 --max-nodes=10 --num-nodes=5
 ```

@@ -1,4 +1,9 @@
 ---
+assignees:
+- brendandburns
+- erictune
+- mikedanese
+
 ---
 
 Kubernetes可以在多种平台运行，从笔记本电脑，到云服务商的虚拟机，再到机架上的物理机服务器。
@@ -71,22 +76,13 @@ Kubernetes可以在云服务提供商和物理机环境运行，并支持很多�
 
 #### 私有虚拟机
 
-<<<<<<< HEAD
 - [Vagrant](/docs/getting-started-guides/coreos) (采用CoreOS和flannel)
 - [CloudStack](/docs/getting-started-guides/cloudstack) 采用Ansible，CoreOS和flannel）
-- [Vmware](/docs/getting-started-guides/vsphere)  （采用Debian）
+- [Vmware vSphere](/docs/getting-started-guides/vsphere)  （采用Debian）
+- [Vmware Photon Controller](/docs/getting-started-guides/photon-controller)  （采用Debian）
 - [juju.md](/docs/getting-started-guides/juju) （采用Juju，Ubuntu和flannel）
 - [Vmware](/docs/getting-started-guides/coreos) （采用CoreOS和flannel）
 - [libvirt-coreos.md](/docs/getting-started-guides/libvirt-coreos)  （采用CoreOS）
-=======
-- [Vagrant](/docs/getting-started-guides/coreos) (uses CoreOS and flannel)
-- [CloudStack](/docs/getting-started-guides/cloudstack) (uses Ansible, CoreOS and flannel)
-- [Vmware vSphere](/docs/getting-started-guides/vsphere)  (uses Debian)
-- [Vmware Photon Controller](/docs/getting-started-guides/photon-controller)  (uses Debian)
-- [juju.md](/docs/getting-started-guides/juju) (uses Juju, Ubuntu and flannel)
-- [Vmware](/docs/getting-started-guides/coreos)  (uses CoreOS and flannel)
-- [libvirt-coreos.md](/docs/getting-started-guides/libvirt-coreos)  (uses CoreOS)
->>>>>>> 2ac973c0dd5984820428b35dca5f48c17e7f7287
 - [oVirt](/docs/getting-started-guides/ovirt)
 - [OpenStack Heat](/docs/getting-started-guides/openstack-heat) (采用 CentOS 和 flannel)
 - [libvirt](/docs/getting-started-guides/fedora/flannel_multi_node_cluster) (采用 Fedora 和 flannel)

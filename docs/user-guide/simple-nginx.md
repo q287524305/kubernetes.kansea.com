@@ -1,4 +1,7 @@
 ---
+assignees:
+- mikedanese
+
 ---
 
 好的，如果你已经开始了任何一个[入门指南](/docs/getting-started-guides/)，并且启动了一个Kubernetes集群。那么接下来呢？ 这篇入门指南会帮助你在Kubernetes集群上运行第一个容器。

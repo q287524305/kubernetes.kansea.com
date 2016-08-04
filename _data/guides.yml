@@ -145,12 +145,8 @@ toc:
     section:
     - title: 利用 Minikube 运行 Kubernetes
       path: /docs/getting-started-guides/minikube/
-    - title: 利用 Docker 在本地运行 Kubernetes
-      path: /docs/getting-started-guides/docker/
-    - title: 在本地运行 Kubernetes
-      path: /docs/getting-started-guides/locally/
-    - title: 在 Vagrant 上运行 Kubernetes
-      path: /docs/getting-started-guides/vagrant/
+    - title: 已弃用的备用方案
+      path: /docs/getting-started-guides/alternatives/
   - title: 在私有云上运行 Kubernetes
     section:
     - title: 基于 Google Container Engine 运行 Kubernetes
@@ -165,14 +161,6 @@ toc:
       path: /docs/getting-started-guides/azure/
     - title: 基于 CenturyLink 运行 Kubernetes
       path: /docs/getting-started-guides/clc/
-  - title: 可移植的多点群集
-    section:
-    - title: 基于 Docker 安装一个  Kubernetes Master
-      path: /docs/getting-started-guides/docker-multinode/master/
-    - title: 添加一个基于 Docker 的 Kubernetes 工作节点
-      path: /docs/getting-started-guides/docker-multinode/worker/
-    - title: 部署 DNS
-      path: /docs/getting-started-guides/docker-multinode/deployDNS/
   - title: 自定义环境上运行 Kubernetes
     section:
     - title: 自定义搭建一个新的群集
@@ -237,7 +225,9 @@ toc:
         path: /docs/getting-started-guides/coreos/bare_metal_calico/
       - title: Ubuntu 和 Calico
         path: /docs/getting-started-guides/ubuntu-calico/
-  - title: 大型群集
+  - title: 便携式多节点集群
+    path: /docs/getting-started-guides/docker-multinode/
+  - title: 创建大型群集
     path: /docs/admin/cluster-large/
   - title: 在多个区域运行
     path: /docs/admin/multiple-zones/

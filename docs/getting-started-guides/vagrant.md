@@ -1,4 +1,9 @@
 ---
+assignees:
+- brendandburns
+- derekwaynecarr
+- jbeda
+
 ---
 
 **停住你的脚步。现在开始，在本地环境下推荐使用[利用 Minikube 运行 Kubernetes](../minikube/) 了。**

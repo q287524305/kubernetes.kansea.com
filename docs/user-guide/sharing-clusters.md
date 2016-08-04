@@ -1,4 +1,8 @@
 ---
+assignees:
+- mikedanese
+- thockin
+
 ---
 
 可以复制`kubectl`客户端配置文件([kubeconfig](/docs/user-guide/kubeconfig-file))可以访问正在运行的 Kubernetes 群集。
