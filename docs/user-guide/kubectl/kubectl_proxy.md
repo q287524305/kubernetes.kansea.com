@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
 
 ## kubectl proxy
@@ -68,6 +64,4 @@ kubectl proxy --api-prefix=/k8s-api
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

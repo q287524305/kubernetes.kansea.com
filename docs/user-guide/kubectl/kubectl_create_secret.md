@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- dchen1107
-
 ---
 
 ## kubectl create secret
@@ -22,8 +18,8 @@ kubectl create secret
 
 ### 参见
 
-* [kubectl create](/docs/user-guide/kubectl/kubectl_create/)	 - Create a resource by filename or stdin
-* [kubectl create secret docker-registry](/docs/user-guide/kubectl/kubectl_create_secret_docker-registry/)	 - Create a secret for use with a Docker registry.
-* [kubectl create secret generic](/docs/user-guide/kubectl/kubectl_create_secret_generic/)	 - Create a secret from a local file, directory or literal value.
 
-
+* [kubectl create](kubectl_create.md)	 - Create a resource by filename or stdin
+* [kubectl create secret docker-registry](kubectl_create_secret_docker-registry.md)	 - Create a secret for use with a Docker registry.
+* [kubectl create secret generic](kubectl_create_secret_generic.md)	 - Create a secret from a local file, directory or literal value.
+* [kubectl create secret tls](kubectl_create_secret_tls.md)	 - Create a TLS secret.

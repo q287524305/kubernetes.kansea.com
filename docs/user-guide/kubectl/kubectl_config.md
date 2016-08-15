@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
 
 ## kubectl config
@@ -34,7 +30,7 @@ kubectl config SUBCOMMAND
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。
 * [kubectl config current-context](/docs/user-guide/kubectl/kubectl_config_current-context/)	 - Displays the current-context
 * [kubectl config set](/docs/user-guide/kubectl/kubectl_config_set/)	 - Sets an individual value in a kubeconfig file
 * [kubectl config set-cluster](/docs/user-guide/kubectl/kubectl_config_set-cluster/)	 - Sets a cluster entry in kubeconfig

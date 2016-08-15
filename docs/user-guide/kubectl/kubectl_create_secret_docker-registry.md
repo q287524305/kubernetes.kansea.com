@@ -1,9 +1,6 @@
 ---
-assignees:
-- bgrant0607
-- derekwaynecarr
-
 ---
+
 ## kubectl create secret docker-registry
 
 Create a secret for use with a Docker registry.
@@ -33,7 +30,7 @@ kubectl create secret docker-registry NAME --docker-username=user --docker-passw
 
 ```
   # If you don't already have a .dockercfg file, you can create a dockercfg secret directly by using:
-  $ kubectl create secret docker-registry my-secret --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL
+  kubectl create secret docker-registry my-secret --docker-server=DOCKER_REGISTRY_SERVER --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL
 ```
 
 ### 选项
@@ -45,6 +42,7 @@ kubectl create secret docker-registry NAME --docker-username=user --docker-passw
       --docker-username="": Username for Docker registry authentication
       --dry-run[=false]: If true, only print the object that would be sent, without sending it.
       --generator="secret-for-docker-registry/v1": The name of the API generator to use.
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
       --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').

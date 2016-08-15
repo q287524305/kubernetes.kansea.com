@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- janetkuo
-
 ---
 
 ## kubectl rollout resume
@@ -33,12 +29,11 @@ kubectl rollout resume deployment/nginx
 
 ```
   -f, --filename=[]: Filename, directory, or URL to a file identifying the resource to get from a server.
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
 ```
 
 {% include_relative parent_commands.md %}
 
 ### 参见
 
-* [kubectl rollout](/docs/user-guide/kubectl/kubectl_rollout/)	 - rollout manages a deployment
-
-
+* [kubectl rollout](kubectl_rollout.md)	 - rollout manages a deployment

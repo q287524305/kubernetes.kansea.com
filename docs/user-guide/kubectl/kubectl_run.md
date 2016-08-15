@@ -1,10 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- brendandburns
-- feihujiang
-- janetkuo
-
 ---
 
 ## kubectl run
@@ -66,6 +60,7 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
       --generator="": The name of the API generator to use.  Default is 'deployment/v1beta1' if --restart=Always, otherwise the default is 'job/v1'.  This will happen only for cluster version at least 1.2, for olders we will fallback to 'run/v1' for --restart=Always, 'run-pod/v1' for others.
       --hostport=-1: The host port mapping for the container port. To demonstrate a single-machine container.
       --image="": 用来运行的容器镜像。
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
   -l, --labels="": pod 的标签。
       --leave-stdin-open[=false]: If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
       --limits="": The resource requirement limits for this container.  For example, 'cpu=200m,memory=512Mi'
@@ -76,8 +71,8 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
       --port=-1: The port that this container exposes.  If --expose is true, this is also the port used by the service that is created.
       --record[=false]: Record current kubectl command in the resource annotation.
   -r, --replicas=1: Number of replicas to create for this container. Default is 1.
-      --requests="": The resource requirement requests for this container.  For example, 'cpu=100m,memory=256Mi'
-      --restart="Always": The restart policy for this Pod.  Legal values [Always, OnFailure, Never].  If set to 'Always' a deployment is created for this pod, if set to OnFailure or Never, a job is created for this pod and --replicas must be 1.  Default 'Always'
+      --requests="": The resource requirement requests for this container.  For example, 'cpu=100m,memory=256Mi'.  Note that server side components may assign requests depending on the server configuration, such as limit ranges.
+      --restart="Always": The restart policy for this Pod.  Legal values [Always, OnFailure, Never].  If set to 'Always' a deployment is created for this pod, if set to 'OnFailure', a job is created for this pod, if set to 'Never', a regular pod is created. For the latter two --replicas must be 1.  Default 'Always'
       --rm[=false]: If true, delete resources created in this command for attached containers.
       --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.
       --service-generator="service/v2": The name of the generator to use for creating a service.  Only used if --expose is true
@@ -87,11 +82,11 @@ kubectl run pi --image=perl --restart=OnFailure -- perl -Mbignum=bpi -wle 'print
       --sort-by="": If non-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
   -i, --stdin[=false]: Keep stdin open on the container(s) in the pod, even if nothing is attached.
       --template="": Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
-      --tty[=false]: Allocated a TTY for each container in the pod.  Because -t is currently shorthand for --template, -t is not supported for --tty. This shorthand is deprecated and we expect to adopt -t for --tty soon.
+  -t, --tty[=false]: Allocated a TTY for each container in the pod.
 ```
 
 {% include_relative parent_commands.md %}
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

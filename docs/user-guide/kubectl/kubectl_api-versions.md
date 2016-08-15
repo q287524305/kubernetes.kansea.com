@@ -1,9 +1,6 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
+
 ## kubectl api-versions
 
 以“组/版本”的格式输出服务端支持的API版本。
@@ -21,4 +18,4 @@ kubectl api-versions
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

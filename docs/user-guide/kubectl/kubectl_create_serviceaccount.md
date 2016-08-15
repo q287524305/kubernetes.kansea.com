@@ -1,10 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- bprashanth
-- dchen1107
-- liggitt
-
 ---
 
 ## kubectl create serviceaccount
@@ -33,8 +27,9 @@ kubectl create serviceaccount NAME [--dry-run]
 ```
       --dry-run[=false]: If true, only print the object that would be sent, without sending it.
       --generator="serviceaccount/v1": The name of the API generator to use.
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
       --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
-  -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
+  -o, --output="": Output format. One of: json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://releases.k8s.io/release-1.3/docs/user-guide/jsonpath.md].
       --output-version="": Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
       --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.
       --schema-cache-dir="~/.kube/schema": If non-empty, load/store cached API schemas in this directory, default is '$HOME/.kube/schema'
@@ -49,6 +44,4 @@ kubectl create serviceaccount NAME [--dry-run]
 
 ### 参见
 
-* [kubectl create](/docs/user-guide/kubectl/kubectl_create/)	 - Create a resource by filename or stdin
-
-
+* [kubectl create](kubectl_create.md)	 - Create a resource by filename or stdin

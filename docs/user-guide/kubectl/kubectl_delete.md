@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
 
 ## kubectl delete
@@ -41,6 +37,9 @@ kubectl delete pod,service baz foo
 # Delete pods and services with label name=myLabel.
 kubectl delete pods,services -l name=myLabel
 
+# Delete a pod immediately (no graceful shutdown)
+kubectl delete pod foo --now
+
 # Delete a pod with UID 1234-56-7890-234234-456456.
 kubectl delete pod 1234-56-7890-234234-456456
 
@@ -56,7 +55,10 @@ kubectl delete pods --all
   -f, --filename=[]: Filename, directory, or URL to a file containing the resource to delete.
       --grace-period=-1: Period of time in seconds given to the resource to terminate gracefully. Ignored if negative.
       --ignore-not-found[=false]: Treat "resource not found" as a successful delete. Defaults to "true" when --all is specified.
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
+      --now[=false]: If true, resources are force terminated without graceful deletion (same as --grace-period=0).
   -o, --output="": Output mode. Use "-o name" for shorter output (resource/name).
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
   -l, --selector="": Selector (label query) to filter on.
       --timeout=0: The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
 ```
@@ -65,6 +67,4 @@ kubectl delete pods --all
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

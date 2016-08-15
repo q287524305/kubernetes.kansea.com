@@ -1,9 +1,6 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
+
 ## kubectl port-forward
 
 Forward one or more local ports to a pod.
@@ -44,6 +41,4 @@ kubectl port-forward  mypod 0:5000
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

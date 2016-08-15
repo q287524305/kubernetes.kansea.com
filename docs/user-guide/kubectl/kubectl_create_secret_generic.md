@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- derekwaynecarr
-
 ---
 
 ## kubectl create secret generic
@@ -66,6 +62,4 @@ kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [-
 
 ### 参见
 
-* [kubectl create secret](/docs/user-guide/kubectl/kubectl_create_secret/)	 - Create a secret using specified subcommand.
-
-
+* [kubectl create secret](kubectl_create_secret.md)	 - Create a secret using specified subcommand.

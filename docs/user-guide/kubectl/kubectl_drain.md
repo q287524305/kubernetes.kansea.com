@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- mml
-
 ---
 
 ## kubectl drain
@@ -21,7 +17,8 @@ without --ignore-daemonsets, and regardless it will not delete any
 DaemonSet-managed pods, because those pods would be immediately replaced by the
 DaemonSet controller, which ignores unschedulable markings.  If there are any
 pods that are neither mirror pods nor managed--by ReplicationController,
-DaemonSet or Job--, then drain will not delete any pods unless you use --force.
+ReplicaSet, DaemonSet or Job--, then drain will not delete any pods unless you
+use --force.
 
 When you are ready to put the node back into service, use kubectl uncordon, which
 will make the node schedulable again.
@@ -34,10 +31,10 @@ kubectl drain NODE
 ### 示例
 
 ```
-# Drain node "foo", even if there are pods not managed by a ReplicationController, Job, or DaemonSet on it.
+# Drain node "foo", even if there are pods not managed by a ReplicationController, ReplicaSet, Job, or DaemonSet on it.
 $ kubectl drain foo --force
 
-# As above, but abort if there are pods not managed by a ReplicationController, Job, or DaemonSet, and use a grace period of 15 minutes.
+# As above, but abort if there are pods not managed by a ReplicationController, ReplicaSet, Job, or DaemonSet, and use a grace period of 15 minutes.
 $ kubectl drain foo --grace-period=900
 
 ```
@@ -45,7 +42,8 @@ $ kubectl drain foo --grace-period=900
 ### 选项
 
 ```
-      --force[=false]: Continue even if there are pods not managed by a ReplicationController, Job, or DaemonSet.
+      --delete-local-data[=false]: Continue even if there are pods using emptyDir (local data that will be deleted when the node is drained).
+      --force[=false]: Continue even if there are pods not managed by a ReplicationController, ReplicaSet, Job, or DaemonSet.
       --grace-period=-1: Period of time in seconds given to each pod to terminate gracefully. If negative, the default value specified in the pod will be used.
       --ignore-daemonsets[=false]: Ignore DaemonSet-managed pods.
 ```
@@ -54,6 +52,4 @@ $ kubectl drain foo --grace-period=900
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

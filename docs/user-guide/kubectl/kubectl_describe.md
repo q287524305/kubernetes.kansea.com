@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- hurf
-
 ---
 
 ## kubectl describe
@@ -22,11 +18,11 @@ $ kubectl describe TYPE NAME_PREFIX
 will first check for an exact match on TYPE and NAME_PREFIX. If no such resource
 exists, it will output details for every resource that has a name prefixed with NAME_PREFIX
 
-Possible resource types include (case insensitive): pods (po), services (svc),
-replicationcontrollers (rc), nodes (no), events (ev), limitranges (limits),
-persistentvolumes (pv), persistentvolumeclaims (pvc), resourcequotas (quota),
-namespaces (ns), serviceaccounts, horizontalpodautoscalers (hpa),
-endpoints (ep) or secrets.
+Possible resource types include (case insensitive): pods (po), services (svc), deployments,
+replicasets (rs), replicationcontrollers (rc), nodes (no), events (ev), limitranges (limits),
+persistentvolumes (pv), persistentvolumeclaims (pvc), resourcequotas (quota), namespaces (ns),
+serviceaccounts (sa), ingresses (ing), horizontalpodautoscalers (hpa), daemonsets (ds), configmaps,
+componentstatuses (cs), endpoints (ep), and secrets.
 
 ```
 kubectl describe (-f FILENAME | TYPE [NAME_PREFIX | -l label] | TYPE/NAME)
@@ -59,13 +55,14 @@ kubectl describe pods frontend
 
 ```
   -f, --filename=[]: Filename, directory, or URL to a file containing the resource to describe
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
   -l, --selector="": Selector (label query) to filter on
+      --show-events[=true]: If true, display events related to the described object.
 ```
 
 {% include_relative parent_commands.md %}
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

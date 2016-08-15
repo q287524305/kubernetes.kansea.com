@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
 
 ## kubectl config use-context

@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- dchen1107
-
 ---
 
 ## kubectl explain
@@ -14,11 +10,11 @@ Documentation of resources.
 
 Documentation of resources.
 
-Possible resource types include: pods (po), services (svc),
-replicationcontrollers (rc), nodes (no), events (ev), componentstatuses (cs),
-limitranges (limits), persistentvolumes (pv), persistentvolumeclaims (pvc),
-resourcequotas (quota), namespaces (ns), horizontalpodautoscalers (hpa)
-or endpoints (ep).
+Possible resource types include (case insensitive): pods (po), services (svc), deployments,
+replicasets (rs), replicationcontrollers (rc), nodes (no), events (ev), limitranges (limits),
+persistentvolumes (pv), persistentvolumeclaims (pvc), resourcequotas (quota), namespaces (ns),
+serviceaccounts (sa), ingresses (ing), horizontalpodautoscalers (hpa), daemonsets (ds), configmaps,
+componentstatuses (cs), endpoints (ep), and secrets.
 
 ```
 kubectl explain RESOURCE
@@ -37,6 +33,7 @@ kubectl explain pods.spec.containers
 ### 选项
 
 ```
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
       --recursive[=false]: Print the fields of fields (Currently only 1 level deep)
 ```
 
@@ -44,6 +41,4 @@ kubectl explain pods.spec.containers
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

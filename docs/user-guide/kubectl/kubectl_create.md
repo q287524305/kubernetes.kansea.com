@@ -1,9 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- brendandburns
-- janetkuo
-
 ---
 
 ## kubectl create
@@ -35,8 +30,10 @@ cat pod.json | kubectl create -f -
 
 ```
   -f, --filename=[]: Filename, directory, or URL to file to use to create the resource
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
   -o, --output="": Output mode. Use "-o name" for shorter output (resource/name).
       --record[=false]: Record current kubectl command in the resource annotation.
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
       --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.
       --schema-cache-dir="~/.kube/schema": If non-empty, load/store cached API schemas in this directory, default is '$HOME/.kube/schema'
       --validate[=true]: If true, use a schema to validate the input before sending it
@@ -46,10 +43,8 @@ cat pod.json | kubectl create -f -
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-* [kubectl create configmap](/docs/user-guide/kubectl/kubectl_create_configmap/)	 - Create a configMap from a local file, directory or literal value.
-* [kubectl create namespace](/docs/user-guide/kubectl/kubectl_create_namespace/)	 - Create a namespace with the specified name.
-* [kubectl create secret](/docs/user-guide/kubectl/kubectl_create_secret/)	 - Create a secret using specified subcommand.
-* [kubectl create serviceaccount](/docs/user-guide/kubectl/kubectl_create_serviceaccount/)	 - Create a service account with the specified name.
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl create configmap](kubectl_create_configmap.md)	 - Create a configMap from a local file, directory or literal value.
+* [kubectl create namespace](kubectl_create_namespace.md)	 - Create a namespace with the specified name.
+* [kubectl create secret](kubectl_create_secret.md)	 - Create a secret using specified subcommand.
+* [kubectl create serviceaccount](kubectl_create_serviceaccount.md)	 - Create a service account with the specified name.

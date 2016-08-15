@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- eparis
-
 ---
 
 ## kubectl logs
@@ -42,6 +38,7 @@ kubectl logs --since=1h nginx
 ```
   -c, --container="": Print the logs of this container
   -f, --follow[=false]: Specify if the logs should be streamed.
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
       --limit-bytes=0: Maximum bytes of logs to return. Defaults to no limit.
   -p, --previous[=false]: If true, print the logs for the previous instance of the container in a pod if it exists.
       --since=0: Only return logs newer than a relative duration like 5s, 2m, or 3h. Defaults to all logs. Only one of since-time / since may be used.
@@ -54,6 +51,4 @@ kubectl logs --since=1h nginx
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

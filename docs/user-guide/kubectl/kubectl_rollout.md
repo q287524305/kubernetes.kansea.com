@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- janetkuo
-
 ---
 
 ## kubectl rollout
@@ -12,7 +8,7 @@ rollout manages a deployment
 ### 摘要
 
 
-rollout manages a deployment using subcommands like "kubectl rollout undo deployment/abc"
+Manages a deployment using subcommands like "kubectl rollout undo deployment/abc"
 
 ```
 kubectl rollout SUBCOMMAND
@@ -29,10 +25,9 @@ kubectl rollout undo deployment/abc
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-* [kubectl rollout history](/docs/user-guide/kubectl/kubectl_rollout_history/)	 - view rollout history
-* [kubectl rollout pause](/docs/user-guide/kubectl/kubectl_rollout_pause/)	 - Mark the provided resource as paused
-* [kubectl rollout resume](/docs/user-guide/kubectl/kubectl_rollout_resume/)	 - Resume a paused resource
-* [kubectl rollout undo](/docs/user-guide/kubectl/kubectl_rollout_undo/)	 - undoes a previous rollout
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl rollout history](kubectl_rollout_history.md)	 - view rollout history
+* [kubectl rollout pause](kubectl_rollout_pause.md)	 - Mark the provided resource as paused
+* [kubectl rollout resume](kubectl_rollout_resume.md)	 - Resume a paused resource
+* [kubectl rollout status](kubectl_rollout_status.md)	 - Watch rollout status until it's done
+* [kubectl rollout undo](kubectl_rollout_undo.md)	 - undoes a previous rollout

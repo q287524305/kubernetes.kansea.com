@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- dchen1107
-
 ---
 
 ## kubectl create configmap
@@ -25,7 +21,7 @@ symlinks, devices, pipes, etc).
 
 
 ```
-kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run]
+kubectl create configmap NAME [--from-file=[key=]source] [--from-literal=key1=value1] [--dry-run]
 ```
 
 ### 示例
@@ -35,7 +31,7 @@ kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from
   kubectl create configmap my-config --from-file=path/to/bar
 
   # Create a new configmap named my-config with specified keys instead of names on disk
-  kubectl create configmap my-config --from-file=ssh-privatekey=~/.ssh/id_rsa --from-file=ssh-publickey=~/.ssh/id_rsa.pub
+  kubectl create configmap my-config --from-file=key1=/path/to/bar/file1.txt --from-file=key2=/path/to/bar/file2.txt
 
   # Create a new configMap named my-config with key1=config1 and key2=config2
   kubectl create configmap my-config --from-literal=key1=config1 --from-literal=key2=config2
@@ -64,6 +60,5 @@ kubectl create configmap NAME [--type=string] [--from-file=[key=]source] [--from
 
 ### 参见
 
-* [kubectl create](/docs/user-guide/kubectl/kubectl_create/)	 - Create a resource by filename or stdin
 
 

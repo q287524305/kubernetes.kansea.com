@@ -1,10 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- brendandburns
-- hurf
-- janetkuo
-
 ---
 
 ## kubectl annotate
@@ -21,11 +15,11 @@ assignees:
 如果`--overwrite`设为true，将会覆盖现有的注解，否则试图修改一个注解的值将会抛出错误。
 如果设置了`--resource-version`，那么将会使用指定的这个版本，否则将使用当前版本。
 
-
-支持的资源包括但不限于（大小写不限）：pods (po)、services (svc)、
-replicationcontrollers (rc)、nodes (no)、events (ev)、componentstatuses (cs)、
-limitranges (limits)、persistentvolumes (pv)、persistentvolumeclaims (pvc)、
-orizontalpodautoscalers (hpa), resourcequotas (quota) 和 secrets
+支持的资源包括但不限于（大小写不限）：
+  pod (po), service (svc), replicationcontroller (rc),
+  node (no), event (ev), componentstatuse (cs),
+  limitrange (limits), persistentvolume (pv), persistentvolumeclaim (pvc),
+  horizontalpodautoscaler (hpa), resourcequota (quota), secret
 
 ```
 kubectl annotate [--overwrite] (-f FILENAME | TYPE NAME) KEY_1=VAL_1 ... KEY_N=VAL_N [--resource-version=version]
@@ -61,21 +55,24 @@ kubectl annotate pods foo description-
 ```
       --all[=false]: 选择namespace中所有指定类型的资源。
   -f, --filename=[]: 用来指定待升级资源的文件名，目录名或者URL。
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
       --no-headers[=false]: 当使用默认输出格式时不打印标题栏。
   -o, --output="": 输出格式。一下任意一种：json|yaml|wide|name|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... 参见 golang template [http://golang.org/pkg/text/template/#pkg-overview] 和 jsonpath template [http://releases.k8s.io/release-1.2/docs/user-guide/jsonpath.md].
       --output-version="": 输出指定版本格式的对象 (例如: 'extensions/v1beta1').
       --overwrite[=false]: 如果设置为true，允许覆盖更新注解，否则拒绝更新已存在的注解。
       --record[=false]: 在资源注释中记录当前 kubectl 命令。
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
       --resource-version="": 如果不为空，仅当资源当前版本和指定版本相同时才能更新注解。仅当更新单个资源时有效。
   -l, --selector="": 刷选标签。
   -a, --show-all[=false]: 打印时，显示所有资源(默认隐藏已终止的 Pod)
       --show-labels[=false]: 打印时，在最后一列显示所有标签(默认隐藏标签栏)
       --sort-by="": 非空时，按照这个字段的规定排序。该字段需要设置为 JSONPath 表达式 (例如:'{.metadata.name}')，在 JSONPath 表达式中指定 API 资源领域时，必须使用整数或者字符串。
       --template="": 当 -o=go-template, -o=go-template-file 时需要设置为模板字符串或者模板文件路径， 模板格式是 golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+
 ```
 
 {% include_relative parent_commands.md %}
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- janetkuo
-
 ---
 
 ## kubectl edit
@@ -50,9 +46,11 @@ kubectl edit (RESOURCE/NAME | -f FILENAME)
 
 ```
   -f, --filename=[]: 用来指定待编辑资源的文件名，目录名或者URL。
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
   -o, --output="yaml": 输出格式，可选yaml或者json中的一种。
       --output-version="": 输出资源使用的API版本（例如'extensions/v1beta1'）。
       --record[=false]: 在资源注释里记录当前 kubectl 命令。
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
       --save-config[=false]: 如果为true，当前对象的配置会保存在它的注释里。如果以后还要执行此 kubectl 命令的话，这会非常有用。
       --windows-line-endings[=false]: 使用 Windows 行尾符（默认为 Unix 行尾符）
 ```
@@ -61,4 +59,4 @@ kubectl edit (RESOURCE/NAME | -f FILENAME)
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用 kubectl 来管理 Kubernetes 集群。
+* [kubectl](kubectl.md)	 - 使用 kubectl 来管理 Kubernetes 集群。

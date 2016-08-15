@@ -1,11 +1,6 @@
 ---
-assignees:
-- bgrant0607
-- brendandburns
-- eparis
-- hurf
-
 ---
+
 ## kubectl config view
 
 显示合并后的kubeconfig设置，或者一个指定的kubeconfig配置文件。

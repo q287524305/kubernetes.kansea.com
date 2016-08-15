@@ -1,9 +1,6 @@
 ---
-assignees:
-- bgrant0607
-- derekwaynecarr
-
 ---
+
 ## kubectl create namespace
 
 Create a namespace with the specified name.
@@ -46,6 +43,6 @@ kubectl create namespace NAME [--dry-run]
 
 ### 参见
 
-* [kubectl create](/docs/user-guide/kubectl/kubectl_create/)	 - Create a resource by filename or stdin
+* [kubectl create](kubectl_create.md)	 - Create a resource by filename or stdin
 
 

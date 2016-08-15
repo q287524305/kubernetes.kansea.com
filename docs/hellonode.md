@@ -62,9 +62,10 @@ gcloud components install kubectl
 ```javascript
 var http = require('http');
 var handleRequest = function(request, response) {
+  console.log('Received request for URL: ' + request.url);
   response.writeHead(200);
-  response.end("Hello World!");
-}
+  response.end('Hello World!');
+};
 var www = http.createServer(handleRequest);
 www.listen(8080);
 ```
@@ -106,32 +107,40 @@ docker build -t gcr.io/$PROJECT_ID/hello-node:v1 .
 让我们用 Docker 来试一下你的镜像:
 
 ```shell
-$ docker run -d -p 8080:8080 gcr.io/$PROJECT_ID/hello-node:v1
-325301e6b2bffd1d0049c621866831316d653c0b25a496d04ce0ec6854cb7998
+docker run -d -p 8080:8080 --name hello_tutorial gcr.io/$PROJECT_ID/hello-node:v1
 ```
 
 你可以通过浏览器访问你的应用，如果你愿意，你也可以使用`curl` 或者 `wget`:
 
 ```shell
-$ curl http://localhost:8080
-Hello World!
+curl http://localhost:8080
 ```
+
+你应该能看到 `Hello World!`
 
 **如果你得到一个来自于 `Docker for Mac`的 `Connection refused` 信息，请确认你使用的是 Docker 最新版本 (1.12 或者更高).如果你在 OSX 上用的是 `Docker Toolbox`,确保你用的是虚拟机的 IP 而不是 localhost**
 
 ```shell
-$ curl "http://$(docker-machine ip YOUR-VM-MACHINE-NAME):8080"
+curl "http://$(docker-machine ip YOUR-VM-MACHINE-NAME):8080"
 ```
 
-让我们停止运行这个容器。在这个例子里，我们用`docker ps`查看到容器的 ID 是`2c66d0efcbd4`:
+让我们停止运行这个容器。你可以使用`docker ps`列出容器列表:
 
 ```shell
 docker ps
-CONTAINER ID        IMAGE                              COMMAND
-2c66d0efcbd4        gcr.io/$PROJECT_ID/hello-node:v1    "/bin/sh -c 'node    
+```
 
-docker stop 2c66d0efcbd4
-2c66d0efcbd4
+You should something like see:
+
+```shell
+CONTAINER ID        IMAGE                                 COMMAND                  NAMES
+c5b6d4b9f36d        gcr.io/$PROJECT_ID/hello-node:v1      "/bin/sh -c 'node ser"   hello_tutorial
+```
+
+Now stop the running container with
+
+```
+docker stop hello_tutorial
 ```
 
 现在镜像已经可以如期运行，并标记了你的`PROJECT_ID`，我们推送它到[Google 容器仓库](https://cloud.google.com/tools/container-registry/), 每一个 Google 云项目具有一个私有 Docker 镜像库 (而且也在 Google 云平台之外) :
@@ -148,16 +157,30 @@ gcloud docker push gcr.io/$PROJECT_ID/hello-node:v1
 
 集群由一个 master API server 和一组叫做 node 的虚拟机。
 
-通过控制台创建群集: *Compute > Container Engine > Container Clusters > New container cluster*。将名称设置为'hello-world'，使用所有默认设置选项。你会得到一个具有三个可以部署你容器镜像的 node（节点）群集。
+首先,选择一个[Google Cloud Project zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones) 来运行你的服务，
+在这个教程中我们将使用 **us-central1-a**。
+这个配置命令如下：
+
+```
+gcloud config set compute/zone us-central1-a
+```
+
+现在，通过`gcloud`命令行工具来创建一个群集：
+
+```shell
+gcloud container clusters create hello-world
+```
+
+另外,通过: [Google Cloud Console](https://console.cloud.google.com): *Compute > Container Engine > Container Clusters > New container cluster* 创建群集。将名称设置为'hello-world'，使用所有默认设置选项。
+
+你会得到一个具有三个可以部署你容器镜像的 node（节点）群集(这个步骤会花上几分钟)。
 
 ![image](/images/hellonode/image_11.png)
 
 是时候来部署你的`容器式应用` 到 Kubernetes 集群了!
-请确保你[配置](https://cloud.google.com/container-engine/docs/clusters/operations#configuring_kubectl) 过`kubectl`使用你刚刚创建的集群
-(确保`--zone`标识的值与你的群集 zone 匹配):
 
 ```shell
-$ gcloud container clusters get-credentials --zone us-central1-f hello-world
+gcloud container clusters get-credentials hello-world
 ```
 
 **文档其余部分都需要 Kubernetes 的客户端和服务端版本为1.3。运行`kubectl version`查看你当前的版本**  1.2版看[这个文档](https://github.com/kubernetes/kubernetes.github.io/blob/release-1.2/docs/hellonode.md).
@@ -169,16 +192,16 @@ $ gcloud container clusters get-credentials --zone us-central1-f hello-world
 使用 `kubectl run` 命令来创建一个 pod:
 
 ```shell
-$ kubectl run hello-node --image=gcr.io/$PROJECT_ID/hello-node:v1 --port=8080
-deployment "hello-node" created
+kubectl run hello-node --image=gcr.io/$PROJECT_ID/hello-node:v1 --port=8080
 ```
 
-如图所示， `kubectl run` 创建一个 **[deployment](/docs/user-guide/deployments/)**。 推荐使用 `deployment` 创建和扩容 pod。在这个例子中，一个新的`deployment`管理一个运行*hello-node:v1*镜像的单独的 pod 副本。
+如图所示， `kubectl run` 创建一个 **[deployment](/docs/user-guide/deployments/)**。 推荐使用 `deployment` 创建和扩容 pod。在这个例子中，一个新的`deployment`管理一个运行 *hello-node:v1* 镜像的单独的 pod 副本。
 
 要查看我们刚创建`deployment`运行：
 
 ```shell
-$ kubectl get deployments
+kubectl get deployments
+
 NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-node   1         1         1            1           3m
 ```
@@ -186,7 +209,8 @@ hello-node   1         1         1            1           3m
 要查看我们刚通过`deployment`创建`pod`运行：
 
 ```shell
-$ kubectl get pods
+kubectl get pods
+
 NAME                         READY     STATUS    RESTARTS   AGE
 hello-node-714049816-ztzrb   1/1       Running   0          6m
 ```
@@ -238,7 +262,8 @@ kubectl expose deployment hello-node --type="LoadBalancer"
 查看该服务关联的多个 IP:
 
 ```shell
-$ kubectl get services hello-node
+kubectl get services hello-node
+
 NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    AGE
 hello-node   10.3.246.12                   8080/TCP   23s
 ```
@@ -246,7 +271,8 @@ hello-node   10.3.246.12                   8080/TCP   23s
  `EXTERNAL_IP` 可能需要过几分钟才可见。如果没有`EXTERNAL_IP`，那么需要等上几分钟再重试。
 
 ```shell
-$ kubectl get services hello-node
+kubectl get services hello-node
+
 NAME         CLUSTER_IP    EXTERNAL_IP     PORT(S)    AGE
 hello-node   10.3.246.12   23.251.159.72   8080/TCP   2m
 ```
@@ -257,7 +283,12 @@ hello-node   10.3.246.12   23.251.159.72   8080/TCP   2m
 
 ![image](/images/hellonode/image_12.png)
 
-## 扩容你的网站
+如果通过浏览器或者 CURL 来访问新的 web 服务，
+你应该可以看到一些运行日志：
+
+```shell
+kubectl logs <POD-NAME>
+```
 
 Kubernetes 的强大功能之一就是他可以很容易的扩容你的应用程序。假设你突然需要增加你的应用;你只需要告诉`deployment`一个新的 pod 副本总数即可:
 
@@ -268,13 +299,15 @@ kubectl scale deployment hello-node --replicas=4
 现在你有4个应用副本了， 每个都在群集上独立运行，并能负载均衡他们之间的流量。
 
 ```shell
-$ kubectl get deployment
+kubectl get deployment
+
 NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-node   4         4         4            3           40m
 ```
 
 ```shell
-$ kubectl get pods
+kubectl get pods
+
 NAME                         READY     STATUS    RESTARTS   AGE
 hello-node-714049816-g4azy   1/1       Running   0          1m
 hello-node-714049816-rk0u6   1/1       Running   0          1m
@@ -295,9 +328,8 @@ hello-node-714049816-ztzrb   1/1       Running   0          41m
 首先, 让我们修改程序。在开发机上，编辑 server.js 的输出消息:
 
 ```javascript
-  response.end("Hello Kubernetes World!");
+  response.end('Hello Kubernetes World!');
 ```
-
 
 我们构建并上传一个具有新标识的容器到仓库:
 
@@ -312,14 +344,14 @@ gcloud docker push gcr.io/$PROJECT_ID/hello-node:v2
 `gcr.io/$PROJECT_ID/hello-node:v1` 为 `gcr.io/$PROJECT_ID/hello-node:v2`。为此，我们需要使用 `kubectl set image` 命令.
 
 ```shell
-$ kubectl set image deployment/hello-node hello-node=gcr.io/$PROJECT_ID/hello-node:v2
-deployment "hello-node" image updated
+kubectl set image deployment/hello-node hello-node=gcr.io/$PROJECT_ID/hello-node:v2
 ```
 
 这会用新的镜像来更新`deployment`，它会创建新的 pod 并删除旧的 pod。
 
 ```
-$ kubectl get deployments
+kubectl get deployments
+
 NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 hello-node   4         5         4            3           1h
 ```
@@ -339,7 +371,7 @@ hello-node   4         5         4            3           1h
 
 通过[Dashboard 之旅](/docs/user-guide/ui/)更多地了解 Web 界面。
 
-## 就这么多，是时候关闭它了
+## 删除它
 
 这只是一个演示!所以，要记得关闭它，否则会产生费用的。让我们来学一下如何关闭它。
 
@@ -352,25 +384,42 @@ kubectl delete service,deployment hello-node
 删除群集:
 
 ```shell
-$ gcloud container clusters delete --zone us-central1-f hello-world
+gcloud container clusters delete hello-world
+```
+
+You should see:
+
+```
 The following clusters will be deleted.
- - [hello-world] in [us-central1-f]
+ - [hello-world] in [us-central1-a]
 
 Do you want to continue (Y/n)?
 
 Deleting cluster hello-world...done.
-Deleted [https://container.googleapis.com/v1/projects/<$PROJECT_ID>/zones/us-central1-f/clusters/hello-world].
+Deleted [https://container.googleapis.com/v1/projects/<$PROJECT_ID>/zones/us-central1-a/clusters/hello-world].
 ```
 
 这回删除正在运行在 Google Compute Engine 的群集实例。
 
-最后在 Docker 容器仓库中删除你的容器镜像:
+最后通过 `gsutil` 来删除 你的 Docker 仓库的镜像，gcloud 安装的时候应该已经安装了该命令工具，
+有关`gsutil`的更多信息请查看[gsutil 文档](https://cloud.google.com/storage/docs/gsutil)
+
+要列出我们在本教程前面创建的镜像
 
 ```shell
-$ gsutil ls
+gsutil ls
+```
+
+你可以看到:
+
+```shell
 gs://artifacts.<$PROJECT_ID>.appspot.com/
-$ gsutil rm -r gs://artifacts.<$PROJECT_ID>.appspot.com/
-Removing gs://artifacts.<$PROJECT_ID>.appspot.com/...
+```
+
+然后 删除这个路径下所有的 `镜像` 运行:
+
+```shell
+gsutil rm -r gs://artifacts.<$PROJECT_ID>.appspot.com/
 ```
 
 当然，你也可以删除整个项目，但请注意，你必须先关闭计费，此外当结算周期结束以后，项目才会被删除。

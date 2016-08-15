@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- dchen1107
-
 ---
 
 ## kubectl cordon
@@ -31,6 +27,6 @@ kubectl cordon foo
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。
 
-
+* [kubectl](kubectl.md)	 - kubectl 控制着 Kubernetes 集群管理器

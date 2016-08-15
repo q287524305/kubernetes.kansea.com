@@ -1,10 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- brendandburns
-- caesarxuchao
-- janetkuo
-
 ---
 
 ## kubectl replace
@@ -20,7 +14,7 @@ JSON and YAML formats are accepted. If replacing an existing resource, the
 complete resource spec must be provided. This can be obtained by
 $ kubectl get TYPE NAME -o yaml
 
-Please refer to the models in https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/api-reference/v1/definitions.html to find if a field is mutable.
+Please refer to the models in https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/blob/v1.3.0-beta.0/docs/api-reference/v1/definitions.html to find if a field is mutable.
 
 ```
 kubectl replace -f FILENAME
@@ -49,8 +43,10 @@ kubectl replace --force -f ./pod.json
   -f, --filename=[]: Filename, directory, or URL to file to use to replace the resource.
       --force[=false]: Delete and re-create the specified resource
       --grace-period=-1: Only relevant during a force replace. Period of time in seconds given to the old resource to terminate gracefully. Ignored if negative.
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
   -o, --output="": Output mode. Use "-o name" for shorter output (resource/name).
       --record[=false]: Record current kubectl command in the resource annotation.
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
       --save-config[=false]: If true, the configuration of current object will be saved in its annotation. This is useful when you want to perform kubectl apply on this object in the future.
       --schema-cache-dir="~/.kube/schema": If non-empty, load/store cached API schemas in this directory, default is '$HOME/.kube/schema'
       --timeout=0: Only relevant during a force replace. The length of time to wait before giving up on a delete of the old resource, zero means determine a timeout from the size of the object
@@ -61,6 +57,4 @@ kubectl replace --force -f ./pod.json
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

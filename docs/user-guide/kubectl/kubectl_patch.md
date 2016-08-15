@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- caesarxuchao
-
 ---
 
 ## kubectl patch
@@ -16,7 +12,7 @@ Update field(s) of a resource using strategic merge patch
 
 JSON and YAML formats are accepted.
 
-Please refer to the models in https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/blob/release-1.2/docs/api-reference/v1/definitions.html to find if a field is mutable.
+Please refer to the models in https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/blob/v1.3.0-beta.0/docs/api-reference/v1/definitions.html to find if a field is mutable.
 
 ```
 kubectl patch (-f FILENAME | TYPE NAME) -p PATCH
@@ -43,9 +39,11 @@ kubectl patch pod valid-pod --type='json' -p='[{"op": "replace", "path": "/spec/
 
 ```
   -f, --filename=[]: Filename, directory, or URL to a file identifying the resource to update
+      --include-extended-apis[=true]: If true, include definitions of new APIs via calls to the API server. [default true]
   -o, --output="": Output mode. Use "-o name" for shorter output (resource/name).
   -p, --patch="": The patch to be applied to the resource JSON file.
       --record[=false]: Record current kubectl command in the resource annotation.
+  -R, --recursive[=false]: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
       --type="strategic": The type of patch being provided; one of [json merge strategic]
 ```
 
@@ -53,6 +51,4 @@ kubectl patch pod valid-pod --type='json' -p='[{"op": "replace", "path": "/spec/
 
 ### 参见
 
-* [kubectl](/docs/user-guide/kubectl/kubectl/)	 - 使用kubectl来管理Kubernetes集群。
-
-
+* [kubectl](kubectl.md)	 - 使用kubectl来管理Kubernetes集群。

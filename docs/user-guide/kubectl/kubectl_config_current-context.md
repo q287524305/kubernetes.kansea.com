@@ -1,8 +1,4 @@
 ---
-assignees:
-- bgrant0607
-- dchen1107
-
 ---
 
 ## kubectl config current-context

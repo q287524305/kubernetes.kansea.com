@@ -5,7 +5,7 @@ assignees:
 
 ---
 
-通过 Kubernetes 部署和管理应用，你需要使用 Kubernetes命令行工具， [kubectl](/docs/user-guide/kubectl/kubectl/). 它可以让您检查集群资源，创建、删除和更新组件以及更多功能。您会用它来查看新集群并生成示例应用程序。
+通过 Kubernetes 部署和管理应用，你需要使用 Kubernetes命令行工具， [kubectl](kubectl.md). 它可以让您检查集群资源，创建、删除和更新组件以及更多功能。您会用它来查看新集群并生成示例应用程序。
 
 ## 安装 kubectl
 
