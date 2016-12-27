@@ -1,5 +1,5 @@
 ---
-title: Writing a New Topic
+title: 编写新主题
 ---
 
 {% capture overview %}
@@ -8,7 +8,7 @@ This page shows how to create a new topic for the Kubernetes docs.
 
 {% capture prerequisites %}
 Create a fork of the Kubernetes documentation repository as described in
-[Creating a Documentation Pull Request](/docs/contribute/create-pull-request/).
+[创建一个文档的 Pull Request](/docs/contribute/create-pull-request/).
 {% endcapture %}
 
 {% capture steps %}
@@ -120,7 +120,7 @@ image format is SVG.
 {% endcapture %}
 
 {% capture whatsnext %}
-* Learn about [using page templates](/docs/contribute/page-templates/).
+* Learn about [使用页面模板](/docs/contribute/page-templates/).
 * Learn about [staging your changes](/docs/contribute/stage-documentation-changes).
 * Learn about [creating a pull request](/docs/contribute/create-pull-request/).
 {% endcapture %}

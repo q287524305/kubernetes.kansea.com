@@ -1,11 +1,11 @@
-bigheader: "Samples"
-abstract: "A collection of example applications that show how to use Kubernetes."
+bigheader: "范例"
+abstract: "展示如何使用Kubernetes的应用示例集合。"
 toc:
 - docs/samples.md
 
-- title: Storage / Database / KV
+- title: 存储/数据库/ KV
   section:
-  - title: Apache Cassandra Database
+  - title: Apache Cassandra 数据库
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/cassandra
   - title: Ceph
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/rbd/
@@ -30,46 +30,46 @@ toc:
   - title: Vitess
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/vitess/
 
-- title: Big Data
+- title: 大数据
   section:
   - title: Apache Spark
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/spark
   - title: Apache Storm
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/storm
 
-- title: Messaging / Queueing
+- title: 消息 / 排队
   section:
   - title: Celery + RabbitMQ
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/celery-rabbitmq
   - title: Hazelcast
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/hazelcast
 
-- title: Miscellaneous
+- title: 其它
   section:
-  - title: Meteor Applications
+  - title: Meteor 应用程序
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/meteor/
   - title: OpenShift Origin
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/openshift-origin/
   - title: Selenium
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/selenium/
 
-- title: Monitoring and Logging
+- title: 监控和日志
   section:
   - title: Elasticsearch
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/elasticsearch/
   - title: NewRelic
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/newrelic
 
-- title: Multi-tier Applications
+- title: 多层应用程序
   section:
-  - title: Guestbook - Go Server
+  - title: Guestbook - Go 服务器
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/guestbook-go/
-  - title: GuestBook - PHP Server
+  - title: GuestBook - PHP 服务器
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/guestbook/
   - docs/getting-started-guides/meanstack.md
   - title: MySQL + Wordpress
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/mysql-wordpress-pd/
-  - title: MySQL + Phabricator Server
+  - title: MySQL + Phabricator 服务器
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/phabricator/
   - title: Nodejs + Mongo
     path: https://github.com/kubernetes/kubernetes/tree/release-1.3/examples/nodesjs-mongodb

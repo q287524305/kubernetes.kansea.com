@@ -1,4 +1,4 @@
-bigheader: "Kubernetes Documentation"
-abstract: "Documentation for using and learning about Kubernetes."
+bigheader: "Kubernetes 文档"
+abstract: "Kubernetes 的使用和学习文档。"
 toc:
 - docs/index.md

@@ -16,5 +16,5 @@ The Concepts section of the Kubernetes documentation is a work in progress.
 ### What's next
 
 If you would like to write a concept page, see
-[Using Page Templates](/docs/contribute/page-templates/)
+[使用页面模板](/docs/contribute/page-templates/)
 for information about the concept page type and the concept template.

@@ -32,5 +32,5 @@ each of which has a sequence of steps.
 ### What's next
 
 If you would like to write a tutorial, see
-[Using Page Templates](/docs/contribute/page-templates/)
+[使用页面模板](/docs/contribute/page-templates/)
 for information about the tutorial page type and the tutorial template.

@@ -4,5 +4,5 @@ title: Kubernetes API Swagger Spec
 
 ---
 
-Kubernetes swagger UI has now been replaced by our generated API reference docs
-which can be accessed at http://kubernetes.io/docs/api-reference/README/.
+Kubernetes swagger UI现在已经替换为我们生成的 API 参考文档
+可以在这访问 http://kubernetes.io/docs/api-reference/README/.

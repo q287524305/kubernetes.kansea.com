@@ -1,4 +1,4 @@
-bigheader: "Tools"
-abstract: "Tools to help you use and enhance Kubernetes."
+bigheader: "工具"
+abstract: "帮助使用和增强 Kubernetes 的工具。"
 toc:
 - docs/tools/index.md

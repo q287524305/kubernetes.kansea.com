@@ -1,12 +1,12 @@
-bigheader: "Reference Documentation"
-abstract: "Design docs, concept definitions, and references for APIs and CLIs."
+bigheader: "参考文档"
+abstract: "APIs 和 CLIs 的设计文档，概念定义以及引用"
 toc:
 - docs/reference.md
 
 - title: Kubernetes API
   section:
   - docs/api.md
-  - title: Accessing the API
+  - title: 访问 API
     section:
     - docs/admin/accessing-the-api.md
     - docs/admin/authentication.md
@@ -17,24 +17,24 @@ toc:
   - docs/api-reference/v1/definitions.html
   - kubernetes/third_party/swagger-ui/index.md
 
-- title: Autoscaling API
+- title: 自动扩容 API
   section:
   - docs/api-reference/autoscaling/v1/operations.html
   - docs/api-reference/autoscaling/v1/definitions.html
 
-- title: Batch API
+- title: 批处理 API
   section:
   - docs/api-reference/batch/v1/operations.html
   - docs/api-reference/batch/v1/definitions.html
 
 - title: Apps API
   section:
-  - title: Apps API Operations
+  - title: Apps API 指令
     path: /docs/api-reference/apps/v1beta1/operations/
-  - title: Apps API Definitions
+  - title: Apps API 定义
     path: /docs/api-reference/apps/v1beta1/definitions/
 
-- title: Extensions API
+- title: 扩展 API
   section:
   - docs/api-reference/extensions/v1beta1/operations.html
   - docs/api-reference/extensions/v1beta1/definitions.html
@@ -46,7 +46,7 @@ toc:
   - docs/user-guide/kubectl-conventions.md
   - docs/user-guide/jsonpath.md
   - docs/user-guide/kubectl-cheatsheet.md
-  - title: kubectl Commands
+  - title: kubectl 命令
     section:
     - docs/user-guide/kubectl/index.md
     - docs/user-guide/kubectl/kubectl_annotate.md
@@ -102,7 +102,7 @@ toc:
       - /docs/user-guide/kubectl/kubectl_namespace/
       - docs/user-guide/kubectl/kubectl_stop.md
 
-- title: Kubernetes Components
+- title: Kubernetes 组件
   section:
   - docs/admin/kube-apiserver.md
   - docs/admin/kube-controller-manager.md
@@ -115,7 +115,7 @@ toc:
     - docs/admin/kubelet-tls-bootstrapping.md
     - docs/admin/kubelet-authentication-authorization.md
 
-- title: Glossary
+- title: 术语
   section:
   - docs/user-guide/annotations.md
   - docs/admin/daemons.md
@@ -144,21 +144,21 @@ toc:
   - docs/user-guide/thirdpartyresources.md
   - docs/user-guide/volumes.md
 
-- title: Kubernetes Design Docs
+- title: Kubernetes 设计文档
   section:
-  - title: Kubernetes Architecture
+  - title: Kubernetes 架构
     path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/architecture.md
-  - title: Kubernetes Design Overview
+  - title: Kubernetes 设计概要
     path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/
-  - title: Kubernetes Identity and Access Management
+  - title: Kubernetes 身份和访问管理
     path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/access.md
   - docs/admin/ovs-networking.md
-  - title: Security Contexts
+  - title: 安全环境
     path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/security_context.md
-  - title: Security in Kubernetes
+  - title: Kubernetes 安全
     path: https://github.com/kubernetes/kubernetes/blob/release-1.3/docs/design/security.md
 
-- title: Federation
+- title: 联合
   section:
   - docs/user-guide/federation/index.md
   - docs/user-guide/federation/configmap.md
@@ -170,8 +170,8 @@ toc:
   - docs/user-guide/federation/replicasets.md
   - docs/user-guide/federation/secrets.md
   - docs/federation/api-reference/README.md
-  - title: Federation Components
+  - title: 联合组件
     section:
     - docs/admin/federation-apiserver.md
-    - title : federation-controller-mananger
+    - title : 联合控制管理
       path: /docs/admin/federation-controller-manager

@@ -1,9 +1,9 @@
-bigheader: "Support"
-abstract: "Troubleshooting resources, frequently asked questions, and community support channels."
+bigheader: "帮助中心"
+abstract: "疑难问题解答，常见问题和社区帮助渠道。"
 toc:
 - docs/troubleshooting.md
 
-- title: Contributing to the Kubernetes Docs
+- title: 贡献 Kubernetes 文档
   section:
   - editdocs.md
   - docs/contribute/create-pull-request.md
@@ -12,7 +12,7 @@ toc:
   - docs/contribute/page-templates.md
   - docs/contribute/style-guide.md
 
-- title: Troubleshooting
+- title: 疑难问题解答
   section:
   - docs/user-guide/debugging-pods-and-replication-controllers.md
   - docs/user-guide/introspection-and-debugging.md
@@ -21,7 +21,7 @@ toc:
   - docs/admin/cluster-troubleshooting.md
   - docs/user-guide/debugging-services.md
 
-- title: Frequently Asked Questions
+- title: 经常问的问题
   section:
   - title: User FAQ
     path: https://github.com/kubernetes/kubernetes/wiki/User-FAQ/
@@ -30,12 +30,12 @@ toc:
   - title: Services FAQ
     path: https://github.com/kubernetes/kubernetes/wiki/Services-FAQ/
 
-- title: Other Resources
+- title: 其他资源
   section:
-  - title: Kubernetes Issue Tracker on GitHub
+  - title: 在 GitHub 上追踪 Kubernetes 问题
     path: https://github.com/kubernetes/kubernetes/issues/
   - docs/reporting-security-issues.md
-  - title: Release Notes
+  - title: 发行说明
     path: https://github.com/kubernetes/kubernetes/releases/
-  - title: Release Roadmap
+  - title: 发布路线图
     path: https://github.com/kubernetes/kubernetes/milestones/

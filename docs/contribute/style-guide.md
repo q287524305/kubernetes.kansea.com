@@ -1,5 +1,5 @@
 ---
-title: Documentation Style Guide
+title: 文档样式指南
 ---
 
 {% capture overview %}
@@ -9,8 +9,8 @@ propose changes to this document in a pull request.
 
 For additional information on creating new content for the Kubernetes
 docs, follow the instructions on
-[using page templates](/docs/contribute/page-templates/) and
-[creating a documentation pull request](/docs/contribute/create-pull-request/).
+[使用页面模板](/docs/contribute/page-templates/) and
+[创建一个文档的 Pull Request](/docs/contribute/create-pull-request/).
 {% endcapture %}
 
 {% capture body %}
@@ -206,8 +206,8 @@ considered new in a few months.
 
 
 {% capture whatsnext %}
-* Learn about [writing a new topic](/docs/contribute/write-new-topic/).
-* Learn about [using page templates](/docs/contribute/page-templates/).
+* Learn about [编写新主题](/docs/contribute/write-new-topic/).
+* Learn about [使用页面模板](/docs/contribute/page-templates/).
 * Learn about [staging your changes](/docs/contribute/stage-documentation-changes/)
 * Learn about [creating a pull request](/docs/contribute/create-pull-request/).
 {% endcapture %}

@@ -1,5 +1,5 @@
 ---
-title: Staging Your Documentation Changes
+title: 标记文档修改
 ---
 
 {% capture overview %}
@@ -9,7 +9,7 @@ to the Kubernetes documentation.
 
 {% capture prerequisites %}
 Create a fork of the Kubernetes documentation repository as described in
-[Creating a Documentation Pull Request](/docs/contribute/create-pull-request/).
+[创建一个文档的 Pull Request](/docs/contribute/create-pull-request/).
 {% endcapture %}
 
 {% capture steps %}
@@ -93,8 +93,8 @@ web server:
 {% endcapture %}
 
 {% capture whatsnext %}
-* Learn about [writing a new topic](/docs/contribute/write-new-topic/).
-* Learn about [using page templates](/docs/contribute/page-templates/).
+* Learn about [编写新主题](/docs/contribute/write-new-topic/).
+* Learn about [使用页面模板](/docs/contribute/page-templates/).
 * Learn about [creating a pull request](/docs/contribute/create-pull-request/).
 {% endcapture %}
 

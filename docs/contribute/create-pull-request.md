@@ -1,5 +1,5 @@
 ---
-title: Creating a Documentation Pull Request
+title: 创建一个文档的 Pull Request
 ---
 
 {% capture overview %}
@@ -90,8 +90,8 @@ next upcoming release. It's automatically updated as new PRs get merged.
 {% endcapture %}
 
 {% capture whatsnext %}
-* Learn about [writing a new topic](/docs/contribute/write-new-topic).
-* Learn about [using page templates](/docs/contribute/page-templates/).
+* Learn about [编写新主题](/docs/contribute/write-new-topic).
+* Learn about [使用页面模板](/docs/contribute/page-templates/).
 * Learn about [staging your changes](/docs/contribute/stage-documentation-changes).
 {% endcapture %}
 

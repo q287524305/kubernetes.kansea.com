@@ -46,4 +46,4 @@ single thing, typically by giving a short sequence of steps.
 ### What's next
 
 If you would like to write a task page, see
-[Creating a Documentation Pull Request](/docs/create-pull-request/).
+[创建一个文档的 Pull Request](/docs/create-pull-request/).

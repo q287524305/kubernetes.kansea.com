@@ -7,11 +7,11 @@ You can click the **Fork** button in the upper-right area of the screen to creat
 For more information about contributing to the Kubernetes documentation, see:
 
 * [Contributing to the kubernetes Documentation](http://kubernetes.io/editdocs/)
-* [Creating a Documentation Pull Request](http://kubernetes.io/docs/contribute/create-pull-request/)
-* [Writing a New Topic](http://kubernetes.io/docs/contribute/write-new-topic/)
-* [Staging Your Documentation Changes](http://kubernetes.io/docs/contribute/stage-documentation-changes/)
-* [Using Page Templates](http://kubernetes.io/docs/contribute/page-templates/)
-* [Documentation Style Guide](http://kubernetes.io/docs/contribute/style-guide/)
+* [创建一个文档的 Pull Request](http://kubernetes.io/docs/contribute/create-pull-request/)
+* [编写新主题](http://kubernetes.io/docs/contribute/write-new-topic/)
+* [标记文档修改](http://kubernetes.io/docs/contribute/stage-documentation-changes/)
+* [使用页面模板](http://kubernetes.io/docs/contribute/page-templates/)
+* [文档样式指南](http://kubernetes.io/docs/contribute/style-guide/)
 
 ## Thank you!
 

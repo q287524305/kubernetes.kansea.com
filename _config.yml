@@ -1,6 +1,6 @@
 name: Kubernetes
 title: Kubernetes
-description: Production-Grade Container Orchestration
+description: 生产级别的容器编排
 markdown: kramdown
 kramdown:
   input: GFM

@@ -1,9 +1,9 @@
-bigheader: "Tasks"
-abstract: "Step-by-step instructions for performing operations with Kuberentes."
+bigheader: "任务"
+abstract: "使用 Kubernetes 执行操作的详细说明。"
 toc:
 - docs/tasks/index.md
 
-- title: Configuring Pods and Containers
+- title: 配置 Pods 和 Containers
   section:
   - docs/tasks/configure-pod-container/define-environment-variable-container.md
   - docs/tasks/configure-pod-container/define-command-argument-container.md
@@ -11,26 +11,26 @@ toc:
   - docs/tasks/configure-pod-container/configure-volume-storage.md
   - docs/tasks/configure-pod-container/distribute-credentials-secure.md
 
-- title: Accessing Applications in a Cluster
+- title: 访问集群中的应用程序
   section:
   - docs/tasks/access-application-cluster/port-forward-access-application-cluster.md
 
-- title: Debugging Applications in a Cluster
+- title: 调试集群中的应用程序
   section:
   - docs/tasks/debug-application-cluster/determine-reason-pod-failure.md
 
-- title: Accessing the Kubernetes API
+- title: 访问 Kubernetes API
   section:
   - docs/tasks/access-kubernetes-api/http-proxy-access-api.md
 
-- title: Administering a Cluster
+- title: 管理集群
   section:
   - docs/tasks/administer-cluster/assign-pods-nodes.md
 
   - docs/tasks/administer-cluster/dns-horizontal-autoscaling.md
   - docs/tasks/administer-cluster/safely-drain-node.md
 
-- title: Managing Stateful Applications
+- title: 管理有状态的应用程序
   section:
   - docs/tasks/manage-stateful-set/upgrade-pet-set-to-stateful-set.md
   - docs/tasks/manage-stateful-set/scale-stateful-set.md
@@ -38,7 +38,7 @@ toc:
   - docs/tasks/manage-stateful-set/debugging-a-statefulset.md
   - docs/tasks/manage-stateful-set/delete-pods.md
 
-- title: Troubleshooting
+- title: 疑难问题解答
   section:
   - docs/tasks/troubleshoot/debug-init-containers.md
   - /docs/tasks/administer-cluster/access-control-identity-management/

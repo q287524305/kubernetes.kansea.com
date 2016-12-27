@@ -2,7 +2,7 @@
 redirect_from:
 - "/docs/templatedemos/"
 - "/docs/templatedemos.html"
-title: Using Page Templates
+title: 使用页面模板
 ---
 
 <!--<html>
