@@ -8,7 +8,7 @@ Kubernetes 的[`Pod`](/docs/user-guide/pods)的寿命是有限的。它们出生
 
 欢迎进入`Service`的世界。
 
-一个Kubernetes的`Service`是一种抽象，它定义了一个`Pod`的逻辑集合和一个用于访问它们的策略 - 有的时候被称之为微服务。一个`Service`的目标`Pod`集合通常是由[`Label
+一个Kubernetes的`Service`是一种抽象，它定义了一组`Pods`的逻辑集合和一个用于访问它们的策略 - 有的时候被称之为微服务。一个`Service`的目标`Pod`集合通常是由[`Label
 Selector`](/docs/user-guide/labels/#label-selectors) 来决定的（下面有讲一个没有选择器的`Service` 有什么用处）。
 
 举个例子，想象一个处理图片的后端运行了三个副本。这些副本都是可以替代的 - 前端不关心它们使用的是哪一个后端。尽管实际组成后端集合的`Pod`可能会变化，前端的客户端却不需要知道这个变化，也不需要自己有一个列表来记录这些后端服务。`Service`抽象能让你达到这种解耦。
