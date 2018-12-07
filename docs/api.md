@@ -29,7 +29,7 @@ Kubernetes 被分成多个组件，各部分通过API相互交互。
 Kubernetes用 [Swagger v1.2](http://swagger.io/) 记录API所有细节。Kubernetes apiserver (aka "master")提供了一个API接口用于获取 Swagger Kubernetes API 规范 ，默认在路径`/swaggerapi`下，`/swagger-ui`是可以使用浏览器查看API文档的UI
 。
 
-我们会定期更新[最新 API 文档的 UI](http://kubernetes.io/kubernetes/third_party/swagger-ui/)。如果你使用不同斑斑的 Kubernetes，你需要使用不同的规范。
+我们会定期更新[最新 API 文档的 UI](http://kubernetes.io/kubernetes/third_party/swagger-ui/)。如果你使用不同版本的 Kubernetes，你需要使用不同的规范。
 
 Kubernetes 实现一个用于集群内通信的基于 API 规范的另一种 Protobuf，记录每一个位于 Go packages 内定义的 API 对象。
 
