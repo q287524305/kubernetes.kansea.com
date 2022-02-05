@@ -16,13 +16,12 @@ PROPERTY_VALUE 需要设置的新值。二进制字段中，如'证书的权威�
 kubectl config set PROPERTY_NAME PROPERTY_VALUE
 ```
 
-<<<<<<< HEAD
 {% include_relative parent_commands.md %}
 
 ### 参见
 
 * [kubectl config](/docs/user-guide/kubectl/kubectl_config/)	 - config modifies kubeconfig files
-=======
+ 
 ### Options
 
 ```
@@ -70,4 +69,4 @@ kubectl config set PROPERTY_NAME PROPERTY_VALUE
 <!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
 [![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/docs/user-guide/kubectl/kubectl_config_set.md?pixel)]()
 <!-- END MUNGE: GENERATED_ANALYTICS -->
->>>>>>> 5c292d1fd42bad6905eaf57cf4a67f4e9a95ecdd
+ 
